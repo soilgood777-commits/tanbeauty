@@ -8,7 +8,21 @@
   var page = me.getAttribute('data-page') || 'home';
   var host = document.createElement('div');
   host.className = 'tb-app';
-  me.parentNode.insertBefore(host, me);
+  // Imweb moves widget scripts to the end of <body>; mount inside the code widget instead.
+  var slot = document.querySelector('[data-widget-type="code"]');
+  if (slot) slot.appendChild(host); else me.parentNode.insertBefore(host, me);
+  // The design has its own header, footer and floating buttons: hide Imweb's defaults.
+  var css = document.createElement('style');
+  css.textContent = '#doz_header_wrap,#doz_footer_wrap{display:none!important}' +
+    '.tb-app{width:100%}' +
+    '[data-widget-type="code"],[data-widget-type="code"]>*{overflow:visible!important}';
+  document.head.appendChild(css);
+  if (slot) {
+    for (var el = slot; el && el !== document.body; el = el.parentElement) {
+      el.style.padding = '0'; el.style.margin = '0'; el.style.maxWidth = 'none'; el.style.width = '100%';
+      if (getComputedStyle(el).overflow !== 'visible') el.style.overflow = 'visible';
+    }
+  }
   function text(url) {
     return fetch(url, { cache: 'no-cache' }).then(function (r) {
       if (!r.ok) throw new Error(url + ' ' + r.status); return r.text();
