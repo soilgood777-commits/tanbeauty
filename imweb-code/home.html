@@ -88,7 +88,6 @@ input{font-family:inherit}
 <section id="top" aria-label="메인 비주얼" style="position:relative;width:100%;height:calc(100svh / var(--mz, 1));min-height:480px;margin-top:-88px;overflow:hidden;background:#111111">
 <video src="https://tanbeauty.netlify.app/hero.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" aria-hidden="true" onTimeUpdate="{{ heroTime }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
 <div style="position:absolute;left:0;right:0;top:0;height:200px;background:linear-gradient(180deg,rgba(17,17,17,.5),rgba(17,17,17,0));pointer-events:none"></div>
-<span style="position:absolute;right:clamp(20px,6vw,96px);top:104px;font-size:10px;font-weight:500;letter-spacing:.02em;color:rgba(255,255,255,.85);background:rgba(0,0,0,.35);padding:3px 7px;border-radius:3px;pointer-events:none">연출 이미지</span>
 <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,17,17,0) 45%,rgba(17,17,17,.55) 100%);pointer-events:none"></div>
 <div style="position:absolute;left:clamp(20px,6vw,96px);right:clamp(20px,6vw,96px);bottom:clamp(48px,8vh,96px);height:clamp(120px,16vw,220px);pointer-events:none">
 <sc-for list="{{ heroCaps }}" as="c" hint-placeholder-count="1">
