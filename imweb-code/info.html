@@ -1,6 +1,7 @@
 <!-- 탠뷰티 · 가격·후기·전후사진·오시는 길 (페이지 주소 /info) · 아임웹 코드 위젯용. 이 파일 내용 전체를 코드 위젯 하나에 붙여 넣으세요. -->
 <style>#doz_header_wrap,#doz_footer_wrap{display:none!important}x-dc{display:none!important}</style>
-<script>(function(){function f(){var x=document.querySelector('x-dc')||document.getElementById('dc-root');if(!x)return;for(var e=x.parentElement;e&&e!==document.body;e=e.parentElement){e.style.padding='0';e.style.margin='0';e.style.maxWidth='none';e.style.width='100%';if(getComputedStyle(e).overflow!=='visible')e.style.overflow='visible';}}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',f);else f();})();</script>
+<script>(function(){function f(){var x=document.querySelector('x-dc')||document.getElementById('dc-root');if(!x)return;for(var e=x.parentElement;e&&e!==document.body;e=e.parentElement){e.style.padding='0';e.style.margin='0';e.style.maxWidth='none';e.style.width='100%';if(getComputedStyle(e).overflow!=='visible')e.style.overflow='visible';}}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',f);else f();})();
+(function(){function k(){var vs=document.querySelectorAll('#dc-root video');for(var i=0;i<vs.length;i++){var v=vs[i];if(v.__tb)continue;v.__tb=1;v.muted=true;v.defaultMuted=true;v.setAttribute('muted','');v.setAttribute('playsinline','');if(v.autoplay||v.hasAttribute('autoplay')){var p=v.play();if(p&&p.catch)p.catch(function(){});}}}new MutationObserver(k).observe(document.documentElement,{childList:true,subtree:true});})();</script>
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
