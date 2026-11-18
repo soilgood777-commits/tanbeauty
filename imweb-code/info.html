@@ -1,0 +1,493 @@
+<!-- 탠뷰티 · 가격·후기·전후사진·오시는 길 (페이지 주소 /info) · 아임웹 코드 위젯용. 이 파일 내용 전체를 코드 위젯 하나에 붙여 넣으세요. -->
+<style>#doz_header_wrap,#doz_footer_wrap{display:none!important}</style>
+<script>(function(){function f(){var x=document.querySelector('x-dc')||document.getElementById('dc-root');if(!x)return;for(var e=x.parentElement;e&&e!==document.body;e=e.parentElement){e.style.padding='0';e.style.margin='0';e.style.maxWidth='none';e.style.width='100%';if(getComputedStyle(e).overflow!=='visible')e.style.overflow='visible';}}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',f);else f();})();</script>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{margin:0;background:#FFFFFF;color:#111111;font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;-webkit-font-smoothing:antialiased;word-break:keep-all;letter-spacing:-.02em}
+*{box-sizing:border-box}
+@media (max-width:600px){:root{--mz:.8}#dc-root{zoom:var(--mz)}}
+a{color:#111111;text-decoration:none}
+a:hover{color:#FFB3C8}
+button{font-family:inherit}
+@keyframes tbFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<div style="min-height:100vh">
+
+<header style="position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(17,17,17,.06)">
+<div style="padding:0 clamp(20px,4vw,48px);height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+<a href="/" aria-label="탠뷰티 홈" style="display:flex;align-items:baseline;gap:12px;padding-top:6px">
+<span style="position:relative;display:inline-flex;align-items:baseline;font-weight:800;font-size:28px;letter-spacing:-.04em;line-height:1;color:#111111"><span style="position:absolute;left:.1em;top:-.2em;width:1.1em;height:.2em;border-top:.075em solid #FFB3C8;border-radius:70% 30% 0 0/100% 100% 0 0"></span>탠뷰티<span style="width:.2em;height:.2em;border-radius:50%;background:#FFB3C8;margin-left:.08em"></span></span>
+<span style="font-size:12px;font-weight:500;color:#666666;letter-spacing:.22em">TAN BEAUTY</span>
+</a>
+<div style="display:flex;align-items:center;gap:clamp(16px,2.4vw,40px)">
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+<nav style="display:flex;align-items:center;gap:clamp(22px,2.8vw,44px);font-size:18px;font-weight:500;height:72px">
+<div onMouseEnter="{{ navIn }}" onMouseLeave="{{ navOut }}" style="position:relative;height:100%;display:flex;align-items:center">
+<span style="padding:8px 0;cursor:default">시술</span>
+<sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:100%;left:50%;margin-left:-110px;width:220px;background:#FFFFFF;border:1px solid rgba(17,17,17,.1);box-shadow:0 16px 40px rgba(17,17,17,.08);padding:10px 0;display:flex;flex-direction:column;animation:tbFade .18s ease">
+<sc-for list="{{ techLinks }}" as="tl" hint-placeholder-count="8">
+<a href="{{ tl.href }}" style="padding:10px 22px;font-size:16px">{{ tl.name }}</a>
+</sc-for>
+</div>
+</sc-if>
+</div>
+<sc-for list="{{ pages }}" as="pg" hint-placeholder-count="4">
+<button onClick="{{ pg.go }}" style="position:relative;padding:8px 0;border:none;background:transparent;font-size:18px;font-weight:{{ pg.weight }};color:{{ pg.color }};cursor:pointer">{{ pg.name }}<span style="position:absolute;left:0;right:0;bottom:0;height:2px;background:#FFB3C8;opacity:{{ pg.line }}"></span></button>
+</sc-for>
+</nav>
+</sc-if>
+<button onClick="{{ book }}" style="height:44px;padding:0 20px;border-radius:999px;border:none;background:#111111;color:#FFFFFF;font-size:15px;font-weight:700;cursor:pointer" style-hover="background:#FFB3C8;color:#111111">예약하기</button>
+</div>
+</div>
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+<nav style="display:flex;gap:6px;padding:0 clamp(20px,4vw,48px) 12px;overflow-x:auto">
+<sc-for list="{{ pages }}" as="pg" hint-placeholder-count="4">
+<button onClick="{{ pg.go }}" style="flex:none;height:36px;padding:0 14px;border-radius:999px;border:1px solid {{ pg.chipBorder }};background:{{ pg.chipBg }};color:{{ pg.chipColor }};font-size:14px;font-weight:600;cursor:pointer">{{ pg.name }}</button>
+</sc-for>
+</nav>
+</sc-if>
+</header>
+
+<sc-if value="{{ isGallery }}" hint-placeholder-val="{{ false }}">
+<main style="animation:tbFade .4s ease">
+<section style="position:relative;background:linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.55) 45%,rgba(255,255,255,0) 75%),url(https://soilgood777-commits.github.io/tanbeauty/gen/hd-gallery.jpg) right center/cover no-repeat;padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px) clamp(32px,4vw,48px);display:flex;flex-direction:column;gap:18px">
+<span style="position:absolute;right:16px;bottom:12px;font-size:10px;color:#666666;background:rgba(255,255,255,.8);padding:3px 7px;border-radius:3px">연출 이미지</span>
+<span style="font-size:14px;font-weight:700;letter-spacing:.08em;color:#E0809E">BEFORE / AFTER</span>
+<h1 style="margin:0;font-weight:800;letter-spacing:-.045em;font-size:clamp(40px,5.6vw,76px);line-height:1.08">전후사진</h1>
+<p style="margin:0;font-size:clamp(17px,1.5vw,20px);line-height:1.65;color:#444444;max-width:34em">직후 사진만 보여드리지 않아요. 같은 조명과 각도에서, 회복된 뒤와 리터치 후까지 손님 동의를 받아 올립니다.</p>
+</section>
+<section style="padding:0 clamp(20px,4vw,48px) clamp(40px,5vw,64px)">
+<div style="display:grid;grid-template-columns:{{ cols4 }};gap:1px;background:rgba(17,17,17,.1);border:1px solid rgba(17,17,17,.1);border-radius:20px;overflow:hidden">
+<sc-for list="{{ rules }}" as="ru" hint-placeholder-count="4">
+<div style="background:#FFFFFF;padding:26px;display:flex;flex-direction:column;gap:8px">
+<span style="font-weight:800;font-size:15px;color:#E0809E">{{ ru.n }}</span>
+<span style="font-weight:800;font-size:19px">{{ ru.t }}</span>
+<span style="font-size:15px;line-height:1.6;color:#555555">{{ ru.d }}</span>
+</div>
+</sc-for>
+</div>
+</section>
+<section style="padding:0 clamp(20px,4vw,48px) clamp(56px,7vw,96px)">
+<div style="display:flex;flex-direction:column;gap:14px;margin-bottom:28px">
+<span style="font-size:14px;font-weight:700;color:#E0809E">회복 과정</span>
+<h2 style="margin:0;font-weight:800;letter-spacing:-.04em;font-size:clamp(28px,3.4vw,46px);line-height:1.2">직후 사진만 보면 안 되는 이유</h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,3vw,40px);align-items:stretch">
+<div style="position:relative;aspect-ratio:4/3;border-radius:24px;overflow:hidden;background:#F4ECEE">
+<sc-for list="{{ stages }}" as="sg" hint-placeholder-count="1">
+<div style="position:absolute;inset:0;background:{{ sg.bg }};opacity:{{ sg.op }};transform:scale({{ sg.sc }});transition:opacity .7s ease,transform 1.2s cubic-bezier(.2,.7,.2,1);display:flex;align-items:flex-end;padding:22px">
+<span style="font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.9)">{{ sg.label }} 사진 자리</span>
+</div>
+</sc-for>
+<div style="position:absolute;left:0;right:0;top:0;height:3px;background:rgba(17,17,17,.08)"><div style="height:100%;width:{{ stageFill }};background:#111111;transition:width .6s cubic-bezier(.2,.7,.2,1)"></div></div>
+</div>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ stages }}" as="sg" hint-placeholder-count="4">
+<button onClick="{{ sg.pick }}" style="text-align:left;border:none;border-bottom:1px solid rgba(17,17,17,.1);background:transparent;padding:20px 0;display:grid;grid-template-columns:56px 1fr;gap:14px;cursor:pointer;color:#111111;opacity:{{ sg.rowOp }};transition:opacity .4s">
+<span style="font-weight:800;font-size:15px;color:{{ sg.numColor }};padding-top:3px">{{ sg.n }}</span>
+<span style="display:flex;flex-direction:column;gap:6px"><span style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-weight:800;font-size:20px">{{ sg.label }}</span><span style="font-size:13px;color:#666666">{{ sg.when }}</span></span><sc-if value="{{ sg.on }}" hint-placeholder-val="{{ false }}"><span style="font-size:15px;line-height:1.6;color:#444444;animation:tbFade .35s ease">{{ sg.d }}</span></sc-if></span>
+</button>
+</sc-for>
+<span style="margin-top:14px;font-size:13px;color:#666666">회복 속도와 색 변화는 피부 상태에 따라 개인차가 있어요.</span>
+</div>
+</div>
+</section>
+<section style="background:#FFF1F5;padding:clamp(48px,6vw,88px) clamp(20px,4vw,48px)">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px">
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ gFilters }}" as="gf" hint-placeholder-count="5">
+<button onClick="{{ gf.pick }}" style="height:40px;padding:0 18px;border-radius:999px;border:1px solid {{ gf.border }};background:{{ gf.bg }};color:{{ gf.color }};font-size:15px;font-weight:600;cursor:pointer">{{ gf.name }}</button>
+</sc-for>
+</div>
+<span style="font-size:14px;color:#666666">사진 위에서 좌우로 움직여 비교해 보세요</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:24px">
+<sc-for list="{{ baList }}" as="b" hint-placeholder-count="6">
+<div data-ba-card="1" style="background:#FFFFFF;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .3s,transform .3s" style-hover="box-shadow:0 18px 40px rgba(17,17,17,.1);transform:translateY(-3px)">
+<div onPointerMove="{{ b.move }}" onPointerDown="{{ b.move }}" onPointerLeave="{{ b.leave }}" style="position:relative;aspect-ratio:3/2;cursor:ew-resize;touch-action:pan-y;user-select:none;overflow:hidden">
+<div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#FFE6EE 0 10px,#FFF3F7 10px 20px)"></div>
+<span style="position:absolute;right:12px;top:12px;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:#FFB3C8;color:#111111">AFTER</span>
+<div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#E2E2E2 0 10px,#EEEEEE 10px 20px);clip-path:inset(0 {{ b.clip }} 0 0);transition:{{ b.tr }}"><span style="position:absolute;left:12px;top:12px;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:#111111;color:#FFFFFF">BEFORE</span></div>
+<div style="position:absolute;top:0;bottom:0;left:{{ b.pos }};width:2px;margin-left:-1px;background:#FFFFFF;box-shadow:0 0 0 1px rgba(17,17,17,.08);transition:{{ b.tr }};pointer-events:none">
+<span style="position:absolute;top:50%;left:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:#FFFFFF;box-shadow:0 4px 14px rgba(17,17,17,.18);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;letter-spacing:2px">‹›</span>
+</div>
+</div>
+<div style="padding:20px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+<span style="display:flex;flex-direction:column;gap:4px"><span style="font-weight:800;font-size:17px">{{ b.tech }}</span><span style="font-size:13px;color:#666666">{{ b.when }}</span></span>
+<a href="{{ b.href }}" style="font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px">시술 보기</a>
+</div>
+</div>
+</sc-for>
+</div>
+<p style="margin:24px 0 0;font-size:14px;color:#666666">사진은 손님 동의를 받는 대로 계속 올라가요. 더 많은 사진은 <a href="https://www.instagram.com/tanbeautyyy/" target="_blank" rel="noopener" style="font-weight:600;text-decoration:underline;text-underline-offset:3px">인스타그램 @tanbeautyyy</a>에서 볼 수 있어요.</p>
+</section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isPrices }}" hint-placeholder-val="{{ false }}">
+<main style="animation:tbFade .4s ease">
+<section style="position:relative;background:linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.55) 45%,rgba(255,255,255,0) 75%),url(https://soilgood777-commits.github.io/tanbeauty/gen/hd-prices.jpg) right center/cover no-repeat;padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px) clamp(32px,4vw,48px);display:flex;flex-direction:column;gap:18px">
+<span style="position:absolute;right:16px;bottom:12px;font-size:10px;color:#666666;background:rgba(255,255,255,.8);padding:3px 7px;border-radius:3px">연출 이미지</span>
+<span style="font-size:14px;font-weight:700;letter-spacing:.08em;color:#E0809E">PRICE</span>
+<h1 style="margin:0;font-weight:800;letter-spacing:-.045em;font-size:clamp(40px,5.6vw,76px);line-height:1.08">가격 안내</h1>
+<p style="margin:0;font-size:clamp(17px,1.5vw,20px);line-height:1.65;color:#444444;max-width:34em">'부터'가 아닌 정가입니다. 모든 가격은 VAT 별도이며, 반영구 시술에는 리터치 1회가 포함돼요.</p>
+</section>
+<section style="padding:0 clamp(20px,4vw,48px) clamp(48px,6vw,80px)">
+<div style="display:grid;grid-template-columns:{{ cols4 }};gap:12px">
+<sc-for list="{{ includes }}" as="inc" hint-placeholder-count="4">
+<div data-inc="1" style="padding:22px;border-radius:16px;background:#111111;color:#FFFFFF;display:flex;align-items:center;gap:14px">
+<span style="flex:none;width:32px;height:32px;border-radius:50%;background:#FFB3C8;color:#111111;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800">✓</span>
+<span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;color:#BBBBBB">가격에 포함</span><span style="font-weight:800;font-size:17px">{{ inc }}</span></span>
+</div>
+</sc-for>
+</div>
+</section>
+<div style="padding:0 clamp(20px,4vw,48px) clamp(16px,2vw,24px);display:grid;grid-template-columns:{{ priceCols }};gap:clamp(32px,4vw,64px);align-items:start">
+<div style="min-width:0">
+<sc-for list="{{ priceGroups }}" as="g" hint-placeholder-count="2">
+<section style="padding:0 0 clamp(40px,5vw,64px)">
+<div>
+<h2 style="margin:0 0 8px;font-weight:800;letter-spacing:-.04em;font-size:clamp(26px,3vw,38px)">{{ g.title }}</h2>
+<div style="display:flex;flex-direction:column;border-top:2px solid #111111">
+<sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3">
+<a href="{{ r.href }}" style="display:grid;grid-template-columns:minmax(0,1fr) auto 32px;gap:16px 20px;align-items:center;padding:22px 16px;margin:0 -16px;border-bottom:1px solid rgba(17,17,17,.1);border-radius:12px;color:#111111;transition:background .25s" onMouseEnter="{{ r.hover }}" style-hover="background:#FFF1F5;color:#111111">
+<span style="display:flex;flex-direction:column;gap:6px;min-width:0"><span style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-weight:800;font-size:20px">{{ r.name }}</span><span style="font-size:13px;color:#888888">{{ r.sub }}</span></span><span style="font-size:15px;line-height:1.5;color:#555555">{{ r.note }}</span></span>
+<span style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;text-align:right">
+<span style="display:flex;align-items:baseline;gap:6px"><span style="font-weight:800;font-size:clamp(20px,2vw,26px);letter-spacing:-.03em;white-space:nowrap">{{ r.price }}</span><span style="font-size:12px;color:#666666;white-space:nowrap">{{ r.vat }}</span></span>
+<span style="font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:{{ r.tagBg }};color:#111111;white-space:nowrap">{{ r.tag }}</span>
+</span>
+<span style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(17,17,17,.15);display:flex;align-items:center;justify-content:center;font-size:14px">→</span>
+</a>
+</sc-for>
+</div>
+</div>
+</section>
+</sc-for>
+</div>
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+<aside style="position:sticky;top:96px;display:flex;flex-direction:column;gap:16px;order:-1">
+<div style="position:relative;aspect-ratio:4/5;border-radius:24px;overflow:hidden;background:#F4ECEE">
+<sc-for list="{{ previews }}" as="pv" hint-placeholder-count="1">
+<div style="position:absolute;inset:0;background:#F4ECEE url({{ pv.img }}) center/cover no-repeat;opacity:{{ pv.op }};transform:scale({{ pv.sc }});transition:opacity .5s ease,transform 1s cubic-bezier(.2,.7,.2,1)"></div>
+</sc-for>
+<div style="position:absolute;inset:auto 0 0 0;padding:24px;background:linear-gradient(180deg,rgba(17,17,17,0),rgba(17,17,17,.7));color:#FFFFFF;display:flex;flex-direction:column;gap:6px">
+<span style="font-weight:800;font-size:26px;letter-spacing:-.03em">{{ pvCur.name }}</span>
+<span style="font-size:15px;color:#EEEEEE">{{ pvCur.note }}</span>
+</div>
+<span style="position:absolute;right:14px;top:14px;font-size:10px;color:#666666;background:rgba(255,255,255,.8);padding:3px 7px;border-radius:3px">연출 이미지</span>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 20px;border-radius:16px;border:1px solid rgba(17,17,17,.1)">
+<span style="display:flex;align-items:baseline;gap:6px"><span style="font-weight:800;font-size:24px;letter-spacing:-.03em">{{ pvCur.price }}</span><span style="font-size:12px;color:#666666">{{ pvCur.vat }}</span></span>
+<a href="{{ pvCur.href }}" style="height:44px;padding:0 18px;border-radius:999px;background:#111111;color:#FFFFFF;display:flex;align-items:center;font-size:14px;font-weight:700" style-hover="background:#FFB3C8;color:#111111">자세히 보기 →</a>
+</div>
+</aside>
+</sc-if>
+</div>
+<section style="background:#F7F7F7;padding:clamp(48px,6vw,80px) clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(28px,4vw,56px)">
+<h2 style="margin:0;font-weight:800;letter-spacing:-.04em;font-size:clamp(26px,3vw,38px);line-height:1.25">가격이 달라질 수 있는 경우</h2>
+<div style="display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{ priceNotes }}" as="pn" hint-placeholder-count="3">
+<div style="display:flex;gap:14px;align-items:flex-start;font-size:17px;line-height:1.6"><span style="flex:none;margin-top:9px;width:8px;height:8px;border-radius:50%;background:#FFB3C8"></span><span>{{ pn }}</span></div>
+</sc-for>
+</div>
+</section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isReviews }}" hint-placeholder-val="{{ false }}">
+<main style="animation:tbFade .4s ease">
+<section style="position:relative;background:linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.55) 45%,rgba(255,255,255,0) 75%),url(https://soilgood777-commits.github.io/tanbeauty/gen/hd-reviews.jpg) right center/cover no-repeat;padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px) clamp(32px,4vw,48px);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
+<span style="position:absolute;right:16px;bottom:12px;font-size:10px;color:#666666;background:rgba(255,255,255,.8);padding:3px 7px;border-radius:3px">연출 이미지</span>
+<div style="display:flex;flex-direction:column;gap:18px">
+<span style="font-size:14px;font-weight:700;letter-spacing:.08em;color:#E0809E">REVIEW</span>
+<h1 style="margin:0;font-weight:800;letter-spacing:-.045em;font-size:clamp(40px,5.6vw,76px);line-height:1.08">손님 후기</h1>
+<p style="margin:0;font-size:clamp(17px,1.5vw,20px);line-height:1.65;color:#444444;max-width:34em">네이버 플레이스 방문자 리뷰에서 그대로 발췌했어요. 아이디 일부는 가렸습니다.</p>
+</div>
+<a href="https://map.naver.com/p/search/%ED%83%A0%EB%B7%B0%ED%8B%B0/place/2088171690" target="_blank" rel="noopener" style="height:52px;padding:0 24px;border-radius:999px;background:#111111;color:#FFFFFF;display:flex;align-items:center;font-size:15px;font-weight:700">네이버에서 전체 207건 보기 →</a>
+</section>
+<section style="padding:0 clamp(20px,4vw,48px) clamp(48px,6vw,72px)">
+<div style="border-radius:24px;background:#FFF1F5;color:#111111;padding:clamp(28px,3.4vw,48px);display:grid;grid-template-columns:{{ rvInner }};gap:28px clamp(32px,5vw,80px);align-items:center">
+<div style="display:flex;flex-direction:column;gap:10px;padding-right:{{ rvPad }};border-right:{{ rvDivider }}">
+<span style="font-size:14px;color:#666666">네이버 플레이스 평균 별점</span>
+<div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:800;font-size:clamp(64px,6vw,96px);line-height:.9;letter-spacing:-.05em;color:#E0809E">5.0</span><span style="font-size:18px;color:#888888">/ 5</span></div>
+<span style="color:#E0809E;font-size:20px;letter-spacing:3px">★★★★★</span>
+<span style="font-size:15px;color:#444444">방문자 리뷰 207건</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<span style="font-size:14px;color:#666666">이런 점이 좋았어요 · 182명 참여</span>
+<sc-for list="{{ keywords }}" as="kw" hint-placeholder-count="5">
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr) 44px;gap:14px;align-items:center">
+<span style="font-weight:800;font-size:15px;color:{{ kw.rankColor }}">{{ kw.rank }}</span>
+<span style="display:flex;flex-direction:column;gap:7px"><span style="font-size:16px;font-weight:600">“{{ kw.k }}”</span><span style="height:4px;border-radius:2px;background:rgba(17,17,17,.08);overflow:hidden"><span style="display:block;height:100%;width:{{ kw.w }};background:#E0809E;border-radius:2px"></span></span></span>
+<span style="font-size:15px;font-weight:700;text-align:right">{{ kw.n }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+<section style="background:#FFF1F5;padding:clamp(48px,6vw,80px) clamp(20px,4vw,48px)">
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px">
+<sc-for list="{{ rFilters }}" as="rf" hint-placeholder-count="5">
+<button onClick="{{ rf.pick }}" style="height:40px;padding:0 18px;border-radius:999px;border:1px solid {{ rf.border }};background:{{ rf.bg }};color:{{ rf.color }};font-size:15px;font-weight:600;cursor:pointer">{{ rf.name }} <span style="opacity:.6">{{ rf.n }}</span></button>
+</sc-for>
+</div>
+<div style="columns:3 300px;column-gap:16px">
+<sc-for list="{{ revList }}" as="r" hint-placeholder-count="6">
+<div style="break-inside:avoid;margin-bottom:16px;padding:26px;border-radius:20px;background:#FFFFFF;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span style="color:#FFB3C8;font-size:15px;letter-spacing:2px">★★★★★</span><span style="font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:#FFE2EB">{{ r.cat }}</span></div>
+<p style="margin:0;font-size:16px;line-height:1.7;color:#222222;text-wrap:pretty">“{{ r.text }}”</p>
+<span style="font-size:13px;color:#666666">{{ r.who }} · {{ r.date }}</span>
+</div>
+</sc-for>
+</div>
+<sc-if value="{{ hasMoreRev }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;justify-content:center;margin-top:12px"><button onClick="{{ moreRev }}" style="height:52px;padding:0 28px;border-radius:999px;border:1.5px solid #111111;background:#FFFFFF;font-size:15px;font-weight:700;cursor:pointer" style-hover="background:#111111;color:#FFFFFF">후기 {{ moreRevN }}개 더 보기</button></div>
+</sc-if>
+</section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isLocation }}" hint-placeholder-val="{{ false }}">
+<main style="animation:tbFade .4s ease">
+<section style="position:relative;background:linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.55) 45%,rgba(255,255,255,0) 75%),url(https://soilgood777-commits.github.io/tanbeauty/gen/hd-location.jpg) right center/cover no-repeat;padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px) clamp(32px,4vw,48px);display:flex;flex-direction:column;gap:18px">
+<span style="position:absolute;right:16px;bottom:12px;font-size:10px;color:#666666;background:rgba(255,255,255,.8);padding:3px 7px;border-radius:3px">연출 이미지</span>
+<span style="font-size:14px;font-weight:700;letter-spacing:.08em;color:#E0809E">LOCATION</span>
+<h1 style="margin:0;font-weight:800;letter-spacing:-.045em;font-size:clamp(40px,5.6vw,76px);line-height:1.08">오시는 길</h1>
+<p style="margin:0;font-size:clamp(17px,1.5vw,20px);line-height:1.65;color:#444444">인천 남동구 구월로 89 제6동 102호 · 인천시청역 바로 앞</p>
+</section>
+<section style="padding:clamp(32px,4vw,56px) clamp(20px,4vw,48px) clamp(48px,6vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px">
+<div style="position:relative;min-height:420px;border-radius:24px;overflow:hidden;background:#EEEEEE">
+<iframe title="탠뷰티 위치 지도" src="https://maps.google.com/maps?q=%EC%9D%B8%EC%B2%9C%20%EB%82%A8%EB%8F%99%EA%B5%AC%20%EA%B5%AC%EC%9B%94%EB%A1%9C%2089&amp;z=17&amp;hl=ko&amp;output=embed" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ ways }}" as="w" hint-placeholder-count="3">
+<div style="padding:24px 26px;border-radius:20px;border:1px solid rgba(17,17,17,.1);display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:start">
+<span style="width:52px;height:52px;border-radius:50%;background:{{ w.bg }};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:{{ w.ink }}">{{ w.icon }}</span>
+<span style="display:flex;flex-direction:column;gap:6px"><span style="font-weight:800;font-size:19px">{{ w.t }}</span><span style="font-size:15px;line-height:1.6;color:#555555">{{ w.d }}</span></span>
+</div>
+</sc-for>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:4px">
+<a href="https://map.naver.com/p/search/%ED%83%A0%EB%B7%B0%ED%8B%B0/place/2088171690" target="_blank" rel="noopener" style="height:52px;border-radius:12px;background:#111111;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700">네이버 지도 길찾기</a>
+<a href="tel:0320000000" style="height:52px;border-radius:12px;border:1px solid rgba(17,17,17,.15);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700">전화 032-000-0000</a>
+</div>
+</div>
+</section>
+<section style="background:#F7F7F7;padding:clamp(48px,6vw,80px) clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(28px,4vw,56px)">
+<div style="display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-weight:800;letter-spacing:-.04em;font-size:clamp(26px,3vw,38px)">영업시간</h2>
+<div style="display:flex;flex-direction:column;border-top:2px solid #111111">
+<sc-for list="{{ hours }}" as="hr" hint-placeholder-count="3">
+<div style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(17,17,17,.1);font-size:18px;font-weight:{{ hr.weight }}"><span>{{ hr.day }}</span><span style="color:{{ hr.color }}">{{ hr.time }}</span></div>
+</sc-for>
+</div>
+<span style="font-size:14px;color:#666666">100% 예약제로 운영해요. 방문 전 예약해 주세요.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-weight:800;letter-spacing:-.04em;font-size:clamp(26px,3vw,38px)">방문 전 확인해 주세요</h2>
+<sc-for list="{{ visitNotes }}" as="vn" hint-placeholder-count="3">
+<div style="display:flex;gap:14px;align-items:flex-start;font-size:17px;line-height:1.6"><span style="flex:none;margin-top:9px;width:8px;height:8px;border-radius:50%;background:#FFB3C8"></span><span>{{ vn }}</span></div>
+</sc-for>
+</div>
+</section>
+</main>
+</sc-if>
+
+<section style="padding:clamp(56px,7vw,88px) clamp(20px,4vw,48px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px">
+<h2 style="margin:0;font-weight:800;letter-spacing:-.04em;font-size:clamp(28px,3.6vw,48px);line-height:1.2">상담은 부담 없이, 디자인은 꼼꼼하게</h2>
+<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+<button onClick="{{ book }}" style="height:56px;padding:0 28px;border-radius:999px;border:none;background:#111111;color:#FFFFFF;font-size:17px;font-weight:700;cursor:pointer" style-hover="background:#FFB3C8;color:#111111">네이버로 예약하기 →</button>
+<a href="https://pf.kakao.com/_BxoQan" target="_blank" rel="noopener" style="height:56px;padding:0 24px;border-radius:999px;border:1.5px solid #111111;display:flex;align-items:center;font-size:16px;font-weight:600">카톡 상담</a>
+</div>
+</section>
+
+<footer style="background:#F5F5F5;border-top:1px solid rgba(17,17,17,.08);padding:32px clamp(20px,4vw,48px);font-size:13px;line-height:1.8;color:#444444;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+<span>탠뷰티 · 인천 남동구 구월로 89 제6동 102호 · 평일 10:00–20:00 · 토 10:00–18:00 · 일 휴무</span>
+<a href="/" style="color:#444444">홈으로</a>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const NAVER = 'https://m.place.naver.com/place/2088171690/booking';
+const T = '/treatment#t=';
+const IMG = { embo: 'brow-natural', combo: 'brow-combo', powder: 'brow-shadow', eyeline: 'eyeline', lip: 'lip', hair: 'hairline', mole: 'beautymark', remove: 'p-studio' };
+const TECH = [
+{ id: 'embo', g: 0, name: '자연눈썹', sub: '결 표현 · 엠보', price: 130000, note: '한 올씩 결을 그려 내 눈썹처럼 자연스럽게' },
+{ id: 'combo', g: 0, name: '콤보눈썹', sub: '결 + 쉐이딩', price: 150000, note: '쌩얼엔 자연스럽게, 화장하면 또렷하게' },
+{ id: 'powder', g: 0, name: '쉐도우눈썹', sub: '점묘 쉐이딩', price: 150000, note: '유분이 많은 피부도 번짐이 적게' },
+{ id: 'eyeline', g: 1, name: '점막아이라인', sub: '아이라인 반영구', price: 130000, note: '점막을 채워 번짐 없이 또렷한 눈매' },
+{ id: 'lip', g: 1, name: '틴트입술', sub: '입술 반영구', price: 180000, note: '피부톤에 맞춘 컬러로 혈색과 윤곽 정돈' },
+{ id: 'hair', g: 1, name: '헤어라인', sub: '헤어라인·두피', price: null, note: '채우는 면적에 따라 상담 후 안내' },
+{ id: 'mole', g: 1, name: '미인점', sub: '점 반영구', price: 40000, note: '원하는 위치에 작고 자연스럽게' },
+{ id: 'remove', g: 1, name: '잔흔케어', sub: '기존 반영구 잔흔 정리', price: 50000, note: '1회 가격 · 회차는 잔흔 상태에 따라 상담', noRetouch: true },
+];
+const PAGES = [['gallery', '전후사진'], ['prices', '가격'], ['reviews', '후기'], ['location', '오시는 길']];
+const KW = [['시술이 꼼꼼해요', 192], ['친절해요', 187], ['상담이 자세해요', 151], ['분위기가 편안해요', 105], ['매장이 청결해요', 87]];
+const REV = [
+['눈썹', '윤명*', '2026.09', '수시로 소독도 하시고 일회용 제품도 뜯기전에 확인 시켜주셔서 더 믿음이 갔네요. 자연스러운걸 좋아한다고 말씀드리니 정말 당일부터 자연스럽고 만족스러워요.'],
+['잔흔케어', '째뿡*', '2026.10', '무리하게 추가 시술을 강요하지 않으시고, 딱 제 상태에 맞춰 필요한 만큼만 솔직하게 진행해 주셔서 더 믿음이 갔습니다.'],
+['눈썹', '진호*', '2026.08', '시술 전 스케치할때부터 거울을 보며 몇번이고 함께 의논하며 수정할 부분은 없는지 저보다 더 꼼꼼하게 체크해주셨답니다.'],
+['남성', 'sws*', '2026.07', '남자라 너무 진하거나 티 나는 눈썹은 부담스러웠는데… 정말 제 원래 눈썹처럼 자연스럽게 표현돼서 너무 만족스러웠어요.'],
+['잔흔케어', 'fg*', '2026.05', '제거샵만 여기저기 4군데 정도 다녔었는데 탠뷰티가 가장 꼼꼼하게 잘해주세요..!! 진짜 1회만에 붉은기 바로 빠지고..'],
+['눈썹', '햇살*', '2026.08', '아침에 세수하고 스킨케어만 바르고 나올 정도로 삶의 질이 너무 달라졌어요. 원장님이 제가 선호하는 방향에 맞춰서 해 주시니까 더 부담 없고 좋았어요.'],
+['입술', 'SHW*', '2026.07', '제 입술에 맞는 컬러를 추천해 주셔서 결과가 정말 자연스럽습니다. 무엇보다 쌩얼에도 혈색이 살아 보여서 너무 만족합니다.'],
+['헤어라인', 'tls*', '2025.09', '예식날 올빽을 하고 싶은데 M자가 엄청 파여 있어… 너무 진하지않고 자연스럽게 결이 살아있습니다. 이마가 너무 좁아보이지 않게 완성해 주셨습니다!'],
+['잔흔케어', 'vic*', '2026.06', '10년 묵은 눈썹 잔흔 케어받고 왔습니다!! 아픔도 1에서 10으로 치자면 2-3정도? 따꼼! 에서 끝나더라고요!'],
+['남성', 'qri*', '2026.07', '40대가 되면서 눈썹이 점점 흐려져 고민이었는데… 아내가 보자마자 너무 잘됐다고 마음에 들어 했고, 인상도 훨씬 또렷해졌다는 이야기를 많이 들었습니다.'],
+['눈썹', 'JH10*', '2026.02', '색은 제 눈썹 색깔에 맞춰 두 가지 색을 섞어서 해주셨어요. 같이 일하는 동료도 제 눈썹보고 어디서 했냐고 물어보네요.'],
+['잔흔케어', '채일*', '2026.02', '몇년전에 강남쪽에서 같은 시술 받은적이 있는데… 진짜 원장님께서 엄청 꼼꼼히 시술해주시고 결과물도 딱 원하는 밝기로 나와서 너무 마음에 들어요.'],
+['남성', 'sinm*', '2025.08', '무슨 실? 같은걸로 대칭도 꼼꼼히 잡으시고 디자인에서부터 엄첨 심혈을 기울여주심. 이렇게까지 꼼꼼하게 해주신 것은 처음이었음.'],
+['눈썹', 'Shim*', '2026.06', '인천시청역 8번 출구로 나오면 바로 앞 건물 위치해 있어 찾아가기 정말 편했습니다. 처음 받는 시술이라 걱정이 많았는데, 통증은 느껴지지 않았어요.'],
+['헤어라인', 'eun*', '2025.08', '제 비어있던 헤어라인이 이렇게 자연스럽게 채워지다니. 빈곳은 채우고 튀어나온곳은 왁싱으로 정리해서 헤어라인을 예쁘게 잡아주셨어요.'],
+['잔흔케어', '06*', '2026.06', '1회차에 붉은기가 거의 다 빠졌어요!! 아프다기보단 간질간질하고 마지막 즘에만 따끔?한 정도였어용!!'],
+['눈썹', 'yeon*', '2025.12', '디자인 엄청 섬세하게 잡아주시고 색상까지도 여러개 보여주시면서 고를 수 있게 해주셔서 너무 좋았어용. 미인점까지 추가 진행했는데 위치랑 크기 찰떡 대만족.'],
+['남성', '377*', '2026.07', '남자눈썹은 터무니없는 가격을 부르는 경우가 많은데 실력도 좋구 가격도 합리적으로 해주시고 너무 좋은 곳입니다.'],
+['잔흔케어', '소년*', '2026.02', '다음날 상태가 괜찮은지 연락도 주셔서 걱정도 한숨 덜었구요, 한달 뒤에 더 괜찮아진다고 하셨는데 기대중이에요!'],
+['눈썹', 'sj88*', '2026.08', '친언니가 여기서 눈썹문신을 했는데 너무 자연스럽고 예쁘게 잘 돼서, 다음날 바로 엄마까지 모시고 갔어요.'],
+['헤어라인', '숭숭*', '2025.07', '평소 헤어라인 스트레스라 고민이 정말 많았는데, 탠뷰티에서 헤어라인 컨설팅을 받고 제 평생고민이 사라졌습니다!!'],
+['잔흔케어', '햇빛*', '2026.03', '원래 눈썹 그대로 눈썹에 손상도 없이 잔흔만 제거된게 신기했어요. 약간의 붓기는 있어도 금방 가라앉더라구요.'],
+['눈썹', '연주*', '2026.08', '시술 전에 디자인 잡을 때 어울리는 라인으로 정말 꼼꼼하게 체크해 주시는 모습에 완전 신뢰감 생겼습니다. 시술 중간에도 한 번 더 세심하게 수정해주셨어요.'],
+['잔흔케어', 'jun*', '2026.04', '10년 전부터 5번 받은 눈썹이 붉은 잔흔이 되어… 김포에 살고 있어 거리는 있지만 인천까지 왔습니다! 역시 제 선택이 옳았어요!!'],
+['남성', '잘공*', '2026.06', '50대 중반 남자입니다. 넘 자연스럽게 연출해주셔서 기분 좋게 리뷰 남겨요. 제 나이때 눈썹 생각하신분께 적극 추천합니다.'],
+['눈썹', 'Puel*', '2025.11', '아이라인이랑 눈썹 그리는게 잘 못 그려서 스트레스였는데 예쁘게 잘 되서 대만족이요. 기구들도 위생적으로 관리되는거 같고 계속 손소독하시는거 보고 안심됐어요.'],
+['잔흔케어', 'kmk*', '2025.11', '여러번 커버한거라 오래걸릴줄알았는데 1회차인데 직후에도 확실히 연해졌고 붓기도 없네요.'],
+['눈썹', '칼리*', '2026.08', '마취를 해도 살짝 불편한 통증을 느끼는 편이었는데, 여기선 시술하는내내 꿀잠을 잘 만큼 통증없이 편안하게 시술받았네요.'],
+['잔흔케어', 'umi*', '2026.11', '1회차인데도 붉은기가 사라지네요! 대만족. 남편도 같이 왔는데 둘다 만족해하며 돌아갑니당.'],
+['눈썹', '도라*', '2025.11', '사진의 왼쪽이 시술 전, 오른쪽이 시술 후 한달 된 사진입니다. 원래 리뷰같은 거 잘 안 쓰는데 너무 만족해서 한 달만에 늦은 후기 남겨요.'],
+['남성', '발렌*', '2026.11', '여자친구가 극찬한곳이라 믿고 왔는데- 너무 만족스럽네요. 자연스럽게 되어 더 좋습니다!'],
+['잔흔케어', '댕댕E*', '2025.08', '1회 케어만에 붉은기가 어느정도 잡아진거 보고 완전 금손이시구나 싶었어요. 꼼꼼하게 관리해주심은 물론이고 중간중간 아픈지 체크해주셨어요.'],
+['눈썹', 'ysy*', '2026.10', '자연눈썹으로 진행했는데 당일에도 짱구눈썹이 아니라 너무 자연스러워서 좋아요.'],
+['잔흔케어', '복돌*', '2026.08', '네이버 예약으로 쉽게 예약할 수 있었고 원장님께서 시술전 안내도 톡톡으로 바로 주셨어요. 붉은기 가득하던거 다 어디갔죠..'],
+['눈썹', 'yae*', '2026.02', '시술하고 며칠 지났는데도 중간중간 연락하며 어떤지 물어봐주셔서 시술 끝난후 케어도 해주시고 너무 세심하고 친절해요.'],
+['남성', 'logg*', '2025.07', '왼쪽 눈썹 아래에 흉터도 있어서 쉐입도 꼼꼼하게 봐주시고 세미 아치형으로 부탁드렸더니 부담스럽지않게 딱 맞게 해주셨어요!!']
+].map(([cat, who, date, text]) => ({ cat, who, date, text }));
+const R_CATS = ['전체', '눈썹', '잔흔케어', '남성', '헤어라인', '입술'];
+const BA = [
+{ tech: '자연눈썹', id: 'embo', when: '시술 직후 → 리터치 후', c: '눈썹' }, { tech: '콤보눈썹', id: 'combo', when: '시술 직후 → 4주 후', c: '눈썹' },
+{ tech: '쉐도우눈썹', id: 'powder', when: '시술 직후 → 리터치 후', c: '눈썹' }, { tech: '잔흔케어', id: 'remove', when: '1회차 전 → 2회차 전', c: '잔흔케어' },
+{ tech: '잔흔케어', id: 'remove', when: '시술 전 → 1회차 4주 후', c: '잔흔케어' }, { tech: '틴트입술', id: 'lip', when: '시술 전 → 회복 후', c: '입술' },
+{ tech: '점막아이라인', id: 'eyeline', when: '시술 전 → 회복 후', c: '기타' }, { tech: '미인점', id: 'mole', when: '시술 전 → 회복 후', c: '기타' },
+];
+const G_CATS = ['전체', '눈썹', '잔흔케어', '입술', '기타'];
+
+class Component extends DCLogic {
+state = { page: 'prices', rc: '전체', gc: '전체', ba: {}, stage: 0, sel: {}, remN: 1 };
+componentDidMount() {
+this.onHash = () => { const m = location.hash.match(/p=(\w+)/); if (m && PAGES.some(p => p[0] === m[1])) this.setState({ page: m[1] }); };
+this.onHash(); window.addEventListener('hashchange', this.onHash);
+this.onR = () => this.setState({ w: window.innerWidth }); this.onR(); window.addEventListener('resize', this.onR);
+this.st = setInterval(() => { if (this.state.page === 'gallery' && !this.state.stageLock) this.setState(s => ({ stage: (s.stage + 1) % 4 })); }, 3600);
+}
+componentDidUpdate() {
+if (this._gc !== undefined && this._gc !== this.state.gc) document.querySelectorAll('[data-ba-card]').forEach((n, i) => n.animate([{ opacity: 0, transform: 'translateY(20px)' }, { opacity: 1, transform: 'none' }], { duration: 500, delay: i * 70, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' }));
+this._gc = this.state.gc;
+}
+componentWillUnmount() { clearInterval(this.st); window.removeEventListener('hashchange', this.onHash); window.removeEventListener('resize', this.onR); }
+go(p) { this.setState({ page: p }); try { history.replaceState(null, '', '#p=' + p); } catch (e) {} window.scrollTo(0, 0); }
+chip(on) { return { bg: on ? '#111111' : '#FFFFFF', color: on ? '#FFFFFF' : '#111111', border: on ? '#111111' : 'rgba(17,17,17,.14)' }; }
+renderVals() {
+const s = this.state, w = s.w || 1200, dow = new Date().getDay();
+const won = n => n == null ? '상담 후 안내' : n.toLocaleString('ko-KR') + '원';
+const row = t => ({ hover: () => this.setState({ pv: t.id }), name: t.name, sub: t.sub, note: t.note, href: T + t.id, price: won(t.price), vat: t.price == null ? '' : 'VAT 별도', tag: t.noRetouch ? '회차별 결제' : '리터치 1회 포함', tagBg: t.noRetouch ? '#EEEEEE' : '#FFB3C8' });
+const revF = s.rc === '전체' ? REV : REV.filter(r => r.cat === s.rc);
+return {
+isDesktop: w >= 900, isMobile: w < 900,
+cols4: w >= 900 ? 'repeat(4,minmax(0,1fr))' : w >= 480 ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)',
+isGallery: s.page === 'gallery', isPrices: s.page === 'prices', isReviews: s.page === 'reviews', isLocation: s.page === 'location',
+navOpen: !!s.navOpen, navIn: () => this.setState({ navOpen: true }), navOut: () => this.setState({ navOpen: false }),
+techLinks: TECH.map(t => ({ name: t.name, href: T + t.id })),
+pages: PAGES.map(([k, name]) => { const on = s.page === k, c = this.chip(on); return { name, go: () => this.go(k), weight: on ? 700 : 500, color: on ? '#E0809E' : '#111111', line: on ? 1 : 0, chipBg: c.bg, chipColor: c.color, chipBorder: c.border }; }),
+book: () => window.open(NAVER, '_blank', 'noopener'),
+rules: [{ t: '보정 없음', d: '필터·리터칭 없이 원본 그대로' }, { t: '같은 조명·각도', d: '전과 후를 같은 자리에서 촬영' }, { t: '회복 후 사진', d: '직후가 아닌 자리 잡은 뒤 모습' }, { t: '손님 동의', d: '동의한 사진만, 얼굴은 가려서' }].map((r, i) => ({ ...r, n: '0' + (i + 1) })),
+gFilters: G_CATS.map(c => ({ name: c, ...this.chip(s.gc === c), pick: () => this.setState({ gc: c }) })),
+baList: (s.gc === '전체' ? BA : BA.filter(b => b.c === s.gc)).map((b, i) => { const k = b.tech + b.when, p = s.ba[k], v = p == null ? 50 : p;
+return { ...b, href: T + b.id, pos: v + '%', clip: (100 - v) + '%', tr: p == null ? 'all .5s cubic-bezier(.2,.7,.2,1)' : 'none',
+move: e => { const r = e.currentTarget.getBoundingClientRect(); const x = Math.max(0, Math.min(100, (e.clientX - r.left) / r.width * 100)); this.setState(st => ({ ba: { ...st.ba, [k]: Math.round(x) } })); },
+leave: () => this.setState(st => { const n = { ...st.ba }; delete n[k]; return { ba: n }; }) }; }),
+...(() => { const picked = TECH.filter(t => s.sel[t.id] && t.price != null);
+const lines = picked.map(t => ({ name: t.id === 'remove' ? t.name + ' × ' + s.remN + '회' : t.name, v: t.id === 'remove' ? t.price * s.remN : t.price }));
+const sum = lines.reduce((a, l) => a + l.v, 0), vat = Math.round(sum * .1);
+return { calcOpts: TECH.filter(t => t.price != null).map(t => { const on = !!s.sel[t.id]; return { name: t.name, mark: on ? '✓ ' : '', bg: on ? '#111111' : '#FFFFFF', color: on ? '#FFFFFF' : '#111111', border: on ? '#111111' : 'rgba(17,17,17,.14)', toggle: () => this.setState(st => ({ sel: { ...st.sel, [t.id]: !st.sel[t.id] } })) }; }),
+remOn: !!s.sel.remove, remOpts: [1, 2, 3].map(n => { const on = s.remN === n; return { n, bg: on ? '#111111' : '#FFFFFF', color: on ? '#FFFFFF' : '#111111', border: on ? '#111111' : 'rgba(17,17,17,.14)', pick: () => this.setState({ remN: n }) }; }),
+calcLines: lines.map(l => ({ name: l.name, price: won(l.v) })), calcAny: lines.length > 0, calcEmpty: lines.length === 0,
+calcHasRetouch: picked.some(t => !t.noRetouch), calcVat: won(vat), calcTotal: won(sum + vat) }; })(),
+stageFill: ((s.stage + 1) / 4 * 100) + '%',
+stages: [['시술 전', '', '원래 눈썹 상태와 비대칭, 기존 잔흔을 기록해요.', '#ECECEC'], ['시술 직후', '당일', '색이 가장 진하고 선명해 보여요. 이 사진만 보면 실제보다 진하게 느껴질 수 있어요.', '#F7D6E0'], ['회복 후', '약 1~2주', '각질이 떨어지면서 색이 30~40% 정도 옅어지고 자연스러워져요.', '#FBE6EC'], ['리터치 후', '약 4~6주', '빈 곳을 채워 형태와 색이 안정된, 실제로 오래 보게 될 모습이에요.', '#FFF1F5']].map(([label, when, d, c], i) => { const on = s.stage === i;
+return { label, when, d, on, n: '0' + (i + 1), bg: 'repeating-linear-gradient(135deg,' + c + ' 0 12px,#FFFFFF 12px 24px)', op: on ? 1 : 0, sc: on ? 1 : 1.04, rowOp: on ? 1 : .45, numColor: on ? '#E0809E' : '#999999', pick: () => this.setState({ stage: i, stageLock: true }) }; }),
+includes: ['1:1 디자인 상담', '대표원장 직접 시술', '1인 1멸균 니들', '리터치 1회'],
+priceCols: w >= 900 ? 'minmax(0,1fr) minmax(0,1.5fr)' : 'minmax(0,1fr)',
+previews: TECH.map(t => { const on = (s.pv || 'embo') === t.id; return { img: 'https://soilgood777-commits.github.io/tanbeauty/gen/' + IMG[t.id] + '.jpg', op: on ? 1 : 0, sc: on ? 1 : 1.06 }; }),
+pvCur: (() => { const t = TECH.find(x => x.id === (s.pv || 'embo')); return { name: t.name, note: t.note, price: won(t.price), vat: t.price == null ? '' : 'VAT 별도', href: T + t.id }; })(),
+priceGroups: [{ title: '눈썹 반영구', rows: TECH.filter(t => t.g === 0).map(row) }, { title: '그 외 반영구 · 케어', rows: TECH.filter(t => t.g === 1).map(row) }],
+priceNotes: ['헤어라인은 채우는 면적에 따라 상담 후 가격을 안내해요.', '잔흔케어는 1회 가격이며, 필요한 회차는 잔흔 색과 깊이를 보고 솔직하게 안내해요. 여러 회차를 미리 결제하지 않아도 돼요.', '다른 곳에서 받은 반영구를 덮어야 하는 경우, 상담 후 가격이 달라질 수 있어요.'],
+keywords: KW.map(([k, n], i) => ({ k, n, rank: '0' + (i + 1), rankColor: i === 0 ? '#E0809E' : '#888888', w: Math.round(n / 192 * 100) + '%' })),
+rFilters: R_CATS.map(c => ({ name: c, n: c === '전체' ? REV.length : REV.filter(r => r.cat === c).length, ...this.chip(s.rc === c), pick: () => this.setState({ rc: c, rMore: false }) })),
+revList: revF.slice(0, s.rMore ? 999 : 12), hasMoreRev: !s.rMore && revF.length > 12, moreRev: () => this.setState({ rMore: true }), moreRevN: Math.max(0, revF.length - 12),
+rvInner: w >= 700 ? 'auto minmax(0,1fr)' : 'minmax(0,1fr)',
+rvDivider: w >= 700 ? '1px solid rgba(17,17,17,.1)' : 'none', rvPad: w >= 700 ? 'clamp(32px,5vw,80px)' : '0px',
+ways: [{ icon: '지하철', bg: '#111111', ink: '#FFFFFF', t: '인천시청역', d: '인천 1호선·2호선 인천시청역에서 바로 앞이에요.' }, { icon: 'P', bg: '#FFB3C8', ink: '#111111', t: '주차', d: '건물 주차장을 이용할 수 있어요. 자세한 위치는 예약 확정 때 안내해 드려요.' }, { icon: '6동', bg: '#FFF1F5', ink: '#111111', t: '건물 안내', d: '구월로 89 제6동 1층 102호예요.' }],
+hours: [{ d: [1, 2, 3, 4, 5], day: '평일', time: '10:00 – 20:00' }, { d: [6], day: '토요일', time: '10:00 – 18:00' }, { d: [0], day: '일요일', time: '휴무' }].map(x => ({ day: x.day, time: x.time, weight: x.d.includes(dow) ? 700 : 400, color: x.time === '휴무' ? '#E0809E' : '#111111' })),
+visitNotes: ['시술 당일은 눈썹·입술 부위 메이크업 없이 오시면 좋아요.', '임신·수유 중이거나 피부 질환이 있으면 상담 때 꼭 알려주세요.', '만 19세 미만은 보호자 동의 후 상담 가능해요.'],
+};
+}
+}
+</script>
+<script>/* Tan Beauty runtime (React는 실행 시 자동으로 불러옵니다) */
+"use strict";(()=>{var ft=Object.defineProperty,mt=(t,e,n)=>e in t?ft(t,e,{enumerable:!0,configurable:!0,writable:!0,value:n}):t[e]=n,k=(t,e,n)=>mt(t,typeof e!="symbol"?e+"":e,n);function C(){const t=window.React;if(!t)throw new Error("dc-runtime: window.React is not available yet");return t}function ht(){const t=window.ReactDOM;if(!t)throw new Error("dc-runtime: window.ReactDOM is not available yet");return t}var y=((...t)=>C().createElement(...t));function gt(t){const e=t.querySelector("x-dc");if(!e)return null;const n=t.querySelector("script[data-dc-script]"),{props:r,preview:o}=F(n?.getAttribute("data-props")??null);return{template:e.innerHTML,js:n&&n.textContent||"",props:r,preview:o}}function J(t){const e=/<x-dc(?:\s[^>]*)?>/.exec(t);if(!e)return null;const n=t.lastIndexOf("</x-dc>");if(n===-1||n<e.index)return null;const r=t.slice(e.index+e[0].length,n),s=new DOMParser().parseFromString(t,"text/html").querySelector("script[data-dc-script]"),{props:a,preview:p}=F(s?.getAttribute("data-props")??null);return{template:r,js:s&&s.textContent||"",props:a,preview:p}}function F(t){if(!t)return{props:null,preview:null};let e;try{e=JSON.parse(t)}catch{return{props:null,preview:null}}if(!e||typeof e!="object"||Array.isArray(e))return{props:null,preview:null};const n=e,r=n.$preview&&typeof n.$preview=="object"?n.$preview:null,o={};for(const s of Object.keys(n))s[0]!=="$"&&(o[s]=n[s]);return{props:Object.keys(o).length?o:null,preview:r}}function _t(t){let e=t||"";try{e=decodeURIComponent(e)}catch{}return(e.split("/").pop()||"Root").replace(/\.dc\.html$/,"").replace(/\.html?$/,"")||"Root"}var bt=`
+    .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
+      border:1px solid color-mix(in srgb,currentColor 50%,transparent);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:color-mix(in srgb,currentColor 70%,transparent);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:color-mix(in srgb,currentColor 50%,transparent);
+      background:color-mix(in srgb,currentColor 10%,transparent);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts \u2014 keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      figure, table { break-inside: avoid; }
+      #dc-root, #dc-root > .sc-host { height: auto; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  `,wt="";function vt(t,e){let n=e.pathname||"";if(!/\.dc\.html?$/i.test(yt(n)))try{n=new URL(t.baseURI||"/").pathname}catch{}return _t(n)}function yt(t){try{return decodeURIComponent(t)}catch{return t}}function Et(t,e=document){const n=gt(e);if(!n)return null;const r=C(),o=vt(e,location);t.markFetched(o),t.setRootName(o),t.adoptParsed(o,n),window.__resources||fetch(location.href).then(f=>f.ok?f.text():"").then(f=>{const d=f?J(f):null;d?.template&&t.updateHtml(o,d.template)}).catch(()=>{});const s=e.querySelector("x-dc"),a=e.createElement("div");if(a.id="dc-root",s.replaceWith(a),!n.preview){const f=e.createElement("style");f.textContent=wt,e.head.appendChild(f)}const p=t.getDC(o),i=t.registry.get(o);function u(){const[,f]=r.useState(0);r.useEffect(()=>{const l=()=>f(_=>_+1);return i.subs.add(l),()=>{i.subs.delete(l)}},[]);const d=r.useMemo(()=>{const l={};for(const _ in i.propsMeta||{}){const c=i.propsMeta?.[_]?.default;c!==void 0&&(l[_]=c)}return l},[i.propsMeta]);return y(p,{...d,...i.propOverrides||{}})}const g=ht();return g.createRoot?g.createRoot(a).render(y(u)):g.render(y(u),a),o}var Z=/^[A-Za-z_$][A-Za-z0-9_$]*/,xt=/^-?\d+(\.\d+)?$/;function T(t,e){const n=String(e).trim();if(!n)return;if(n[0]==="("&&n[n.length-1]===")"&&St(n))return T(t,n.slice(1,-1));const r=kt(n);if(r){const o=T(t,n.slice(0,r.index)),s=T(t,n.slice(r.index+r.op.length));switch(r.op){case"===":return o===s;case"!==":return o!==s;case"==":return o==s;default:return o!=s}}if(n[0]==="!")return!T(t,n.slice(1));if(n==="true")return!0;if(n==="false")return!1;if(n==="null")return null;if(n!=="undefined")return xt.test(n)?Number(n):n.length>=2&&(n[0]==='"'||n[0]==="'")&&n[n.length-1]===n[0]?n.slice(1,-1):Ct(t,n)}function St(t){let e=0;for(let n=0;n<t.length-1;n++)if(t[n]==="(")e++;else if(t[n]===")"&&(e--,e===0))return!1;return!0}function kt(t){let e=0;for(let n=0;n<t.length;n++){const r=t[n];if(r==="["||r==="(")e++;else if(r==="]"||r===")")e--;else if(e===0&&(r==="="||r==="!")&&t[n+1]==="="){if(n>0&&(t[n-1]==="="||t[n-1]==="!")||!t.slice(0,n).trim())continue;const o=t[n+2]==="="?r+"==":r+"=";return{index:n,op:o}}}return null}function Ct(t,e){const n=e.match(Z);if(!n)return;let r=t?.[n[0]],o=n[0].length;for(;o<e.length;)if(e[o]==="."){const s=e.slice(o+1).match(Z)||e.slice(o+1).match(/^\d+/);if(!s)return;r=r?.[s[0]],o+=1+s[0].length}else if(e[o]==="["){let s=1,a=o+1;for(;a<e.length&&s>0;){if(e[a]==="[")s++;else if(e[a]==="]"&&(s--,s===0))break;a++}if(s!==0)return;const p=T(t,e.slice(o+1,a));r=r?.[p],o=a+1}else return;return r}var B="sc-camel-",At=new Set("a abbr b bdi bdo br cite code del dfn em i ins kbd mark q s samp small span strike strong sub sup u var wbr".split(" ")),X={select:"sc-raw-select",table:"sc-raw-table",tbody:"sc-raw-tbody",thead:"sc-raw-thead",tfoot:"sc-raw-tfoot",tr:"sc-raw-tr",td:"sc-raw-td",th:"sc-raw-th",caption:"sc-raw-caption"},Nt=Object.fromEntries(Object.entries(X).map(([t,e])=>[e,t])),Lt={onclick:"onClick",onchange:"onChange",oninput:"onInput",onsubmit:"onSubmit",onkeydown:"onKeyDown",onkeyup:"onKeyUp",onkeypress:"onKeyPress",onmousedown:"onMouseDown",onmouseup:"onMouseUp",onmouseenter:"onMouseEnter",onmouseleave:"onMouseLeave",onfocus:"onFocus",onblur:"onBlur",ondoubleclick:"onDoubleClick",oncontextmenu:"onContextMenu",onmousemove:"onMouseMove",onmouseover:"onMouseOver",onmouseout:"onMouseOut",onpointerdown:"onPointerDown",onpointerup:"onPointerUp",onpointermove:"onPointerMove",onpointerenter:"onPointerEnter",onpointerleave:"onPointerLeave",onpointercancel:"onPointerCancel",onpointerover:"onPointerOver",onpointerout:"onPointerOut",ongotpointercapture:"onGotPointerCapture",onlostpointercapture:"onLostPointerCapture",ontouchstart:"onTouchStart",ontouchend:"onTouchEnd",ontouchmove:"onTouchMove",ontouchcancel:"onTouchCancel",ondragstart:"onDragStart",ondragend:"onDragEnd",ondragenter:"onDragEnter",ondragleave:"onDragLeave",ondragover:"onDragOver",onanimationstart:"onAnimationStart",onanimationend:"onAnimationEnd",onanimationiteration:"onAnimationIteration",ontransitionend:"onTransitionEnd"},Dt=`(?:[^>"']|"[^"]*"|'[^']*')*`,Mt=new RegExp("<(x-import|dc-import)("+Dt+")/>","gi"),Tt=/(\s)([a-z]+[A-Z][A-Za-z0-9]*)(\s*=)/g;function Rt(t){return t.replace(Tt,(e,n,r,o)=>n+B+r.replace(/[A-Z]/g,s=>"-"+s.toLowerCase())+o)}function Ot(t){t=t.replace(Mt,(e,n,r)=>"<"+n+r+"></"+n+">"),t=t.replace(/<helmet(\s|>)/gi,"<sc-helmet$1"),t=t.replace(/<\/helmet\s*>/gi,"</sc-helmet>"),t=Rt(t);for(const[e,n]of Object.entries(X))t=t.replace(new RegExp("(</?)"+e+"(?=[\\s>])","gi"),"$1"+n);return t}function q(t){return t.replace(/-([a-z])/g,(e,n)=>n.toUpperCase())}function Y(t){const e={};for(const n of t.split(";")){const r=n.indexOf(":");if(r<0)continue;const o=n.slice(0,r).trim();e[o.startsWith("--")?o:q(o)]=n.slice(r+1).trim()}return e}function R(t){const e=t.match(/^\s*\{\{([\s\S]+?)\}\}\s*$/);if(e){const n=e[1];return r=>T(r,n)}if(t.includes("{{")){const n=t.split(/\{\{([\s\S]+?)\}\}/g);return r=>n.map((o,s)=>s&1?T(r,o)??"":o).join("")}return()=>t}function $(t,e,n){const r=[],o=[];let s=null;for(const{name:a,value:p}of[...t.attributes]){if(a==="sc-name"||a==="data-dc-tpl")continue;let i=a;if(i.startsWith(B)&&(i=q(i.slice(B.length))),i==="hint-size"){s=p;continue}if(i.startsWith("style-")){o.push(n.pseudoClass(i.slice(6),p));continue}e!=="dom"?i.includes("-")&&!(e==="x-import"&&(i.startsWith("aria-")||i.startsWith("data-")))&&(i=q(i)):i==="class"?i="className":i==="for"?i="htmlFor":i.startsWith("on")&&(i=Lt[i]||"on"+i[2].toUpperCase()+i.slice(3)),r.push([i,R(p)])}return{propGetters:r,pseudoClasses:o,hintSize:s}}var jt=new Set(["position","left","right","top","bottom","inset","width","height","z-index","transform"]);function Q(t){const e=typeof t=="string"?Y(t):t!=null&&typeof t=="object"?t:null;if(!e)return;const n={};for(const[r,o]of Object.entries(e)){const s=r.replace(/[A-Z]/g,a=>"-"+a.toLowerCase());jt.has(s)&&(n[r]=o)}return Object.keys(n).length?n:void 0}function Pt(t,e){const n=document.createElement("template");//! nosemgrep: direct-inner-html-assignment
+n.innerHTML=Ot(t);let r=0;(function a(p){p.nodeType===Node.ELEMENT_NODE&&p.setAttribute("data-dc-tpl",String(r++));for(const i of p.childNodes)a(i)})(n.content);const o=O(n.content,e),s=((a,p)=>o.map((i,u)=>i(a||{},p,u)));return s.__annotated=n.innerHTML,s}function O(t,e){return[...t.childNodes].map(n=>it(n,e)).filter(n=>n!=null)}var It=/^[0-9a-f]{8}$/,tt=/^(sc-if|sc-for|sc-else|dc-import|x-import)$/,et=/^(template|script|style|sc-helmet|helmet)$/;function nt(t){return t.localName==="deck-stage"?!0:t.localName==="x-import"&&(t.getAttribute("component-from-global-scope")||"")==="deck-stage"}function ot(t,e){const n=[...t.childNodes].map(i=>({c:i,b:it(i,e)})).filter(i=>i.b!==null),r=n.map(i=>i.b),o=new Set,s=new Map,a=[],p=new Array(n.length);{let i=null;for(let u=n.length-1;u>=0;u--){const g=n[u].c;if(g.nodeType===Node.ELEMENT_NODE){const f=g.localName;i=!et.test(f)&&!tt.test(f)?g.getAttribute("data-om-slide-id"):null}p[u]=i}}for(let i=0;i<n.length;i++){const{c:u}=n[i];if(u.nodeType===Node.TEXT_NODE){if((u.nodeValue??"").trim()===""){const l=p[i]?"omid-ws:"+p[i]:"omid-ws:aux",_=s.get(l)??0;s.set(l,_+1),a.push(_===0?l:l+":"+_);continue}return{kids:r,keys:null}}if(u.nodeType!==Node.ELEMENT_NODE){a.push(i);continue}const g=u,f=g.localName;if(et.test(f)){a.push(i);continue}if(tt.test(f))return{kids:r,keys:null};const d=g.getAttribute("data-om-slide-id");if(!d||!It.test(d)||o.has(d))return{kids:r,keys:null};o.add(d),a.push("omid:"+d)}return{kids:r,keys:a}}function rt(t,e,n,r){return t.map((o,s)=>{const a=e?e[s]:s,p=o(n,r,a);return e!=null&&typeof p=="string"?y(C().Fragment,{key:a},p):p})}function it(t,e){if(t.nodeType===Node.TEXT_NODE)return Ut(t);if(t.nodeType!==Node.ELEMENT_NODE)return null;const n=t,r=n.tagName.toLowerCase();return r==="sc-for"?zt(n,e):r==="sc-if"?Gt(n,e):r==="x-import"?Bt(n,e):r==="sc-helmet"?e.helmet(n):r==="dc-import"?Ft(n,e):Vt(n,e)}var st=new Set;function ct(t,e){const n=(t?.__name||"?")+"\0"+e;st.has(n)||(st.add(n),console.warn("[dc-runtime] "+(t?.__name||"template")+": "+e))}function Ut(t){const e=t.nodeValue??"";if(!e.includes("{{"))return!e.trim()&&!e.includes(" ")?null:()=>e;const n=e.split(/\{\{([\s\S]+?)\}\}/g);return(r,o,s)=>y(C().Fragment,{key:s},...n.map((a,p)=>{if(!(p&1))return a;const i=T(r,a);return i===void 0?o?.__streamingNow?y("span",{key:p,className:"sc-interp sc-missing"},a.trim()):document.body?.hasAttribute("data-dc-editor-on")?y("span",{key:p,className:"sc-interp sc-unresolved"},"{{ "+a.trim()+" }}"):(ct(o,"{{ "+a.trim()+" }} never resolved \u2014 rendered as empty"),null):C().isValidElement(i)||Array.isArray(i)?y(C().Fragment,{key:p},i):i===null||typeof i=="boolean"?null:y("span",{key:p,className:"sc-interp"},String(i))}))}function zt(t,e){const n=R(t.getAttribute("list")||""),r=t.getAttribute("as")||"item",o=parseInt(t.getAttribute("hint-placeholder-count")||"0",10),s=O(t,e),a=t.getAttribute("list")||"";return(p,i,u)=>{let g=n(p);return Array.isArray(g)||(i?.__streamingNow?g=o>0?Array(o).fill(void 0):[]:(g!=null&&ct(i,'sc-for list="'+a+'" is not an array ('+typeof g+")"),g=[])),y(C().Fragment,{key:u},g.map((f,d)=>{const l={...p,[r]:f,$index:d};return y(C().Fragment,{key:d},s.map((_,c)=>_(l,i,c)))}))}}function Gt(t,e){const n=R(t.getAttribute("value")||""),r=t.getAttribute("hint-placeholder-val"),o=r!=null?R(r):null,s=O(t,e);return(a,p,i)=>{let u=n(a);return u===void 0&&o&&p?.__streamingNow&&(u=o(a)),u?y(C().Fragment,{key:i},s.map((g,f)=>g(a,p,f))):null}}function Ft(t,e){const n=t.getAttribute("name")||t.getAttribute("component")||"";t.removeAttribute("name"),t.removeAttribute("component");const r=t.getAttribute("data-dc-tpl"),o=t.getAttribute("style");t.removeAttribute("style");const s=o!=null?R(o):null,{propGetters:a,hintSize:p}=$(t,"dc-import",e),i=O(t,e);return(u,g,f)=>{const d={key:f,__hintSize:p,__tplId:r,__hostStyle:s?Q(s(u)):void 0};for(const[l,_]of a){const c=_(u);if(l==="dcProps"){c&&typeof c=="object"&&Object.assign(d,c);continue}d[l]=c}return i.length&&(d.children=i.map((l,_)=>l(u,g,_))),y(e.component(n),d)}}function Bt(t,e){const n=R(t.getAttribute("component-from-global-scope")||""),r=R(t.getAttribute("component")||t.getAttribute("name")||""),o=t.getAttribute("from")||(t.getAttribute("component-from-global-scope")?"":t.getAttribute("src")||t.getAttribute("import")||""),s=o.trim()?o.trim().split(/\s+/):[],a=s.length?s[s.length-1]:"",p=E=>/\.(jsx|tsx)(\?|#|$)/i.test(E)?"jsx":"js",i=t.getAttribute("data-dc-tpl"),u=t.getAttribute("style");t.removeAttribute("style");const g=u!=null?R(u):null,f=i!=null||g!=null,{propGetters:d,hintSize:l}=$(t,"x-import",e),_=t.children.length>0||!!(t.textContent||"").trim(),c=_&&nt(t)?ot(t,e):null,m=c?c.kids:_?O(t,e):[],h=c?.keys??null,w=o.includes("{{");if(s.length&&!w){let E;for(const S of s)E=e.loadExternal(p(S),S,E)}const b=(E,S)=>{const x=E(S),v=x==null?"":String(x);return v.includes("{{")?"":v};return(E,S,x)=>{const v=b(n,E),A=v||b(r,E),L=!A||w?null:v?e.resolveExternalGlobal(a,v):e.resolveExternal(a,A),P=g?Q(g(E)):void 0,N=f?{key:x,className:"sc-host-x","data-dc-tpl":i,style:P||{display:"contents"}}:null;if(!L){const M=w?"x-import `from` cannot contain {{ \u2026 }} \u2014 module URLs are resolved at parse time; use a literal URL":e.resolveExternalError(a,A),G=e.placeholder({key:N?void 0:x,name:A,hintSize:l,error:M});return N?y("div",N,G):G}const D=N?{}:{key:x};let z=!1;for(const[M,G]of d){if(M==="component"||M==="componentFromGlobalScope"||M==="from")continue;const I=G(E);if(I===void 0&&(z=!0),M==="dcProps"){I&&typeof I=="object"&&Object.assign(D,I);continue}D[M]=I}if(z&&S?.__htmlStreamingNow){const M=e.placeholder({key:N?void 0:x,name:A,hintSize:l,error:null});return N?y("div",N,M):M}return m.length&&(D.children=rt(m,h,E,S)),N?y("div",N,y(L,D)):y(L,D)}}function qt(t){const e=t.cloneNode(!0);for(const o of e.querySelectorAll("*"))for(;o.attributes.length;)o.removeAttribute(o.attributes[0].name);const n=e.innerHTML;let r=5381;for(let o=0;o<n.length;o++)r=(r<<5)+r+n.charCodeAt(o)|0;return n.length+"."+(r>>>0).toString(36)}var $t=new Set("script style textarea option title select canvas iframe video audio".split(" ")),Wt=":not("+[...At].join(",")+")";function Vt(t,e){const n=Nt[t.localName]||t.localName,r=t.getAttribute("data-dc-tpl"),s=t.childNodes.length>0&&!$t.has(n)&&t.querySelector(Wt)===null?"|"+qt(t):"",{propGetters:a,pseudoClasses:p}=$(t,"dom",e),i=nt(t)?ot(t,e):null,u=i?i.kids:O(t,e),g=i?.keys??null;return(f,d,l)=>{const _={key:l+s,"data-dc-tpl":r};for(const[c,m]of a){let h=m(f);c==="style"&&typeof h=="string"&&(h=Y(h)),(c==="value"||c==="checked")&&h===void 0&&(h=c==="checked"?!1:""),_[c]=h}return p.length&&(_.className=[_.className,...p].filter(Boolean).join(" ")),y(n,_,...rt(u,g,f,d))}}var j=class{constructor(t){k(this,"props"),k(this,"state",{}),k(this,"__host"),this.props=t||{}}setState(t,e){this.__host&&this.__host.__setLogicState(t,e)}forceUpdate(){this.__host&&this.__host.forceUpdate()}componentDidMount(){}componentDidUpdate(t){}componentWillUnmount(){}renderVals(){return{}}};function Ht(t){//! nosemgrep: eval-and-function-constructor
+return new Function("DCLogic","StreamableLogic","React",t+`
+;return (typeof Component!=="undefined"&&Component)||undefined;`)(j,j,C())}function Kt(t,e){if(!e)return!1;const n=Object.keys(t).filter(o=>o!=="children"),r=Object.keys(e).filter(o=>o!=="children");if(n.length!==r.length)return!1;for(const o of n)if(t[o]!==e[o])return!1;return!0}function U({name:t,hintSize:e,streaming:n,error:r}){const[o,s]=(e||"100%,60px").split(",");return y("div",{className:"sc-placeholder"+(n?" sc-streaming":""),style:{width:o.trim(),height:s&&s.trim()},title:t},r?y("div",{className:"sc-placeholder-error"},(t?t+": ":"")+r):null)}function Jt(t){if(!t)return;const[e,n]=t.split(",");return{minWidth:e.trim(),minHeight:n&&n.trim()}}function Zt(t,e){const n=C(),r=n.createContext([]);class o extends n.Component{constructor(i){super(i),k(this,"__name"),k(this,"__sub"),k(this,"__needsDidMount",!1),k(this,"__streamingNow",!1),k(this,"__htmlStreamingNow",!1),k(this,"__failedLogic",null),k(this,"__failedUserProps",null),k(this,"__failedVer",-1),k(this,"__ctorError",null),k(this,"logic"),this.__name=i.__name,this.state={__v:0,__err:null},this.__sub=()=>{this.state.__err&&this.setState({__err:null}),this.forceUpdate()},this.__makeLogic(t.get(this.__name).Logic,null),e(this.__name)}static getDerivedStateFromError(i){return{__err:i instanceof Error&&i.message?i.message:String(i)}}componentDidCatch(i,u){console.error("[dc-runtime] render error in <"+this.__name+">:",i,u?.componentStack||"")}__makeLogic(i,u){const g=i||j;try{this.logic=new g(this.__userProps()),this.__failedLogic=null,this.__failedUserProps=null,this.__ctorError=null}catch(f){console.error(f),this.__failedLogic=i,this.__failedUserProps=this.__userProps(),this.__failedVer=t.get(this.__name).ver,this.__ctorError=this.__name+": "+(f instanceof Error&&f.message?f.message:String(f)),this.logic=new j(this.__userProps())}this.logic.__host=this,u&&(this.logic.state={...this.logic.state||{},...u})}__userProps(){const{__name:i,__hintSize:u,__tplId:g,__hostStyle:f,...d}=this.props;return d}__setLogicState(i,u){const g=this.logic.state,f=typeof i=="function"?i(g):i;this.logic.state={...g,...f},this.setState(d=>({__v:d.__v+1}),u)}__reconcileLogic(){const i=t.get(this.__name),u=i.Logic,g=this.logic.constructor;if(!(u===g||!u&&g===j||u===this.__failedLogic&&i.ver===this.__failedVer&&Kt(this.__userProps(),this.__failedUserProps))){if(!this.__needsDidMount)try{this.logic.componentWillUnmount()}catch(f){console.error(f)}this.__makeLogic(u,this.logic.state),this.__needsDidMount=!0}}componentDidMount(){t.get(this.__name).subs.add(this.__sub);try{this.logic.componentDidMount()}catch(i){console.error(i)}}componentDidUpdate(i){if(this.logic.props=this.__userProps(),this.__needsDidMount){if(this.state.__err||!t.get(this.__name).tpl)return;this.__needsDidMount=!1;try{this.logic.componentDidMount()}catch(u){console.error(u)}}else try{this.logic.componentDidUpdate(i)}catch(u){console.error(u)}}componentWillUnmount(){if(t.get(this.__name).subs.delete(this.__sub),!this.__needsDidMount)try{this.logic.componentWillUnmount()}catch(i){console.error(i)}}render(){const i=t.get(this.__name),u="sc-host"+(i.htmlStreaming?" sc-streaming-html":"")+(i.jsStreaming?" sc-streaming-js":""),g=i.htmlStreaming?Jt(this.props.__hintSize):void 0,f=this.props.__hostStyle||g?{...g||{},...this.props.__hostStyle||{}}:void 0,d={className:u,style:f,"data-sc-name":this.__name,"data-dc-tpl":this.props.__tplId},l=Array.isArray(this.context)?this.context:[];if(l.includes(this.__name)){const h=[...l.slice(l.indexOf(this.__name)),this.__name].join(" \u2192 ");return y("div",{...d,className:u+" sc-has-error"},y(U,{name:this.__name,hintSize:this.props.__hintSize,error:"circular import: "+h}))}if(this.state.__err)return y("div",{...d,className:u+" sc-has-error"},y("div",{className:"sc-logic-error","data-omelette-chrome":""},this.__name+": "+this.state.__err),y(U,{name:this.__name,hintSize:this.props.__hintSize,error:this.state.__err}));if(this.__reconcileLogic(),!i.tpl)return y("div",d,y(U,{name:this.__name,hintSize:this.props.__hintSize}));const _=this.__userProps();this.logic.props=_;let c=_,m=i.logicError||this.__ctorError;try{c={..._,...this.logic.renderVals()||{}}}catch(h){console.error(h),m=this.__name+".renderVals(): "+(h instanceof Error&&h.message?h.message:String(h))}return this.__streamingNow=!!(i.htmlStreaming||i.jsStreaming),this.__htmlStreamingNow=!!i.htmlStreaming,y("div",{...d,className:u+(m?" sc-has-error":"")},m&&y("div",{className:"sc-logic-error","data-omelette-chrome":""},m),y(r.Provider,{value:[...l,this.__name]},i.tpl(c,this)))}}k(o,"contextType",r);const s=new Map;function a(p){const i=s.get(p);if(i)return i;function u(g){const[,f]=n.useState(0);return n.useEffect(()=>{const d=()=>f(l=>l+1);return t.get(p).subs.add(d),()=>{t.get(p).subs.delete(d)}},[]),e(p),y(o,{...g,__name:p})}return u.displayName=p,s.set(p,u),u}return{getDC:a,StreamableComponent:o}}function W(t){const e=window.__resourceBlobs,n=e?e[t.split("#")[0]]:void 0;return n instanceof Blob?n:null}var Xt="https://unpkg.com/react@18.3.1/umd/react.production.min.js",Yt="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z",Qt="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js",te="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1",ee="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js",ne="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y";function V(t,e){const n=window.__resources,r=n?n[t]:void 0;return typeof r=="string"&&r?{src:r}:{src:t,integrity:e}}var at=t=>!t.includes(".")&&t.includes("-");function H(t){return typeof t=="function"?!re(t):typeof t=="object"&&t!==null&&typeof t.$$typeof=="symbol"}function K(t,e){let n=t;for(const r of e.split(".")){if(n==null)return;n=n[r]}return n}var lt=50,ut=3e4;function oe(t){const e=new Map;let n=null;const r=new Map,o=new Set;function s(){if(window.Babel)return Promise.resolve();if(n)return n;const d=V(ee,ne);return n=new Promise((l,_)=>{const c=document.createElement("script");c.src=d.src,d.integrity&&(c.integrity=d.integrity,c.crossOrigin="anonymous"),c.onload=()=>l(),c.onerror=_,document.head.appendChild(c)}),n}const a=new Map;function p(d,l,_){const c=a.get(l);if(c)return c;e.set(l,null),console.info("[dc-runtime] x-import: loading",l,"("+d+")");const h=Promise.all([d==="jsx"?s():Promise.resolve(),_??Promise.resolve()]).then(()=>{const w=W(l);return w?w.text():fetch(l).then(b=>{if(!b.ok)throw new Error("HTTP "+b.status);return b.text()})}).then(w=>{const b=d==="jsx"?window.Babel.transform(w,{filename:l,presets:["react","typescript"]}).code:w,E={exports:{}},S=new Set(Object.keys(window));//! nosemgrep: eval-and-function-constructor
+new Function("React","module","exports","require",b)(C(),E,E.exports,()=>({}));const x={};for(const v of Object.keys(window))!S.has(v)&&typeof window[v]=="function"&&(x[v]=window[v]);e.set(l,{mod:E.exports,globals:x}),console.info("[dc-runtime] x-import: loaded",l,"\u2014 exports:",Object.keys(E.exports),"window globals:",Object.keys(x)),t()}).catch(w=>{e.set(l,{mod:{},globals:{},error:"failed to load: "+(w instanceof Error&&w.message?w.message:String(w))}),console.error("[dc-runtime] x-import: FAILED to load",l,"("+d+")",w),t()});return a.set(l,h),h}function i(d,l){const _=e.get(d);if(!_)return null;const{mod:c,globals:m}=_,h=c&&c[l]||m&&m[l]||typeof window<"u"&&window[l]||c&&c.default;if(typeof h=="function")return h;const w=d+"\0"+l;return r.has(w)||(r.set(w,_.error||'no export named "'+l+'" (has: '+Object.keys(c).join(", ")+")"),console.error("[dc-runtime] x-import: module",d,"loaded but has no component named",JSON.stringify(l),"\u2014 available exports:",Object.keys(c),"window globals:",Object.keys(m),". The module must `module.exports = {"+l+"}` or set `window."+l+"`.")),null}function u(d){if(o.has(d))return;o.add(d);const l=Date.now(),_=at(d),c=()=>{if(_?customElements.get(d):H(K(window,d))){o.delete(d),t();return}if(Date.now()-l>=ut){console.warn("[dc-runtime] x-import: global",JSON.stringify(d),"never appeared on window after "+ut+"ms");return}setTimeout(c,lt)};setTimeout(c,lt)}function g(d,l){const _=at(l);if(!d){if(_)return customElements.get(l)?l:(u(l),null);const w=K(window,l);return H(w)?w:(u(l),null)}const c=e.get(d);if(!c)return null;if(_&&customElements.get(l))return l;const m=c.globals[l]??K(window,l);if(H(m))return m;if(l.includes("."))return null;const h=d+"\0global\0"+l;return r.has(h)||(r.set(h,null),_&&!customElements.get(l)&&console.warn("[dc-runtime] x-import:",d,"loaded but no custom element",JSON.stringify(l),"is registered and window."+l+" is not a function \u2014 rendering <"+l+"> as an unknown element.")),l}function f(d,l){const _=e.get(d);return _?.error?_.error:r.get(d+"\0"+l)||null}return{load:p,resolve:i,resolveGlobal:g,getError:f}}function re(t){try{return typeof t=="function"&&typeof HTMLElement<"u"&&t.prototype instanceof HTMLElement}catch{return!1}}var ie=".fx{display:flex}.col{display:flex;flex-direction:column}.grid{display:grid}.ac{align-items:center}.jc{justify-content:center}.jb{justify-content:space-between}.f1{flex:1}.noshrink{flex-shrink:0}.wrap{flex-wrap:wrap}.fw5{font-weight:500}.fw6{font-weight:600}.fw7{font-weight:700}.fw8{font-weight:800}.fs11{font-size:11px}.fs12{font-size:12px}.fs13{font-size:13px}.fs14{font-size:14px}.fs15{font-size:15px}.fs16{font-size:16px}.fs20{font-size:20px}.fs22{font-size:22px}.upper{text-transform:uppercase}.tc{text-align:center}.nowrap{white-space:nowrap}.gap8{gap:8px}.gap10{gap:10px}.gap12{gap:12px}.gap16{gap:16px}.gap24{gap:24px}.m0{margin:0}.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}.posrel{position:relative}.posabs{position:absolute}.round{border-radius:50%}.ohide{overflow:hidden}.bbox{box-sizing:border-box}.pointer{cursor:pointer}.w100{width:100%}.b0{border:none}",se=/<meta\b[^>]*\bname\s*=\s*["']design_doc_mode["'][^>]*\b(?:content|value)\s*=\s*["'](\w+)["']/i,ce="#f0eee6",ae="#2e2c26";function le(t,e){const n=new Set,r=new Map;let o=null,s=null,a="light";try{const f=t.documentElement.dataset.theme;a=f==="dark"||f==="light"?f:new URLSearchParams(t.defaultView?.location.search??"").get("theme")==="dark"?"dark":"light"}catch{}function p(){if(!s)return;const f=a==="dark"?ae:ce;s.textContent=`html,body{background:${f}}#dc-root>.sc-host{position:relative}`}function i(f){if(window.parent!==window)try{window.parent.postMessage({type:"__dc_design_mode",mode:f},"*")}catch{}}function u(f){f!==o&&(o=f,i(f),f==="canvas"?(t.documentElement.setAttribute("data-dc-canvas",""),s=t.createElement("style"),s.setAttribute("data-dc-canvas",""),p(),t.head.appendChild(s)):(t.documentElement.removeAttribute("data-dc-canvas"),s?.remove(),s=null))}window.addEventListener("message",f=>{const d=f.data&&f.data.type;if(d==="__dc_theme"){const l=f.data.theme;(l==="light"||l==="dark")&&(a=l,p());return}!o||d!=="__dc_probe"||i(o)});function g(f){const d=[...f.children],l=f.nextSibling!=null||f.parentNode?.nextSibling!=null;if(f.hasAttribute("data-dc-atomics")&&!n.has("__dc-atomics")){n.add("__dc-atomics");const _=t.createElement("style");_.id="__dc-atomics",_.textContent=ie,t.head.appendChild(_)}return(_,c)=>{const m=c&&c.__name||"",h=!!(m&&e(m));for(let w=0;w<d.length;w++){const b=d[w],E=b.tagName,S=h&&!l&&w===d.length-1;if(E==="SCRIPT"){if(S)continue;const x="SCRIPT|"+(b.getAttribute("src")||b.textContent||"");if(n.has(x))continue;n.add(x);const v=t.createElement("script");for(const{name:A,value:L}of[...b.attributes])v.setAttribute(A,L);b.textContent&&(v.textContent=b.textContent),t.head.appendChild(v)}else if(E==="LINK"||E==="META"){if(S)continue;const x=E+"|"+(b.getAttribute("href")||b.getAttribute("src")||b.outerHTML);if(n.has(x))continue;if(n.add(x),E==="LINK"){const v=(b.getAttribute("rel")||"").toLowerCase().split(/\s+/),A=(b.getAttribute("href")||"").trim(),L=window.__resources,P=L&&v.includes("stylesheet")&&!v.includes("alternate")?L[A]:void 0,N=typeof P=="string"&&P?W(P):null;if(N){const D=t.createElement("style");b.hasAttribute("disabled")?D.setAttribute("media","not all"):b.getAttribute("media")&&D.setAttribute("media",b.getAttribute("media")),b.getAttribute("title")&&D.setAttribute("title",b.getAttribute("title")),N.text().then(z=>{D.textContent=z}),t.head.appendChild(D);continue}}t.head.appendChild(b.cloneNode(!0))}else{const x=m+"|"+w;let v=r.get(x);(!v||v.tagName!==E)&&(v&&v.remove(),v=t.createElement(E.toLowerCase()),r.set(x,v),t.head.appendChild(v));for(const{name:A,value:L}of[...b.attributes])v.getAttribute(A)!==L&&v.setAttribute(A,L);v.textContent!==b.textContent&&(v.textContent=b.textContent)}}return null}}return{compile:g,setDesignDocMode:u}}function dt(t,e){if(t[e]!=="u"&&t[e]!=="U"||t.slice(e,e+4).toLowerCase()!=="url("||/[a-z0-9_-]/i.test(t[e-1]??""))return-1;let n=e+4;for(;n<t.length&&/\s/.test(t[n]);)n++;if(t[n]==='"'||t[n]==="'")return-1;for(;n<t.length&&t[n]!==")";)t[n]==="\\"&&n++,n++;return n<t.length?n+1:t.length}function ue(t){let e="",n="";for(let r=0;r<t.length;r++){const o=t[r];if(n){if(o==="\\"){e+=o+(t[r+1]??""),r++;continue}o===n&&(n=""),e+=o}else if(o==="'"||o==='"')n=o,e+=o;else if(o==="/"&&t[r+1]==="*"){const s=t.indexOf("*/",r+2);r=s===-1?t.length:s+1,e+=" "}else{const s=dt(t,r);s===-1?e+=o:(e+=t.slice(r,s),r=s-1)}}return e}function de(t){t=ue(t);const e=[];let n=0,r=0,o="";for(let s=0;s<t.length;s++){const a=t[s];if(o)a==="\\"?s++:a===o&&(o="");else if(a==="'"||a==='"')o=a;else if(a==="(")r++;else if(a===")")r=Math.max(0,r-1);else if(a===";"&&r===0)e.push(t.slice(n,s)),n=s+1;else{const p=dt(t,s);p!==-1&&(s=p-1)}}return e.push(t.slice(n)),e.map(s=>s.trim()).filter(Boolean).map(s=>/!\s*important$/i.test(s)?s:s+" !important").join(";")}function pe(t){let e=null;const n=new Map;let r=0;return(o,s)=>{const a=o+"|"+s,p=n.get(a);if(p)return p;e||(e=t.createElement("style"),t.head.appendChild(e));const i="scp"+(r++).toString(36),u=o==="before"||o==="after",g=u?"."+i+"::"+o:"."+i+":"+o;return e.sheet.insertRule(g+"{"+(u?s:de(s))+"}",e.sheet.cssRules.length),n.set(a,i),i}}function fe(){const t=Object.create(null);function e(r){return t[r]||(t[r]={html:"",tpl:null,Logic:null,jsStreaming:!1,htmlStreaming:!1,ver:0,subs:new Set,fetched:!1})}function n(r){const o=e(r);o.ver++;for(const s of o.subs)s()}return{entries:t,get:e,bump:n,bumpAll(){for(const r in t)n(r)}}}var me=".";function he(t=document){const e=fe(),n=pe(t),r=le(t,c=>e.get(c).htmlStreaming),o=oe(()=>e.bumpAll()),s=Zt(e,p),a={component:c=>s.getDC(c),placeholder:c=>y(U,c),helmet:c=>r.compile(c),loadExternal:(c,m,h)=>o.load(c,m,h),resolveExternal:(c,m)=>o.resolve(c,m),resolveExternalGlobal:(c,m)=>o.resolveGlobal(c,m),resolveExternalError:(c,m)=>o.getError(c,m),pseudoClass:n};function p(c){const m=e.get(c);if(m.fetched)return;m.fetched=!0;const h=me+"/"+encodeURIComponent(c)+".dc.html",w=window.__resources,b=w?w[h]:void 0,E=typeof b=="string"&&b?b:h,S=W(E);(S?S.text():fetch(E).then(x=>x.ok?x.text():(console.error('[dc-runtime] sibling fetch for "'+c+'" failed:',h,"returned",x.status,"\u2014 the reference renders as an empty placeholder."),""))).then(x=>{if(!x)return;const v=J(x);if(!v){console.error('[dc-runtime] sibling fetch for "'+c+'":',h,"has no <x-dc> block \u2014 not a Design Component.");return}v.props&&(m.propsMeta=v.props),v.preview&&(m.preview=v.preview),v.template&&!m.html&&u(c,v.template),v.js&&!m.Logic&&g(c,v.js)}).catch(x=>console.error('[dc-runtime] sibling fetch for "'+c+'" threw:',h,x))}let i=null;function u(c,m){const h=e.get(c);if(h.html=m,c===i){const w=se.exec(m)?.[1]??null;(w||!h.htmlStreaming)&&r.setDesignDocMode(w)}try{h.tpl=Pt(m,a)}catch(w){console.error("[dc-runtime] template compile FAILED for",c,w)}e.bump(c)}function g(c,m){const h=e.get(c),w=h.jsSeq=(h.jsSeq||0)+1;try{const b=Ht(m);if(h.jsSeq!==w)return;typeof b!="function"?h.logicError=c+".dc.html: <script data-dc-script> must define `class Component extends DCLogic`":(h.logicError=null,h.Logic=b)}catch(b){if(h.jsSeq!==w)return;console.error("[dc-runtime] logic class eval FAILED for",c,"\u2014 the template renders with props only.",b),h.logicError=c+": "+(b instanceof Error&&b.message?b.message:String(b))}e.bump(c)}function f(c,m,h){const w=e.get(c);m==="html"?w.htmlStreaming=!!h:w.jsStreaming=!!h;let b=!1;for(const E in e.entries){const S=e.entries[E];if(S&&(S.htmlStreaming||S.jsStreaming)){b=!0;break}}t.documentElement.classList.toggle("sc-dc-streaming",b),e.bump(c)}function d(c,m,h,w){if(w&&(e.get(c).fetched=!0),m==="html")f(c,"html",!!w),u(c,h);else if(m==="js")f(c,"js",!!w),w||g(c,h);else if(m==="props"){const{props:b,preview:E}=F(h),S=e.get(c);S.propsMeta=b??void 0,S.preview=E,e.bump(c)}}function l(c,m){e.get(c).propOverrides=m&&typeof m=="object"?{...m}:null,e.bump(c)}function _(c,m){if(!m)return;const h=e.get(c);m.props&&(h.propsMeta=m.props),m.preview&&(h.preview=m.preview),m.template&&u(c,m.template),m.js&&g(c,m.js)}return{registry:e,getDC:s.getDC,updateHtml:u,updateJs:g,dcUpdate:d,setProps:l,adoptParsed:_,setRootName:c=>{i=c},markFetched:c=>{e.get(c).fetched=!0},annotatedTemplate:c=>{const m=e.get(c);return m.tpl&&m.tpl.__annotated||null},templateSource:c=>e.get(c).html||null,StreamableLogic:j}}function ge(t=6e4,e=Date.now){const n=new Map,r=o=>{const s=n.get(o);return s===void 0?!1:e()-s>t?(n.delete(o),!1):!0};return{push(o,s,a){a!=="dc-model"&&(s?n.set(o,e()):n.delete(o))},live(o){if(o!==void 0)return r(o);for(const s of[...n.keys()])if(r(s))return!0;return!1}}}function _e(){const t=document.createElement("style");t.textContent="x-dc{display:none!important}",document.head.appendChild(t)}function pt(t,e){return new Promise((n,r)=>{//! nosemgrep: create-script-element
+const o=document.createElement("script");o.src=t,e&&(o.integrity=e,o.crossOrigin="anonymous"),o.async=!1,o.onload=()=>n(),o.onerror=()=>r(new Error(`failed to load ${t}`)),document.head.appendChild(o)})}function be(){const t=window;if(t.React&&t.ReactDOM)return Promise.resolve();const e=V(Xt,Yt),n=V(Qt,te);return Promise.all([pt(e.src,e.integrity),pt(n.src,n.integrity)]).then(()=>{})}function we(){const t=he(document);let e="Root";const n=document.createElement("style");n.textContent=bt,document.head.prepend(n);const r=()=>{if(window.parent===window)return;const a=t.registry.entries[e];try{window.parent.postMessage({type:"__dc_booted",rootName:e,propsMeta:a&&a.propsMeta||null,preview:a&&a.preview||null},"*")}catch{}},o=ge(),s={__dcUpdate:(a,p,i,u,g)=>{o.push(a,u,g),t.dcUpdate(a,p,i,u),a===e&&!u&&p==="props"&&r()},__dcStreaming:a=>o.live(a),__dcSetProps:(a,p)=>t.setProps(a,p),__dcRootName:()=>e,__dcAnnotatedTemplate:a=>t.annotatedTemplate(a),__dcTemplateSource:a=>t.templateSource(a),__dcBoot:()=>{e=Et(t,document)??e,r()},__dcRegistry:t.registry.entries,getDC:a=>t.getDC(a),DCLogic:t.StreamableLogic,StreamableLogic:t.StreamableLogic};Object.assign(window,s),window.__dcContentKeyed=!0,document.readyState!=="loading"?s.__dcBoot():document.addEventListener("DOMContentLoaded",()=>s.__dcBoot())}_e(),be().then(we).catch(t=>{throw console.error("[dc] failed to load React or boot:",t),t})})();
+
+</script>
