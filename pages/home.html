@@ -1,0 +1,1034 @@
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;background:#FFFFFF;color:#111111;font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;-webkit-font-smoothing:antialiased;word-break:keep-all;letter-spacing:-.02em}
+*{box-sizing:border-box}
+@media (max-width:600px){:root{--mz:.8}#dc-root{zoom:var(--mz)}}
+a{color:#111111;text-decoration:none}
+a:hover{color:#FFB3C8}
+button{font-family:inherit}
+input{font-family:inherit}
+@keyframes tbProg{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes tbMarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes tbFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;padding-bottom:96px">
+
+<header style="position:sticky;top:0;z-index:40;background:{{ hdr.bg }};backdrop-filter:{{ hdr.blur }};-webkit-backdrop-filter:{{ hdr.blur }};box-shadow:{{ hdr.shadow }};transition:background .4s,box-shadow .4s">
+  <div style="position:absolute;left:0;top:0;height:3px;width:{{ hdr.progress }};background:#FFB3C8;z-index:2"></div>
+  <div style="width:100%;padding:0 clamp(20px,4vw,48px);height:{{ hdr.h }};display:flex;align-items:center;justify-content:space-between;gap:24px;transition:height .35s cubic-bezier(.2,.7,.2,1)">
+    <a href="#top" aria-label="탠뷰티 홈" style="display:flex;align-items:baseline;gap:12px;padding-top:6px">
+      <span style="position:relative;display:inline-flex;align-items:baseline;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:30px;letter-spacing:-.04em;line-height:1;color:{{ hdr.ink }};transition:color .3s"><span style="position:absolute;left:.04em;top:-.32em;width:.9em;height:.24em;border-top:.09em solid #FFB3C8;border-radius:70% 30% 0 0/100% 100% 0 0"></span>탠뷰티<span style="width:.2em;height:.2em;border-radius:50%;background:#FFB3C8;margin-left:.08em"></span></span>
+      <span style="font-size:12px;font-weight:500;color:{{ hdr.sub }};letter-spacing:.22em;transition:color .3s">TAN BEAUTY</span>
+    </a>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;align-items:center;gap:clamp(28px,3.2vw,56px);font-size:20px;font-weight:500;height:100%">
+        <div onMouseEnter="{{ navIn }}" onMouseLeave="{{ navOut }}" style="position:relative;height:100%;display:flex;align-items:center">
+          <a href="#styles" onMouseEnter="{{ nv.t.enter }}" onMouseLeave="{{ nv.t.leave }}" style="position:relative;padding:8px 0;color:{{ nv.t.color }};transition:color .3s">시술<span style="position:absolute;left:50%;bottom:0;height:2px;width:{{ nv.t.line }};transform:translateX(-50%);background:#FFB3C8;border-radius:2px;transition:width .35s cubic-bezier(.2,.7,.2,1)"></span></a>
+          <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;top:100%;left:50%;margin-left:-150px;width:300px;background:#FFFFFF;border:1px solid rgba(17,17,17,.1);box-shadow:0 16px 40px rgba(17,17,17,.08);padding:20px 24px;display:flex;flex-direction:column;animation:tbFade .18s ease">
+              <a href="#styles" style="padding:10px 0;font-size:17px;font-weight:600">눈썹 반영구</a>
+              <div style="display:flex;gap:14px;padding:0 0 12px;font-size:15px;font-weight:400;color:#666666;border-bottom:1px solid rgba(17,17,17,.08)">
+                <a href="/treatment#t=embo" style="color:#666666;transition:color .2s" style-hover="color:#E0809E;text-decoration:underline;text-underline-offset:4px">자연눈썹</a><a href="/treatment#t=combo" style="color:#666666;transition:color .2s" style-hover="color:#E0809E;text-decoration:underline;text-underline-offset:4px">콤보눈썹</a><a href="/treatment#t=powder" style="color:#666666;transition:color .2s" style-hover="color:#E0809E;text-decoration:underline;text-underline-offset:4px">쉐도우눈썹</a>
+              </div>
+              <a href="/treatment#t=eyeline" style="padding:12px 0 8px;font-size:17px;font-weight:500">아이라인 반영구</a>
+              <a href="/treatment#t=lip" style="padding:8px 0;font-size:17px;font-weight:500">입술 반영구</a>
+              <a href="/treatment#t=hair" style="padding:8px 0;font-size:17px;font-weight:500">헤어라인·두피 반영구</a>
+              <a href="/treatment#t=mole" style="padding:8px 0;font-size:17px;font-weight:500">미인점</a>
+            </div>
+          </sc-if>
+        </div>
+        <a href="/info#p=gallery" onMouseEnter="{{ nv.g.enter }}" onMouseLeave="{{ nv.g.leave }}" style="position:relative;padding:8px 0;color:{{ nv.g.color }};transition:color .3s">전후사진<span style="position:absolute;left:50%;bottom:0;height:2px;width:{{ nv.g.line }};transform:translateX(-50%);background:#FFB3C8;border-radius:2px;transition:width .35s cubic-bezier(.2,.7,.2,1)"></span></a>
+        <a href="/info#p=prices" onMouseEnter="{{ nv.p.enter }}" onMouseLeave="{{ nv.p.leave }}" style="position:relative;padding:8px 0;color:{{ nv.p.color }};transition:color .3s">가격<span style="position:absolute;left:50%;bottom:0;height:2px;width:{{ nv.p.line }};transform:translateX(-50%);background:#FFB3C8;border-radius:2px;transition:width .35s cubic-bezier(.2,.7,.2,1)"></span></a>
+        <a href="/info#p=reviews" onMouseEnter="{{ nv.r.enter }}" onMouseLeave="{{ nv.r.leave }}" style="position:relative;padding:8px 0;color:{{ nv.r.color }};transition:color .3s">후기<span style="position:absolute;left:50%;bottom:0;height:2px;width:{{ nv.r.line }};transform:translateX(-50%);background:#FFB3C8;border-radius:2px;transition:width .35s cubic-bezier(.2,.7,.2,1)"></span></a>
+        <a href="/info#p=location" onMouseEnter="{{ nv.l.enter }}" onMouseLeave="{{ nv.l.leave }}" style="position:relative;padding:8px 0;color:{{ nv.l.color }};transition:color .3s">오시는 길<span style="position:absolute;left:50%;bottom:0;height:2px;width:{{ nv.l.line }};transform:translateX(-50%);background:#FFB3C8;border-radius:2px;transition:width .35s cubic-bezier(.2,.7,.2,1)"></span></a>
+      </nav>
+      <button onClick="{{ openBookEmpty }}" onMouseEnter="{{ ctaIn }}" onMouseLeave="{{ ctaOut }}" style="position:relative;height:50px;padding:0 24px 0 28px;border-radius:999px;border:none;background:{{ cta.bg }};color:{{ cta.color }};font-size:17px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px;box-shadow:{{ cta.shadow }};transition:all .35s cubic-bezier(.2,.7,.2,1)">예약하기<span style="width:26px;height:26px;border-radius:50%;background:{{ cta.dotBg }};color:{{ cta.dotColor }};display:flex;align-items:center;justify-content:center;font-size:14px;transform:translateX({{ cta.x }});transition:all .35s">→</span></button>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-label="메뉴" style="width:44px;height:44px;border:none;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer">
+        <span style="width:24px;height:2px;background:{{ hdr.ink }}"></span>
+        <span style="width:24px;height:2px;background:{{ hdr.ink }}"></span>
+      </button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="border-top:1px solid rgba(17,17,17,.08);padding:12px clamp(20px,4vw,40px) 24px;display:flex;flex-direction:column;background:#FFFFFF;max-height:calc(100vh - 88px);overflow:auto">
+      <span style="padding:14px 0 6px;font-size:20px;font-weight:600">시술</span>
+      <div style="display:flex;flex-direction:column;padding:0 0 12px 12px;border-bottom:1px solid rgba(17,17,17,.06)">
+        <a href="#styles" onClick="{{ closeMenu }}" style="padding:10px 0;font-size:16px;">눈썹 반영구 · 자연 / 콤보 / 쉐도우</a>
+        <a href="/treatment#t=eyeline" style="padding:10px 0;font-size:16px;">아이라인 반영구</a>
+        <a href="/treatment#t=lip" style="padding:10px 0;font-size:16px;">입술 반영구</a>
+        <a href="/treatment#t=hair" style="padding:10px 0;font-size:16px;">헤어라인·두피 반영구</a>
+        <a href="/treatment#t=mole" style="padding:10px 0;font-size:16px;">미인점</a>
+      </div>
+      <a href="/info#p=gallery" onClick="{{ closeMenu }}" style="padding:14px 0;font-size:20px;font-weight:500;border-bottom:1px solid rgba(17,17,17,.06)">전후사진</a>
+      <a href="/info#p=prices" onClick="{{ closeMenu }}" style="padding:14px 0;font-size:20px;font-weight:500;border-bottom:1px solid rgba(17,17,17,.06)">가격</a>
+      <a href="/info#p=reviews" onClick="{{ closeMenu }}" style="padding:14px 0;font-size:20px;font-weight:500;border-bottom:1px solid rgba(17,17,17,.06)">후기</a>
+      <a href="/info#p=location" onClick="{{ closeMenu }}" style="padding:14px 0;font-size:20px;font-weight:500;border-bottom:1px solid rgba(17,17,17,.06)">오시는 길</a>
+      <div style="display:flex;flex-direction:column;gap:4px;margin-top:18px;font-size:14px;color:#666666">
+        <a href="tel:0320000000" style="font-size:16px;font-weight:600;color:#111111">032-000-0000</a>
+        <span>평일 10:00–20:00 · 토 10:00–18:00 · 일 휴무</span>
+      </div>
+    </div>
+  </sc-if>
+</header>
+
+<div style="display:{{ pv.home }}">
+<section id="top" aria-label="메인 비주얼" style="position:relative;width:100%;height:calc(100svh / var(--mz, 1));min-height:480px;margin-top:-88px;overflow:hidden;background:#111111">
+  <video src="__TB_BASE__/hero.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" aria-hidden="true" onTimeUpdate="{{ heroTime }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
+  <div style="position:absolute;left:0;right:0;top:0;height:200px;background:linear-gradient(180deg,rgba(17,17,17,.5),rgba(17,17,17,0));pointer-events:none"></div>
+  <span style="position:absolute;right:clamp(20px,6vw,96px);top:104px;font-size:10px;font-weight:500;letter-spacing:.02em;color:rgba(255,255,255,.85);background:rgba(0,0,0,.35);padding:3px 7px;border-radius:3px;pointer-events:none">연출 이미지</span>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,17,17,0) 45%,rgba(17,17,17,.55) 100%);pointer-events:none"></div>
+  <div style="position:absolute;left:clamp(20px,6vw,96px);right:clamp(20px,6vw,96px);bottom:clamp(48px,8vh,96px);height:clamp(120px,16vw,220px);pointer-events:none">
+    <sc-for list="{{ heroCaps }}" as="c" hint-placeholder-count="1">
+      <div style="position:absolute;left:0;bottom:0;display:flex;flex-direction:column;gap:14px;opacity:{{ c.op }};transform:translateY({{ c.y }});transition:opacity .7s ease,transform .9s cubic-bezier(.2,.7,.2,1)">
+        <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:14px;font-weight:700;letter-spacing:.12em;color:#FFB3C8">{{ c.num }} / 04</span>
+        <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:{{ c.weight }};letter-spacing:-.04em;line-height:1.15;font-size:{{ c.size }};color:#FFFFFF;text-shadow:0 2px 24px rgba(0,0,0,.25)">{{ c.text }}</span>
+        <sc-if value="{{ c.last }}" hint-placeholder-val="{{ false }}">
+          <span style="display:flex;align-items:baseline;gap:14px;margin-top:6px">
+            <span style="position:relative;display:inline-flex;align-items:baseline;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:clamp(48px,7vw,104px);letter-spacing:-.04em;line-height:1;color:#FFFFFF;text-shadow:0 2px 24px rgba(0,0,0,.25)"><span style="position:absolute;left:.1em;top:-.2em;width:1.1em;height:.2em;border-top:.075em solid #FFB3C8;border-radius:70% 30% 0 0/100% 100% 0 0"></span>탠뷰티<span style="width:.2em;height:.2em;border-radius:50%;background:#FFB3C8;margin-left:.08em"></span></span>
+            <span style="font-size:clamp(12px,1.1vw,15px);font-weight:600;letter-spacing:.22em;color:rgba(255,255,255,.85)">TAN BEAUTY</span>
+          </span>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+  <div style="position:absolute;left:clamp(20px,6vw,96px);bottom:clamp(20px,4vh,40px);display:flex;gap:6px">
+    <sc-for list="{{ heroCaps }}" as="c" hint-placeholder-count="4">
+      <span style="width:{{ c.barW }};height:3px;border-radius:2px;background:{{ c.barBg }};transition:width .5s,background .5s"></span>
+    </sc-for>
+  </div>
+</section>
+
+<section data-count="1" style="background:#111111;color:#FFFFFF">
+  <div style="width:100%;padding:0 clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(50%,220px),1fr))">
+    <div data-stagger="0" style="position:relative;padding:clamp(36px,4vw,56px) clamp(16px,2vw,32px);display:flex;flex-direction:column;gap:14px;">
+      <span style="position:absolute;top:0;left:0;height:2px;width:{{ lineW }};background:#FFB3C8"></span>
+      <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;line-height:1;font-size:clamp(40px,4.4vw,64px);color:#FFB3C8">{{ c0 }}<span style="font-size:.45em;font-weight:600;color:#FFFFFF;margin-left:4px">년</span></span>
+      <span style="font-size:15px;color:#CCCCCC">총 미용 경력</span>
+    </div>
+    <div data-stagger="1" style="position:relative;padding:clamp(36px,4vw,56px) clamp(16px,2vw,32px);display:flex;flex-direction:column;gap:14px;border-left:1px solid rgba(255,255,255,.12);">
+      <span style="position:absolute;top:0;left:0;height:2px;width:{{ lineW }};background:#FFB3C8"></span>
+      <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;line-height:1;font-size:clamp(40px,4.4vw,64px);color:#FFB3C8">IBAC<span style="font-size:.45em;font-weight:600;color:#FFFFFF;margin-left:4px">반영구 심사장</span></span>
+      <span style="font-size:15px;color:#CCCCCC">국제바디아트콘테스트 반영구 심사장 출신</span>
+    </div>
+    <div data-stagger="2" style="position:relative;padding:clamp(36px,4vw,56px) clamp(16px,2vw,32px);display:flex;flex-direction:column;gap:14px;border-left:1px solid rgba(255,255,255,.12);">
+      <span style="position:absolute;top:0;left:0;height:2px;width:{{ lineW }};background:#FFB3C8"></span>
+      <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;line-height:1;font-size:clamp(40px,4.4vw,64px);color:#FFB3C8">{{ c2 }}<span style="font-size:.45em;font-weight:600;color:#FFFFFF;margin-left:4px">/ 5</span></span>
+      <span style="font-size:15px;color:#CCCCCC">네이버 플레이스 별점 · 리뷰 207건</span>
+    </div>
+    <div data-stagger="3" style="position:relative;padding:clamp(36px,4vw,56px) clamp(16px,2vw,32px);display:flex;flex-direction:column;gap:14px;border-left:1px solid rgba(255,255,255,.12);">
+      <span style="position:absolute;top:0;left:0;height:2px;width:{{ lineW }};background:#FFB3C8"></span>
+      <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;line-height:1;font-size:clamp(40px,4.4vw,64px);color:#FFB3C8">1:1<span style="font-size:.45em;font-weight:600;color:#FFFFFF;margin-left:4px">맞춤</span></span>
+      <span style="font-size:15px;color:#CCCCCC">대표원장 직접 컨설팅 · 시술</span>
+    </div>
+  </div>
+</section>
+
+
+<section id="styles" data-reveal="1" style="width:100%;background:#FFF1F5;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px)">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:28px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <span style="display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:#FFB3C8"><span style="width:28px;height:2px;background:#FFB3C8"></span>01 · 눈썹 반영구</span>
+      <h2 style="margin:0;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:clamp(34px,4.4vw,60px);line-height:1.2">내 눈썹에 맞는 <span style="background:linear-gradient(transparent 58%,#FFCFDD 58%,#FFCFDD 92%,transparent 92%)">기법</span>을<br>골라보세요</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-start;max-width:26em">
+      <p style="margin:0;color:#555555;font-size:17px;line-height:1.7">탭을 누르거나 옆으로 넘겨 비교해 보세요. 카드를 누르면 상세 안내로 이동해요.</p>
+    </div>
+  </div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px">
+    <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none">
+      <sc-for list="{{ stTabs }}" as="tb" hint-placeholder-count="3">
+        <button onClick="{{ tb.go }}" style="flex:none;height:40px;padding:0 16px;border-radius:999px;border:1.5px solid {{ tb.border }};background:{{ tb.bg }};color:{{ tb.color }};font-size:15px;font-weight:700;cursor:pointer;transition:all .25s">{{ tb.name }}</button>
+      </sc-for>
+    </div>
+    <div style="display:flex;gap:6px;flex:none">
+      <button onClick="{{ stPrev }}" aria-label="이전" style="width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(17,17,17,.15);background:#FFFFFF;font-size:16px;cursor:pointer;color:#111111">←</button>
+      <button onClick="{{ stNext }}" aria-label="다음" style="width:40px;height:40px;border-radius:50%;border:none;background:#111111;color:#FFFFFF;font-size:16px;cursor:pointer">→</button>
+    </div>
+  </div>
+  <div data-car="st" onScroll="{{ stScroll }}" style="display:flex;gap:clamp(12px,1.6vw,24px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:0 calc(-1 * clamp(20px,4vw,40px));padding:4px clamp(20px,4vw,40px) 12px;scroll-padding-left:clamp(20px,4vw,40px)">
+    <div data-card="0" onMouseEnter="{{ hv0.enter }}" onMouseLeave="{{ hv0.leave }}" onClick="{{ pickEmbo }}" role="button" style="position:relative;flex:0 0 min(82%,400px);scroll-snap-align:start;background:#FFFFFF;border-radius:24px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transform:{{ hv0.lift }};box-shadow:{{ hv0.shadow }};transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s">
+      <div style="position:relative;aspect-ratio:16/10;overflow:hidden">
+        <div style="position:absolute;inset:0;background:#F4ECEE url(__TB_BASE__/gen/brow-natural.jpg) center/cover no-repeat;transform:scale({{ hv0.zoom }});transition:transform .7s cubic-bezier(.2,.7,.2,1)"></div>
+        <span style="position:absolute;right:14px;bottom:12px;font-size:10px;font-weight:500;letter-spacing:.02em;color:#666666;background:rgba(255,255,255,.8);padding:3px 7px;border-radius:3px;pointer-events:none">연출 이미지</span>
+        <span style="position:absolute;left:20px;top:20px;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:15px;letter-spacing:.02em;padding:8px 14px;border-radius:999px;background:#111111;color:#FFFFFF">01</span>
+      </div>
+      <div style="padding:28px 28px 30px;display:flex;flex-direction:column;gap:14px;flex:1">
+        <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:#FFE2EB;color:#111111">#결표현</span><span style="font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:#FFE2EB;color:#111111">#건성·중성</span><span style="font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:#FFE2EB;color:#111111">#첫시술</span></div>
+        <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:clamp(28px,2.6vw,36px);line-height:1.15">자연눈썹</span>
+        <span style="font-size:16px;color:#555555;line-height:1.65">한 올씩 결을 그리는 엠보 기법. 내 눈썹처럼 자연스럽게 남아요.</span>
+        <div style="margin-top:auto;padding-top:18px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(17,17,17,.08)">
+          <span style="display:flex;align-items:baseline;gap:4px"><span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:26px;letter-spacing:-.03em">13만원</span><span style="font-size:13px;color:#666666">VAT 별도</span><span style="margin-left:6px;align-self:center;font-size:12px;font-weight:700;color:#111111;background:#FFB3C8;padding:3px 8px;border-radius:999px">리터치 1회 포함</span></span>
+          <span style="width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;background:{{ hv0.arrowBg }};color:#111111;border:1px solid {{ hv0.arrowBorder }};transform:rotate({{ hv0.rot }});transition:all .35s">→</span>
+        </div>
+      </div>
+      <span style="position:absolute;left:0;bottom:0;height:4px;width:{{ hv0.lineW }};background:#FFB3C8;transition:width .5s cubic-bezier(.2,.7,.2,1)"></span>
+    </div>
+    <div data-card="1" onMouseEnter="{{ hv1.enter }}" onMouseLeave="{{ hv1.leave }}" onClick="{{ pickCombo }}" role="button" style="position:relative;flex:0 0 min(82%,400px);scroll-snap-align:start;background:#FFFFFF;border-radius:24px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transform:{{ hv1.lift }};box-shadow:{{ hv1.shadow }};transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s">
+      <div style="position:relative;aspect-ratio:16/10;overflow:hidden">
+        <div style="position:absolute;inset:0;background:#F4ECEE url(__TB_BASE__/gen/brow-combo.jpg) center/cover no-repeat;transform:scale({{ hv1.zoom }});transition:transform .7s cubic-bezier(.2,.7,.2,1)"></div>
+        <span style="position:absolute;right:14px;bottom:12px;font-size:10px;font-weight:500;letter-spacing:.02em;color:#666666;background:rgba(255,255,255,.8);padding:3px 7px;border-radius:3px;pointer-events:none">연출 이미지</span>
+        <span style="position:absolute;left:20px;top:20px;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:15px;letter-spacing:.02em;padding:8px 14px;border-radius:999px;background:#111111;color:#FFFFFF">02</span>
+      </div>
+      <div style="padding:28px 28px 30px;display:flex;flex-direction:column;gap:14px;flex:1">
+        <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:#FFE2EB;color:#111111">#결+쉐이딩</span><span style="font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:#FFE2EB;color:#111111">#모든 피부</span><span style="font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:#FFE2EB;color:#111111">#가장 많이 선택</span></div>
+        <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:clamp(28px,2.6vw,36px);line-height:1.15">콤보눈썹</span>
+        <span style="font-size:16px;color:#555555;line-height:1.65">엠보 결 위에 쉐이딩을 더해 자연스러움과 또렷함을 함께.</span>
+        <div style="margin-top:auto;padding-top:18px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(17,17,17,.08)">
+          <span style="display:flex;align-items:baseline;gap:4px"><span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:26px;letter-spacing:-.03em">15만원</span><span style="font-size:13px;color:#666666">VAT 별도</span><span style="margin-left:6px;align-self:center;font-size:12px;font-weight:700;color:#111111;background:#FFB3C8;padding:3px 8px;border-radius:999px">리터치 1회 포함</span></span>
+          <span style="width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;background:{{ hv1.arrowBg }};color:#111111;border:1px solid {{ hv1.arrowBorder }};transform:rotate({{ hv1.rot }});transition:all .35s">→</span>
+        </div>
+      </div>
+      <span style="position:absolute;left:0;bottom:0;height:4px;width:{{ hv1.lineW }};background:#FFB3C8;transition:width .5s cubic-bezier(.2,.7,.2,1)"></span>
+    </div>
+    <div data-card="2" onMouseEnter="{{ hv2.enter }}" onMouseLeave="{{ hv2.leave }}" onClick="{{ pickPowder }}" role="button" style="position:relative;flex:0 0 min(82%,400px);scroll-snap-align:start;background:#FFFFFF;border-radius:24px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transform:{{ hv2.lift }};box-shadow:{{ hv2.shadow }};transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s">
+      <div style="position:relative;aspect-ratio:16/10;overflow:hidden">
+        <div style="position:absolute;inset:0;background:#F4ECEE url(__TB_BASE__/gen/brow-shadow.jpg) center/cover no-repeat;transform:scale({{ hv2.zoom }});transition:transform .7s cubic-bezier(.2,.7,.2,1)"></div>
+        <span style="position:absolute;right:14px;bottom:12px;font-size:10px;font-weight:500;letter-spacing:.02em;color:#666666;background:rgba(255,255,255,.8);padding:3px 7px;border-radius:3px;pointer-events:none">연출 이미지</span>
+        <span style="position:absolute;left:20px;top:20px;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:15px;letter-spacing:.02em;padding:8px 14px;border-radius:999px;background:#111111;color:#FFFFFF">03</span>
+      </div>
+      <div style="padding:28px 28px 30px;display:flex;flex-direction:column;gap:14px;flex:1">
+        <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:#FFE2EB;color:#111111">#또렷함</span><span style="font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:#FFE2EB;color:#111111">#지성 피부</span><span style="font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:#FFE2EB;color:#111111">#메이크업 느낌</span></div>
+        <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:clamp(28px,2.6vw,36px);line-height:1.15">쉐도우눈썹</span>
+        <span style="font-size:16px;color:#555555;line-height:1.65">점묘 쉐이딩으로 부드럽게 채워 유분이 많아도 번짐이 적어요.</span>
+        <div style="margin-top:auto;padding-top:18px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(17,17,17,.08)">
+          <span style="display:flex;align-items:baseline;gap:4px"><span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:26px;letter-spacing:-.03em">15만원</span><span style="font-size:13px;color:#666666">VAT 별도</span><span style="margin-left:6px;align-self:center;font-size:12px;font-weight:700;color:#111111;background:#FFB3C8;padding:3px 8px;border-radius:999px">리터치 1회 포함</span></span>
+          <span style="width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;background:{{ hv2.arrowBg }};color:#111111;border:1px solid {{ hv2.arrowBorder }};transform:rotate({{ hv2.rot }});transition:all .35s">→</span>
+        </div>
+      </div>
+      <span style="position:absolute;left:0;bottom:0;height:4px;width:{{ hv2.lineW }};background:#FFB3C8;transition:width .5s cubic-bezier(.2,.7,.2,1)"></span>
+    </div>
+  </div>
+</section>
+
+<section id="more" data-reveal="1" style="width:100%;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px) 0">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:48px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <span style="display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:#FFB3C8"><span style="width:28px;height:2px;background:#FFB3C8"></span>02 · 그 외 반영구</span>
+      <h2 style="margin:0;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:clamp(34px,4.4vw,60px);line-height:1.2">눈썹 말고도,<br>매일의 <span style="color:#FFB3C8">수고</span>를 덜어드려요</h2>
+    </div>
+    <p style="margin:0;color:#555555;font-size:17px;line-height:1.7;max-width:24em">아이라인부터 두피까지. 같은 원장, 같은 위생 기준으로 시술하고 리터치 1회까지 포함돼요.</p>
+  </div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px">
+    <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none">
+      <sc-for list="{{ moTabs }}" as="tb" hint-placeholder-count="3">
+        <button onClick="{{ tb.go }}" style="flex:none;height:40px;padding:0 16px;border-radius:999px;border:1.5px solid {{ tb.border }};background:{{ tb.bg }};color:{{ tb.color }};font-size:15px;font-weight:700;cursor:pointer;transition:all .25s">{{ tb.name }}</button>
+      </sc-for>
+    </div>
+    <div style="display:flex;gap:6px;flex:none">
+      <button onClick="{{ moPrev }}" aria-label="이전" style="width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(17,17,17,.15);background:#FFFFFF;font-size:16px;cursor:pointer;color:#111111">←</button>
+      <button onClick="{{ moNext }}" aria-label="다음" style="width:40px;height:40px;border-radius:50%;border:none;background:#111111;color:#FFFFFF;font-size:16px;cursor:pointer">→</button>
+    </div>
+  </div>
+  <div data-car="mo" onScroll="{{ moScroll }}" style="display:flex;gap:clamp(12px,1.6vw,24px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:0 calc(-1 * clamp(20px,4vw,40px));padding:4px clamp(20px,4vw,40px) 12px;scroll-padding-left:clamp(20px,4vw,40px)">
+    <div data-mcard="0" onMouseEnter="{{ hm0.enter }}" onMouseLeave="{{ hm0.leave }}" onClick="{{ pickEyeline }}" role="button" style="position:relative;display:flex;flex-direction:column;flex:0 0 {{ mc.basis }};scroll-snap-align:start;border-radius:24px;overflow:hidden;cursor:pointer;background:{{ mc.cardBg }};border:{{ mc.border }}">
+      <div style="position:relative;aspect-ratio:{{ mc.ar }};overflow:hidden;background:#1A1A1A">
+      <div style="position:absolute;inset:0;background:#F4ECEE url(__TB_BASE__/gen/eyeline.jpg) center/cover no-repeat;transform:scale({{ hm0.zoom }});transition:transform .8s cubic-bezier(.2,.7,.2,1)"></div>
+      <span style="position:absolute;left:20px;top:20px;font-size:10px;font-weight:500;letter-spacing:.02em;color:rgba(255,255,255,.85);background:rgba(0,0,0,.35);padding:3px 7px;border-radius:3px;pointer-events:none">연출 이미지</span>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,17,17,0) 35%,rgba(17,17,17,.85) 100%);opacity:{{ mc.gradOp }}"></div>
+      <span style="position:absolute;right:20px;top:16px;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:64px;line-height:1;letter-spacing:-.04em;color:{{ hm0.numColor }};transition:color .4s">01</span>
+      </div>
+      <div style="position:{{ mc.pos }};flex:{{ mc.flex }};left:0;right:0;bottom:0;padding:{{ mc.pad }};display:flex;flex-direction:column;gap:{{ mc.gap }};color:{{ mc.ink }};transform:translateY({{ hm0.shift }});transition:transform .5s cubic-bezier(.2,.7,.2,1)">
+        <span style="font-size:12px;font-weight:700;letter-spacing:.16em;color:#FFB3C8">EYELINE</span>
+        <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:{{ mc.nameSize }};line-height:1.2">점막아이라인</span>
+        <span style="font-size:{{ mc.descSize }};line-height:1.65;color:{{ mc.desc }}">점막을 채워 눈매를 또렷하게. 번짐 없이 자연스러운 라인.</span>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:{{ mc.mt }};padding-top:{{ mc.pt }};border-top:{{ mc.bt }}">
+          <span style="display:flex;flex-direction:{{ mc.priceDir }};align-items:{{ mc.priceAlign }};gap:6px;flex-wrap:wrap"><span style="display:flex;align-items:baseline;gap:6px"><span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:22px">130,000원</span><span style="font-size:12px;color:{{ mc.vat }}">VAT 별도</span></span><span style="align-self:flex-start;font-size:12px;font-weight:700;color:#111111;background:#FFB3C8;padding:3px 8px;border-radius:999px">리터치 1회 포함</span></span>
+          <span style="flex:none;height:{{ mc.btnH }};width:{{ mc.btnW }};padding:{{ mc.btnPad }};border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;background:{{ mc.btnBg }};border:{{ mc.btnBorder }};color:#111111;opacity:{{ hm0.btnOp }};transform:translateX({{ hm0.btnX }});transition:all .4s">{{ mc.btnTxt }}</span>
+        </div>
+      </div>
+    </div>
+    <div data-mcard="1" onMouseEnter="{{ hm1.enter }}" onMouseLeave="{{ hm1.leave }}" onClick="{{ pickLip }}" role="button" style="position:relative;display:flex;flex-direction:column;flex:0 0 {{ mc.basis }};scroll-snap-align:start;border-radius:24px;overflow:hidden;cursor:pointer;background:{{ mc.cardBg }};border:{{ mc.border }}">
+      <div style="position:relative;aspect-ratio:{{ mc.ar }};overflow:hidden;background:#1A1A1A">
+      <div style="position:absolute;inset:0;background:#F4ECEE url(__TB_BASE__/gen/lip.jpg) center/cover no-repeat;transform:scale({{ hm1.zoom }});transition:transform .8s cubic-bezier(.2,.7,.2,1)"></div>
+      <span style="position:absolute;left:20px;top:20px;font-size:10px;font-weight:500;letter-spacing:.02em;color:rgba(255,255,255,.85);background:rgba(0,0,0,.35);padding:3px 7px;border-radius:3px;pointer-events:none">연출 이미지</span>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,17,17,0) 35%,rgba(17,17,17,.85) 100%);opacity:{{ mc.gradOp }}"></div>
+      <span style="position:absolute;right:20px;top:16px;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:64px;line-height:1;letter-spacing:-.04em;color:{{ hm1.numColor }};transition:color .4s">02</span>
+      </div>
+      <div style="position:{{ mc.pos }};flex:{{ mc.flex }};left:0;right:0;bottom:0;padding:{{ mc.pad }};display:flex;flex-direction:column;gap:{{ mc.gap }};color:{{ mc.ink }};transform:translateY({{ hm1.shift }});transition:transform .5s cubic-bezier(.2,.7,.2,1)">
+        <span style="font-size:12px;font-weight:700;letter-spacing:.16em;color:#FFB3C8">LIP</span>
+        <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:{{ mc.nameSize }};line-height:1.2">틴트입술</span>
+        <span style="font-size:{{ mc.descSize }};line-height:1.65;color:{{ mc.desc }}">입술 윤곽과 혈색을 맑게 정돈하는 컬러 시술.</span>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:{{ mc.mt }};padding-top:{{ mc.pt }};border-top:{{ mc.bt }}">
+          <span style="display:flex;flex-direction:{{ mc.priceDir }};align-items:{{ mc.priceAlign }};gap:6px;flex-wrap:wrap"><span style="display:flex;align-items:baseline;gap:6px"><span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:22px">180,000원</span><span style="font-size:12px;color:{{ mc.vat }}">VAT 별도</span></span><span style="align-self:flex-start;font-size:12px;font-weight:700;color:#111111;background:#FFB3C8;padding:3px 8px;border-radius:999px">리터치 1회 포함</span></span>
+          <span style="flex:none;height:{{ mc.btnH }};width:{{ mc.btnW }};padding:{{ mc.btnPad }};border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;background:{{ mc.btnBg }};border:{{ mc.btnBorder }};color:#111111;opacity:{{ hm1.btnOp }};transform:translateX({{ hm1.btnX }});transition:all .4s">{{ mc.btnTxt }}</span>
+        </div>
+      </div>
+    </div>
+    <div data-mcard="2" onMouseEnter="{{ hm2.enter }}" onMouseLeave="{{ hm2.leave }}" onClick="{{ pickHair }}" role="button" style="position:relative;display:flex;flex-direction:column;flex:0 0 {{ mc.basis }};scroll-snap-align:start;border-radius:24px;overflow:hidden;cursor:pointer;background:{{ mc.cardBg }};border:{{ mc.border }}">
+      <div style="position:relative;aspect-ratio:{{ mc.ar }};overflow:hidden;background:#1A1A1A">
+      <div style="position:absolute;inset:0;background:#F4ECEE url(__TB_BASE__/gen/hairline.jpg) center/cover no-repeat;transform:scale({{ hm2.zoom }});transition:transform .8s cubic-bezier(.2,.7,.2,1)"></div>
+      <span style="position:absolute;left:20px;top:20px;font-size:10px;font-weight:500;letter-spacing:.02em;color:rgba(255,255,255,.85);background:rgba(0,0,0,.35);padding:3px 7px;border-radius:3px;pointer-events:none">연출 이미지</span>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,17,17,0) 35%,rgba(17,17,17,.85) 100%);opacity:{{ mc.gradOp }}"></div>
+      <span style="position:absolute;right:20px;top:16px;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:64px;line-height:1;letter-spacing:-.04em;color:{{ hm2.numColor }};transition:color .4s">03</span>
+      </div>
+      <div style="position:{{ mc.pos }};flex:{{ mc.flex }};left:0;right:0;bottom:0;padding:{{ mc.pad }};display:flex;flex-direction:column;gap:{{ mc.gap }};color:{{ mc.ink }};transform:translateY({{ hm2.shift }});transition:transform .5s cubic-bezier(.2,.7,.2,1)">
+        <span style="font-size:12px;font-weight:700;letter-spacing:.16em;color:#FFB3C8">HAIRLINE</span>
+        <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:{{ mc.nameSize }};line-height:1.2">헤어라인</span>
+        <span style="font-size:{{ mc.descSize }};line-height:1.65;color:{{ mc.desc }}">넓은 이마·정수리 빈 곳을 모발 결처럼 채워요.</span>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:{{ mc.mt }};padding-top:{{ mc.pt }};border-top:{{ mc.bt }}">
+          <span style="display:flex;flex-direction:{{ mc.priceDir }};align-items:{{ mc.priceAlign }};gap:6px;flex-wrap:wrap"><span style="display:flex;align-items:baseline;gap:6px"><span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:22px">상담 후 안내</span></span><span style="align-self:flex-start;font-size:12px;font-weight:700;color:#111111;background:#FFB3C8;padding:3px 8px;border-radius:999px">리터치 1회 포함</span></span>
+          <span style="flex:none;height:{{ mc.btnH }};width:{{ mc.btnW }};padding:{{ mc.btnPad }};border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;background:{{ mc.btnBg }};border:{{ mc.btnBorder }};color:#111111;opacity:{{ hm2.btnOp }};transform:translateX({{ hm2.btnX }});transition:all .4s">{{ mc.btnTxt }}</span>
+        </div>
+      </div>
+    </div>
+    <div data-mcard="3" onMouseEnter="{{ hm3.enter }}" onMouseLeave="{{ hm3.leave }}" onClick="{{ pickMole }}" role="button" style="position:relative;display:flex;flex-direction:column;flex:0 0 {{ mc.basis }};scroll-snap-align:start;border-radius:24px;overflow:hidden;cursor:pointer;background:{{ mc.cardBg }};border:{{ mc.border }}">
+      <div style="position:relative;aspect-ratio:{{ mc.ar }};overflow:hidden;background:#1A1A1A">
+      <div style="position:absolute;inset:0;background:#F4ECEE url(__TB_BASE__/gen/beautymark.jpg) center/cover no-repeat;transform:scale({{ hm3.zoom }});transition:transform .8s cubic-bezier(.2,.7,.2,1)"></div>
+      <span style="position:absolute;left:20px;top:20px;font-size:10px;font-weight:500;letter-spacing:.02em;color:rgba(255,255,255,.85);background:rgba(0,0,0,.35);padding:3px 7px;border-radius:3px;pointer-events:none">연출 이미지</span>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,17,17,0) 35%,rgba(17,17,17,.85) 100%);opacity:{{ mc.gradOp }}"></div>
+      <span style="position:absolute;right:20px;top:16px;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:64px;line-height:1;letter-spacing:-.04em;color:{{ hm3.numColor }};transition:color .4s">04</span>
+      </div>
+      <div style="position:{{ mc.pos }};flex:{{ mc.flex }};left:0;right:0;bottom:0;padding:{{ mc.pad }};display:flex;flex-direction:column;gap:{{ mc.gap }};color:{{ mc.ink }};transform:translateY({{ hm3.shift }});transition:transform .5s cubic-bezier(.2,.7,.2,1)">
+        <span style="font-size:12px;font-weight:700;letter-spacing:.16em;color:#FFB3C8">BEAUTY MARK</span>
+        <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:{{ mc.nameSize }};line-height:1.2">미인점</span>
+        <span style="font-size:{{ mc.descSize }};line-height:1.65;color:{{ mc.desc }}">원하는 위치에 작고 자연스러운 점 하나.</span>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:{{ mc.mt }};padding-top:{{ mc.pt }};border-top:{{ mc.bt }}">
+          <span style="display:flex;flex-direction:{{ mc.priceDir }};align-items:{{ mc.priceAlign }};gap:6px;flex-wrap:wrap"><span style="display:flex;align-items:baseline;gap:6px"><span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:22px">40,000원</span><span style="font-size:12px;color:{{ mc.vat }}">VAT 별도</span></span><span style="align-self:flex-start;font-size:12px;font-weight:700;color:#111111;background:#FFB3C8;padding:3px 8px;border-radius:999px">리터치 1회 포함</span></span>
+          <span style="flex:none;height:{{ mc.btnH }};width:{{ mc.btnW }};padding:{{ mc.btnPad }};border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;background:{{ mc.btnBg }};border:{{ mc.btnBorder }};color:#111111;opacity:{{ hm3.btnOp }};transform:translateX({{ hm3.btnX }});transition:all .4s">{{ mc.btnTxt }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div style="display:{{ pv.gallery }}">
+<section id="gallery" data-reveal="1" style="width:100%;background:#FFF1F5;margin-top:{{ gMt }};padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px)">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:48px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <span style="display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:#FFB3C8"><span style="width:28px;height:2px;background:#FFB3C8"></span>03 · BEFORE / AFTER</span>
+      <h2 style="margin:0;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:clamp(34px,4.4vw,60px);line-height:1.2">직후가 아니라,<br><span style="background:linear-gradient(transparent 58%,#FFCFDD 58%,#FFCFDD 92%,transparent 92%)">회복된 뒤</span>까지 보여드려요</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;max-width:26em">
+      <p style="margin:0;color:#555555;font-size:17px;line-height:1.7">가운데 핸들을 좌우로 끌어 비교해 보세요. 모든 사진은 같은 조명·각도로 촬영하며 보정하지 않습니다.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span style="font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px;background:#111111;color:#FFFFFF">보정 없음</span>
+        <span style="font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px;background:#FFFFFF;color:#111111;border:1px solid rgba(17,17,17,.12)">촬영일 표기</span>
+        <span style="font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px;background:#FFFFFF;color:#111111;border:1px solid rgba(17,17,17,.12)">고객 동의 완료</span>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-bottom:18px">
+    <sc-for list="{{ baTabs }}" as="tb" hint-placeholder-count="3">
+      <button onClick="{{ tb.go }}" style="flex:none;height:40px;padding:0 16px;border-radius:999px;border:1.5px solid {{ tb.border }};background:{{ tb.bg }};color:{{ tb.color }};font-size:15px;font-weight:700;cursor:pointer;transition:all .25s">{{ tb.name }}</button>
+    </sc-for>
+  </div>
+  <div style="max-width:720px">
+    <sc-for list="{{ baShown }}" as="b" hint-placeholder-count="1">
+      <div data-ba="1" style="background:#FFFFFF;border-radius:24px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(17,17,17,.04);animation:tbFade .35s ease">
+        <div onPointerDown="{{ b.down }}" onPointerMove="{{ b.move }}" onPointerUp="{{ b.up }}" onPointerCancel="{{ b.up }}" style="position:relative;aspect-ratio:4/3;overflow:hidden;cursor:ew-resize;touch-action:pan-y;user-select:none">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#D9D9D9 0 10px,#E3E3E3 10px 20px);display:flex;align-items:flex-start;padding:16px">
+            <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:13px;font-weight:800;letter-spacing:.08em;background:#111111;color:#FFFFFF;padding:7px 12px;border-radius:999px">BEFORE</span>
+          </div>
+          <div style="position:absolute;inset:0;clip-path:inset(0 0 0 {{ b.pos }});background:repeating-linear-gradient(135deg,#FFE6EE 0 10px,#FFF3F7 10px 20px);display:flex;align-items:flex-start;justify-content:flex-end;padding:16px">
+            <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:13px;font-weight:800;letter-spacing:.04em;background:#FFB3C8;color:#111111;padding:7px 12px;border-radius:999px">AFTER · {{ b.stageLabel }}</span>
+          </div>
+          <div style="position:absolute;top:0;bottom:0;left:{{ b.pos }};width:3px;margin-left:-1.5px;background:#FFFFFF;box-shadow:0 0 12px rgba(17,17,17,.15)"></div>
+          <div style="position:absolute;top:50%;left:{{ b.pos }};width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:#FFB3C8;border:3px solid #FFFFFF;box-shadow:0 8px 24px rgba(255,179,200,.35);display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:800;color:#111111">
+            <span>‹</span><span>›</span>
+          </div>
+        </div>
+        <div style="padding:22px 24px 26px;display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap">
+            <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.03em;font-size:20px">{{ b.title }}</span>
+            <span style="font-size:13px;color:#666666">{{ b.meta }}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;background:#F5F5F5;border-radius:999px">
+            <sc-for list="{{ b.stages }}" as="s" hint-placeholder-count="3">
+              <button onClick="{{ s.pick }}" style="height:40px;border:none;border-radius:999px;font-size:14px;font-weight:700;cursor:pointer;background:{{ s.bg }};color:{{ s.color }};box-shadow:{{ s.shadow }};transition:all .25s">{{ s.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="margin-top:44px;display:flex;justify-content:center">
+    <a href="#gallery" style="height:56px;padding:0 30px;border-radius:999px;background:#111111;color:#FFFFFF;display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700">전후사진 전체 보기 <span style="color:#FFB3C8">→</span></a>
+  </div>
+</section>
+</div>
+
+<div style="display:{{ pv.home }}">
+<section id="promise" data-reveal="1" style="background:#111111;color:#FFFFFF;overflow:hidden">
+  <sc-if value="{{ isPromiseMob }}" hint-placeholder-val="{{ false }}">
+  <div style="padding:56px 20px;display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:#FFB3C8"><span style="width:28px;height:2px;background:#FFB3C8"></span>04 · PROMISE</span>
+        <h2 style="margin:0;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:clamp(34px,4.4vw,60px);line-height:1.2">말 대신 <span style="color:#FFB3C8">보여드리는</span><br>세 가지 약속</h2>
+      </div>
+    <div style="display:flex;flex-direction:column">
+      <sc-for list="{{ promises }}" as="p" hint-placeholder-count="3">
+        <div style="display:flex;flex-direction:{{ p.dir }};gap:16px;align-items:center;padding:22px 0;border-top:1px solid rgba(255,255,255,.12)">
+          <div style="flex:none;width:42%;aspect-ratio:1/1;border-radius:16px;background:#222222 url({{ p.img }}) center/cover no-repeat;position:relative"><span style="position:absolute;left:8px;bottom:8px;font-size:9px;color:rgba(255,255,255,.85);background:rgba(0,0,0,.35);padding:2px 6px;border-radius:3px">연출 이미지</span></div>
+          <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:8px">
+            <span style="align-self:flex-start;font-size:12px;font-weight:800;letter-spacing:.06em;color:#FFB3C8;border:1.5px solid #FFB3C8;border-radius:999px;padding:3px 10px">PROMISE {{ p.num }}</span>
+            <span style="font-weight:800;font-size:19px;line-height:1.3;letter-spacing:-.03em">{{ p.title }}</span>
+            <span style="font-size:14px;line-height:1.6;color:#BBBBBB">{{ p.desc }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+  <sc-if value="{{ isPromiseDesk }}" hint-placeholder-val="{{ true }}">
+  <div style="width:100%;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(40px,6vw,96px);align-items:center">
+    <div style="display:flex;flex-direction:column;gap:40px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:#FFB3C8"><span style="width:28px;height:2px;background:#FFB3C8"></span>04 · PROMISE</span>
+        <h2 style="margin:0;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:clamp(34px,4.4vw,60px);line-height:1.2">말 대신 <span style="color:#FFB3C8">보여드리는</span><br>세 가지 약속</h2>
+      </div>
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ promises }}" as="p" hint-placeholder-count="3">
+          <button onClick="{{ p.pick }}" style="position:relative;text-align:left;border:none;background:transparent;color:#FFFFFF;padding:26px 0;border-top:1px solid rgba(255,255,255,.14);cursor:pointer;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start">
+            <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:clamp(40px,4vw,56px);line-height:1;letter-spacing:-.04em;color:{{ p.numColor }};transition:color .4s">{{ p.num }}</span>
+            <span style="display:flex;flex-direction:column;gap:12px;padding-top:4px">
+              <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.03em;font-size:clamp(21px,2vw,26px);color:{{ p.titleColor }};transition:color .4s">{{ p.title }}</span>
+              <sc-if value="{{ p.active }}" hint-placeholder-val="{{ false }}">
+                <span style="font-size:16px;line-height:1.75;color:#CCCCCC;animation:tbFade .5s ease">{{ p.desc }}</span>
+              </sc-if>
+            </span>
+            <sc-if value="{{ p.active }}" hint-placeholder-val="{{ false }}">
+              <span style="position:absolute;left:0;right:0;top:-1px;height:2px;background:rgba(255,255,255,.08)">{{ progressBar }}</span>
+            </sc-if>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+    <div style="position:relative;aspect-ratio:4/5;max-height:720px;width:100%;border-radius:28px;overflow:hidden;background:#1E1E1E">
+      <sc-for list="{{ promises }}" as="p" hint-placeholder-count="1">
+        <div style="position:absolute;inset:0;background:#1E1E1E url({{ p.img }}) center/cover no-repeat;opacity:{{ p.op }};transform:scale({{ p.scale }});transition:opacity .8s ease,transform 1.6s cubic-bezier(.2,.7,.2,1)"></div>
+      </sc-for>
+      <span style="position:absolute;left:16px;top:16px;font-size:10px;font-weight:500;letter-spacing:.02em;color:rgba(255,255,255,.85);background:rgba(0,0,0,.35);padding:3px 7px;border-radius:3px;pointer-events:none">연출 이미지</span>
+      <div style="position:absolute;top:24px;right:24px;display:flex;align-items:baseline;gap:4px;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;color:#FFFFFF"><span style="font-size:44px;line-height:1;color:#FFB3C8">{{ pNum }}</span><span style="font-size:16px;color:#999999">/ 03</span></div>
+    </div>
+  </div>
+  </sc-if>
+</section>
+</div>
+
+<div style="display:{{ pv.prices }}">
+<section id="prices" data-reveal="1" style="width:100%;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px)">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <span style="display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:#FFB3C8"><span style="width:28px;height:2px;background:#FFB3C8"></span>05 · PRICE</span>
+      <h2 style="margin:0;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:clamp(34px,4.4vw,60px);line-height:1.2">가격은 <span style="background:linear-gradient(transparent 58%,#FFCFDD 58%,#FFCFDD 92%,transparent 92%)">처음부터</span><br>공개합니다</h2>
+    </div>
+    <div style="position:relative;display:grid;grid-template-columns:1fr 1fr;padding:5px;background:#F2F2F2;border-radius:999px;width:min(100%,340px)">
+      <span style="position:absolute;top:5px;bottom:5px;left:{{ tabLeft }};width:calc(50% - 5px);background:#111111;border-radius:999px;transition:left .4s cubic-bezier(.2,.7,.2,1)"></span>
+      <button onClick="{{ tabBrow }}" style="position:relative;height:48px;border:none;background:transparent;font-size:16px;font-weight:700;cursor:pointer;color:{{ tabBrowColor }};transition:color .3s">눈썹 반영구</button>
+      <button onClick="{{ tabEtc }}" style="position:relative;height:48px;border:none;background:transparent;font-size:16px;font-weight:700;cursor:pointer;color:{{ tabEtcColor }};transition:color .3s">그 외 반영구</button>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;border-top:2px solid #111111;max-width:980px">
+    <sc-for list="{{ priceCards }}" as="c" hint-placeholder-count="3">
+      <a href="{{ c.href }}" onMouseEnter="{{ c.enter }}" onMouseLeave="{{ c.leave }}" style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:clamp(14px,2vw,28px);align-items:center;padding:clamp(14px,1.6vw,20px) clamp(8px,1vw,16px);border-bottom:1px solid rgba(17,17,17,.1);background:{{ c.bg }};color:#111111;transition:background .3s">
+        <span style="width:clamp(64px,8vw,96px);aspect-ratio:1/1;border-radius:14px;background:#F4ECEE url({{ c.img }}) center/cover no-repeat;transform:scale({{ c.zoom }});transition:transform .4s cubic-bezier(.2,.7,.2,1)"></span>
+        <span style="display:flex;flex-direction:column;gap:6px;min-width:0">
+          <span style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-weight:800;font-size:clamp(18px,1.8vw,22px);letter-spacing:-.03em">{{ c.name }}</span><span style="font-size:13px;color:#888888">{{ c.sub }}</span></span>
+          <span style="display:flex;gap:6px;flex-wrap:wrap"><span style="font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:{{ c.tagBg }}">{{ c.tag }}</span><span style="font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:#F2F2F2;color:#555555">대표원장 직접</span></span>
+        </span>
+        <span style="display:flex;align-items:center;gap:clamp(10px,1.6vw,20px)">
+          <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px"><span style="font-weight:800;font-size:clamp(18px,2vw,26px);letter-spacing:-.03em;white-space:nowrap">{{ c.main }}</span><span style="font-size:12px;color:#888888;white-space:nowrap">{{ c.mainNote }}</span></span>
+          <span style="width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;background:{{ c.arrowBg }};color:{{ c.arrowInk }};border:1px solid {{ c.arrowBorder }};transition:all .3s">→</span>
+        </span>
+      </a>
+    </sc-for>
+  </div>
+  <div style="margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;max-width:980px">
+    <p style="margin:0;font-size:14px;color:#666666;line-height:1.7">모든 가격은 VAT 별도 정가예요. 최종 가격은 디자인 상담 후 확정됩니다.</p>
+    <a href="/info#p=prices" style="font-size:15px;font-weight:700;text-decoration:underline;text-underline-offset:4px">전체 가격표 보기 →</a>
+  </div>
+</section>
+</div>
+
+<div style="display:{{ pv.reviews }}">
+<section id="reviews" data-reveal="1" style="width:100%;background:#FFF1F5;padding:clamp(64px,8vw,112px) 0">
+  <div style="padding:0 clamp(20px,4vw,40px);display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <span style="display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:#E0809E"><span style="width:28px;height:2px;background:#FFB3C8"></span>06 · REVIEW</span>
+      <h2 style="margin:0;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:clamp(30px,4vw,52px);line-height:1.2">네이버 후기,<br><span style="background:linear-gradient(transparent 58%,#FFCFDD 58%,#FFCFDD 92%,transparent 92%)">원문에서 발췌</span></h2>
+    </div>
+    <a href="/info#p=reviews" style="font-size:15px;font-weight:700;text-decoration:underline;text-underline-offset:4px">후기 더 보기 →</a>
+  </div>
+  <div style="margin:0 clamp(20px,4vw,40px) 28px;padding:clamp(16px,2vw,22px) clamp(18px,2.4vw,28px);border-radius:20px;background:#FFFFFF;display:grid;grid-template-columns:{{ rvBoxCols }};gap:14px clamp(20px,3vw,40px);align-items:center">
+    <span style="display:flex;align-items:center;gap:12px">
+      <span style="font-weight:800;font-size:clamp(34px,3.4vw,44px);line-height:1;letter-spacing:-.05em;color:#111111">5.0</span>
+      <span style="display:flex;flex-direction:column;justify-content:center;gap:4px;line-height:1">
+        <span style="color:#E0809E;font-size:15px;letter-spacing:1px;line-height:1">★★★★★</span>
+        <span style="font-size:12px;font-weight:600;color:#666666;line-height:1">네이버 리뷰 <b style="color:#111111;font-weight:800">207</b>건</span>
+      </span>
+    </span>
+    <span style="display:flex;gap:6px;min-width:0">
+      <span style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px;border-radius:12px;background:#FFF1F5"><span style="font-size:{{ rvChipFs }};font-weight:600;white-space:nowrap">“시술이 꼼꼼해요”</span><span style="font-size:13px;font-weight:800;color:#E0809E">192</span></span>
+      <span style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px;border-radius:12px;background:#FFF1F5"><span style="font-size:{{ rvChipFs }};font-weight:600;white-space:nowrap">“친절해요”</span><span style="font-size:13px;font-weight:800;color:#E0809E">187</span></span>
+      <span style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px;border-radius:12px;background:#FFF1F5"><span style="font-size:{{ rvChipFs }};font-weight:600;white-space:nowrap">“상담이 자세해요”</span><span style="font-size:13px;font-weight:800;color:#E0809E">151</span></span>
+    </span>
+  </div>
+  <sc-if value="{{ isRvMob }}" hint-placeholder-val="{{ false }}">
+  <div data-rvcar="1" onTouchStart="{{ rvTouch }}" onPointerDown="{{ rvTouch }}" style="display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:4px 20px 8px;scroll-padding-left:20px">
+    <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+      <div style="flex:0 0 82%;scroll-snap-align:start;padding:22px;border-radius:18px;background:#FFFFFF;display:flex;flex-direction:column;gap:10px;box-shadow:0 2px 10px rgba(17,17,17,.04)">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="color:#E0809E;font-size:14px;letter-spacing:2px">★★★★★</span><span style="font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;background:#FFE2EB">{{ r.tag }}</span></div>
+              <p style="margin:0;font-size:15px;line-height:1.65;color:#222222;white-space:normal">“{{ r.text }}”</p>
+              <span style="margin-top:auto;font-size:12px;color:#888888">{{ r.who }} · {{ r.date }}</span>
+            </div>
+    </sc-for>
+  </div>
+  </sc-if>
+  <sc-if value="{{ isRvDesk }}" hint-placeholder-val="{{ true }}">
+  <div style="display:flex;flex-direction:column;gap:14px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)">
+    <div style="display:flex;gap:14px;width:max-content;animation:tbMarq 70s linear infinite;" style-hover="animation-play-state:paused">
+      <sc-for list="{{ reviewsA }}" as="r" hint-placeholder-count="6">
+            <div style="flex:none;width:clamp(260px,26vw,320px);padding:22px;border-radius:18px;background:#FFFFFF;display:flex;flex-direction:column;gap:10px;box-shadow:0 2px 10px rgba(17,17,17,.04)">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="color:#E0809E;font-size:14px;letter-spacing:2px">★★★★★</span><span style="font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;background:#FFE2EB">{{ r.tag }}</span></div>
+              <p style="margin:0;font-size:15px;line-height:1.65;color:#222222;white-space:normal">“{{ r.text }}”</p>
+              <span style="margin-top:auto;font-size:12px;color:#888888">{{ r.who }} · {{ r.date }}</span>
+            </div>
+      </sc-for>
+    </div>
+    <div style="display:flex;gap:14px;width:max-content;animation:tbMarq 80s linear infinite reverse;" style-hover="animation-play-state:paused">
+      <sc-for list="{{ reviewsB }}" as="r" hint-placeholder-count="6">
+            <div style="flex:none;width:clamp(260px,26vw,320px);padding:22px;border-radius:18px;background:#FFFFFF;display:flex;flex-direction:column;gap:10px;box-shadow:0 2px 10px rgba(17,17,17,.04)">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="color:#E0809E;font-size:14px;letter-spacing:2px">★★★★★</span><span style="font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;background:#FFE2EB">{{ r.tag }}</span></div>
+              <p style="margin:0;font-size:15px;line-height:1.65;color:#222222;white-space:normal">“{{ r.text }}”</p>
+              <span style="margin-top:auto;font-size:12px;color:#888888">{{ r.who }} · {{ r.date }}</span>
+            </div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+</section>
+</div>
+
+<div style="display:{{ pv.home }}">
+<section id="event" data-reveal="1" style="width:100%;background:#FFF1F5;padding:clamp(40px,6vw,72px) clamp(20px,4vw,40px)">
+  <div style="border-radius:24px;background:#FFB3C8;color:#111111;padding:clamp(22px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:22px clamp(24px,4vw,56px);align-items:center">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <span style="align-self:flex-start;font-size:12px;font-weight:800;letter-spacing:.04em;padding:5px 11px;border-radius:999px;background:#111111;color:#FFFFFF">{{ cd.month }}월 예약 오픈</span>
+      <h2 style="margin:0;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:clamp(24px,3vw,38px);line-height:1.25">대표원장 1:1 맞춤 컨설팅</h2>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <span style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(17,17,17,.12);font-size:15px"><span style="font-weight:600">자연눈썹</span><span style="font-weight:800">130,000원</span></span>
+        <span style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(17,17,17,.12);font-size:15px"><span style="font-weight:600">콤보 · 쉐도우눈썹</span><span style="font-weight:800">150,000원</span></span>
+        <span style="font-size:12px;color:#5A3341">VAT 별도 · 리터치 1회 포함</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <span style="font-size:13px;font-weight:700">이번 달 예약 마감까지</span>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px">
+        <span style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0;border-radius:12px;background:rgba(255,255,255,.55)"><span style="font-weight:800;font-size:clamp(22px,2.4vw,30px);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums">{{ cd.d }}</span><span style="font-size:11px;font-weight:700;color:#5A3341">일</span></span><span style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0;border-radius:12px;background:rgba(255,255,255,.55)"><span style="font-weight:800;font-size:clamp(22px,2.4vw,30px);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums">{{ cd.h }}</span><span style="font-size:11px;font-weight:700;color:#5A3341">시간</span></span><span style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0;border-radius:12px;background:rgba(255,255,255,.55)"><span style="font-weight:800;font-size:clamp(22px,2.4vw,30px);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums">{{ cd.m }}</span><span style="font-size:11px;font-weight:700;color:#5A3341">분</span></span><span style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0;border-radius:12px;background:rgba(255,255,255,.55)"><span style="font-weight:800;font-size:clamp(22px,2.4vw,30px);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums">{{ cd.s }}</span><span style="font-size:11px;font-weight:700;color:#5A3341">초</span></span>
+      </div>
+      <button onClick="{{ openBookEmpty }}" style="height:52px;border:none;border-radius:999px;background:#111111;color:#FFFFFF;font-size:16px;font-weight:700;cursor:pointer" style-hover="background:#2A2A2A">네이버로 이번 달 예약하기 →</button>
+    </div>
+  </div>
+</section>
+</div>
+
+<div style="display:{{ pv.location }}">
+<section id="location" data-reveal="1" style="width:100%;padding:clamp(64px,9vw,120px) clamp(20px,4vw,40px) clamp(64px,8vw,100px)">
+  <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:40px">
+    <span style="font-size:15px;font-weight:600;letter-spacing:-.01em;color:#FFB3C8">07 · LOCATION</span>
+    <h2 style="margin:0;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:700;letter-spacing:-.03em;font-size:clamp(28px,3.6vw,44px);line-height:1.3">처음 오셔도 헤매지 않게</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(28px,4vw,56px)">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="position:relative;flex:1;min-height:320px;border-radius:4px;overflow:hidden;background:#EEEEEE">
+        <iframe title="탠뷰티 위치 지도" src="https://maps.google.com/maps?q=%EC%9D%B8%EC%B2%9C%20%EB%82%A8%EB%8F%99%EA%B5%AC%20%EA%B5%AC%EC%9B%94%EB%A1%9C%2089%20%ED%83%A0%EB%B7%B0%ED%8B%B0&amp;z=17&amp;hl=ko&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+      </div>
+      
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+        <span style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:#F5F5F5;font-size:14px;font-weight:600"><span style="width:8px;height:8px;border-radius:50%;background:{{ openDot }}"></span>{{ openLabel }}</span>
+        <span style="font-size:14px;color:#666666">{{ openSub }}</span>
+      </div>
+      <div style="padding:20px 0;border-top:1px solid rgba(17,17,17,.12);display:grid;grid-template-columns:88px 1fr;gap:12px;font-size:15px;line-height:1.7">
+        <span style="color:#666666">주소</span>
+        <span>인천 남동구 구월로 89 제6동 102호 탠뷰티<br><span style="color:#666666;font-size:14px">제6동 1층 102호</span></span>
+      </div>
+      <div style="padding:20px 0;border-top:1px solid rgba(17,17,17,.12);display:grid;grid-template-columns:88px 1fr;gap:12px;font-size:15px;line-height:1.7">
+        <span style="color:#666666">영업시간</span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <sc-for list="{{ hours }}" as="h" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:72px auto;gap:16px;font-weight:{{ h.weight }}"><span>{{ h.day }}</span><span>{{ h.time }}</span></div>
+          </sc-for>
+          <span style="color:#666666;font-size:14px">점심시간 없이 운영 · 마지막 예약은 마감 2시간 전</span>
+        </div>
+      </div>
+      <div style="padding:20px 0;border-top:1px solid rgba(17,17,17,.12);display:grid;grid-template-columns:88px 1fr;gap:12px;font-size:15px;line-height:1.7">
+        <span style="color:#666666">주차</span>
+        <span>주차 가능 · 자세한 위치는 예약 확정 시 안내</span>
+      </div>
+      <div style="padding:20px 0;border-top:1px solid rgba(17,17,17,.12);border-bottom:1px solid rgba(17,17,17,.12);display:grid;grid-template-columns:88px 1fr;gap:12px;font-size:15px;line-height:1.7">
+        <span style="color:#666666">대중교통</span>
+        <span>인천1호선·인천2호선 인천시청역 8번 출구에서 74m · 도보 1분</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:24px;max-width:520px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px">
+        <a href="tel:0320000000" style="min-height:56px;padding:8px 10px 8px 18px;border-radius:12px;background:#111111;color:#FFFFFF;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:transform .25s,box-shadow .25s" style-hover="transform:translateY(-3px);box-shadow:0 12px 28px rgba(17,17,17,.15);color:#FFFFFF">
+          <span style="display:flex;flex-direction:column;gap:4px"><span style="font-size:12px;font-weight:600;opacity:.75">전화 상담</span><span style="font-size:16px;font-weight:800;letter-spacing:-.02em">032-000-0000</span></span>
+          <span style="width:32px;height:32px;border-radius:50%;font-size:15px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-size:18px">→</span>
+        </a>
+        <a href="https://map.naver.com/p/search/%ED%83%A0%EB%B7%B0%ED%8B%B0/place/2088171690" target="_blank" rel="noopener" style="min-height:56px;padding:8px 10px 8px 18px;border-radius:12px;background:#FFFFFF;color:#111111;border:1px solid rgba(17,17,17,.15);display:flex;align-items:center;justify-content:space-between;gap:12px;transition:transform .25s,box-shadow .25s" style-hover="transform:translateY(-3px);box-shadow:0 12px 28px rgba(17,17,17,.08);color:#111111">
+          <span style="display:flex;flex-direction:column;gap:4px"><span style="font-size:12px;font-weight:600;opacity:.75">네이버 지도</span><span style="font-size:16px;font-weight:800;letter-spacing:-.02em">길찾기</span></span>
+          <span style="width:32px;height:32px;border-radius:50%;font-size:15px;background:#F2F2F2;display:flex;align-items:center;justify-content:center;font-size:18px">→</span>
+        </a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+        <a href="https://map.naver.com/p/search/%ED%83%A0%EB%B7%B0%ED%8B%B0/place/2088171690" target="_blank" rel="noopener" style="height:42px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:700;background:#FFFFFF;color:#111111;border:1px solid rgba(17,17,17,.12)" style-hover="border-color:#111111"><span style="width:8px;height:8px;border-radius:50%;background:#03C75A"></span>네이버 예약</a>
+        <a href="https://www.instagram.com/tanbeautyyy/" target="_blank" rel="noopener" style="height:42px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:700;background:#FFFFFF;color:#111111;border:1px solid rgba(17,17,17,.12)" style-hover="border-color:#111111"><span style="width:8px;height:8px;border-radius:50%;background:#DD2A7B"></span>인스타그램</a>
+        <a href="https://www.daangn.com/kr/local-profile/mif3mrvfuufr/" target="_blank" rel="noopener" style="height:42px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:700;background:#FFFFFF;color:#111111;border:1px solid rgba(17,17,17,.12)" style-hover="border-color:#111111"><span style="width:8px;height:8px;border-radius:50%;background:#FF6F0F"></span>당근</a>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer style="background:#F5F5F5;border-top:1px solid rgba(17,17,17,.08)">
+  <div style="width:100%;padding:48px clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:32px;font-size:13px;line-height:1.8;color:#444444">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="padding-top:8px"><span style="position:relative;display:inline-flex;align-items:baseline;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:800;font-size:24px;letter-spacing:-.04em;line-height:1;color:#111111"><span style="position:absolute;left:.04em;top:-.32em;width:.9em;height:.24em;border-top:.09em solid #FFB3C8;border-radius:70% 30% 0 0/100% 100% 0 0"></span>탠뷰티<span style="width:.2em;height:.2em;border-radius:50%;background:#FFB3C8;margin-left:.08em"></span></span></span>
+      <span>탠뷰티 · 대표 ○○○ · 사업자등록번호 000-00-00000<br>인천 남동구 구월로 89 제6동 102호<br><a href="https://www.instagram.com/tanbeautyyy/" target="_blank" rel="noopener" style="color:#444444">Instagram @tanbeautyyy</a> · <a href="https://www.daangn.com/kr/local-profile/mif3mrvfuufr/" target="_blank" rel="noopener" style="color:#444444">당근</a></span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <span style="color:#111111;font-weight:600">면허·등록 현황</span>
+      <span>문신사 면허/등록번호 게시 예정 (문신사법 2027년 10월 시행)<br>위생교육 이수 · 시술 기록(일자·염료·부위) 보관</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <a href="#top" style="color:#444444">시술 후 케어 가이드</a>
+      <a href="#top" style="color:#444444">자주 묻는 질문</a>
+      <a href="#top" style="color:#111111;font-weight:600">개인정보처리방침</a>
+      <span>만 19세 미만은 보호자 동의 후 상담 가능합니다.</span>
+    </div>
+  </div>
+</footer>
+
+<div style="position:fixed;right:clamp(12px,2vw,28px);bottom:clamp(12px,2vw,28px);z-index:50;display:flex;flex-direction:column;gap:10px">
+  <a href="#top" onClick="{{ kakao }}" aria-label="카카오톡 상담" title="카카오톡 상담" style="width:56px;height:56px;border-radius:50%;background:#FEE500;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(17,17,17,.18);transition:transform .25s" style-hover="transform:scale(1.08)"><span style="position:relative;display:flex;align-items:center;justify-content:center;width:30px;height:24px;border-radius:50%;background:#3C1E1E"><span style="position:absolute;left:6px;bottom:-4px;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:7px solid #3C1E1E;transform:rotate(20deg)"></span><span style="font-size:8px;font-weight:900;color:#FEE500;letter-spacing:-.02em">TALK</span></span></a>
+  <a href="https://map.naver.com/p/search/%ED%83%A0%EB%B7%B0%ED%8B%B0/place/2088171690" target="_blank" rel="noopener" aria-label="네이버 예약" title="네이버 예약" style="width:56px;height:56px;border-radius:50%;background:#03C75A;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(17,17,17,.18);transition:transform .25s" style-hover="transform:scale(1.08)"><span style="font-size:24px;font-weight:900;color:#FFFFFF;line-height:1">N</span></a>
+  <a href="https://www.instagram.com/tanbeautyyy/" target="_blank" rel="noopener" aria-label="인스타그램" title="인스타그램" style="width:56px;height:56px;border-radius:50%;background:linear-gradient(45deg,#F58529,#DD2A7B 50%,#8134AF 80%,#515BD4);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(17,17,17,.18);transition:transform .25s" style-hover="transform:scale(1.08)"><span style="position:relative;width:24px;height:24px;border:2.5px solid #FFFFFF;border-radius:7px;display:flex;align-items:center;justify-content:center"><span style="width:9px;height:9px;border:2.5px solid #FFFFFF;border-radius:50%"></span><span style="position:absolute;top:2px;right:2px;width:3px;height:3px;border-radius:50%;background:#FFFFFF"></span></span></a>
+  <a href="https://www.daangn.com/kr/local-profile/mif3mrvfuufr/" target="_blank" rel="noopener" aria-label="당근" title="당근" style="width:56px;height:56px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(17,17,17,.18);transition:transform .25s" style-hover="transform:scale(1.08)"><img src="__TB_BASE__/daangn-icon.png" alt="" style="width:26px;height:auto;display:block"></a>
+</div>
+
+<sc-if value="{{ diagOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeDiag }}" style="position:fixed;inset:0;z-index:60;background:rgba(17,17,17,.5);display:flex;align-items:center;justify-content:center;padding:12px">
+    <div onClick="{{ stop }}" style="width:100%;max-width:600px;max-height:calc(100vh - 24px);overflow:auto;background:#FFFFFF;border-radius:12px;animation:tbFade .25s ease">
+      <div style="position:sticky;top:0;background:#FFFFFF;padding:20px 24px 16px;display:flex;flex-direction:column;gap:14px;z-index:1">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:14px;font-weight:600;color:#666666">눈썹 진단 · {{ diagCount }}</span>
+          <button onClick="{{ closeDiag }}" aria-label="닫기" style="width:44px;height:44px;margin-right:-12px;border:none;background:transparent;font-size:22px;cursor:pointer;color:#111111">×</button>
+        </div>
+        <div style="height:3px;background:#F0F0F0;border-radius:2px;overflow:hidden"><div style="height:100%;width:{{ diagPct }};background:#111111;transition:width .3s"></div></div>
+      </div>
+      <sc-if value="{{ diagAsking }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:8px 24px 28px;display:flex;flex-direction:column;gap:20px">
+          <h3 style="margin:0;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:700;letter-spacing:-.03em;font-size:26px;line-height:1.4">{{ q.title }}</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:10px">
+            <sc-for list="{{ q.opts }}" as="o" hint-placeholder-count="3">
+              <button onClick="{{ o.pick }}" style="text-align:left;padding:0;border-radius:8px;border:1px solid {{ o.border }};background:#FFF;cursor:pointer;overflow:hidden;display:flex;flex-direction:column;color:#111111">
+                <div style="aspect-ratio:16/9;width:100%;background:repeating-linear-gradient(135deg,#EDEDED 0 8px,#F6F6F6 8px 16px);display:flex;align-items:flex-end;padding:8px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666666">{{ o.img }}</span></div>
+                <div style="padding:14px;display:flex;flex-direction:column;gap:4px"><span style="font-size:16px;font-weight:600">{{ o.label }}</span><span style="font-size:13px;color:#666666;line-height:1.5">{{ o.desc }}</span></div>
+              </button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ diagCanBack }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ diagBack }}" style="align-self:flex-start;height:44px;padding:0;border:none;background:transparent;color:#666666;font-size:14px;cursor:pointer">← 이전 질문</button>
+          </sc-if>
+        </div>
+      </sc-if>
+      <sc-if value="{{ diagDone }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:8px 24px 28px;display:flex;flex-direction:column;gap:20px">
+          <span style="font-size:14px;color:#666666">{{ res.summary }}</span>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:13px;color:#FFB3C8;font-weight:600">{{ res.kicker }}</span>
+            <h3 style="margin:0;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:700;letter-spacing:-.03em;font-size:30px">{{ res.name }}</h3>
+            <p style="margin:0;font-size:15px;line-height:1.7;color:#444444">{{ res.reason }}</p>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(17,17,17,.12);border:1px solid rgba(17,17,17,.12);border-radius:6px;overflow:hidden">
+            <div style="background:#FFFFFF;padding:14px;display:flex;flex-direction:column;gap:4px"><span style="font-size:12px;color:#666666">예상 가격</span><span style="font-size:17px;font-weight:600">{{ res.price }}</span></div>
+            <div style="background:#FFFFFF;padding:14px;display:flex;flex-direction:column;gap:4px"><span style="font-size:12px;color:#666666">대안</span><span style="font-size:17px;font-weight:600">{{ res.alt }}</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:13px;color:#666666">비슷한 고객의 회복 후 사진</span>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+              <div style="aspect-ratio:1;border-radius:4px;background:repeating-linear-gradient(135deg,#EDEDED 0 8px,#F6F6F6 8px 16px)"></div>
+              <div style="aspect-ratio:1;border-radius:4px;background:repeating-linear-gradient(135deg,#EDEDED 0 8px,#F6F6F6 8px 16px)"></div>
+              <div style="aspect-ratio:1;border-radius:4px;background:repeating-linear-gradient(135deg,#EDEDED 0 8px,#F6F6F6 8px 16px)"></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button onClick="{{ kakaoDiag }}" style="height:54px;border:none;border-radius:999px;background:#FFB3C8;color:#111111;font-size:16px;font-weight:600;cursor:pointer" style-hover="background:#FF9DB9">{{ res.cta }}</button>
+            <button onClick="{{ bookFromDiag }}" style="height:50px;border:1px solid rgba(17,17,17,.25);border-radius:999px;background:transparent;font-size:15px;cursor:pointer;color:#111111">이 기법으로 바로 예약</button>
+            <button onClick="{{ diagRestart }}" style="height:44px;border:none;background:transparent;color:#666666;font-size:14px;cursor:pointer">다시 진단하기</button>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ bookOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeBook }}" style="position:fixed;inset:0;z-index:60;background:rgba(17,17,17,.5);display:flex;align-items:center;justify-content:center;padding:12px">
+    <div onClick="{{ stop }}" style="width:100%;max-width:600px;max-height:calc(100vh - 24px);overflow:auto;background:#FFFFFF;border-radius:12px;animation:tbFade .25s ease;display:flex;flex-direction:column">
+      <div style="position:sticky;top:0;background:#FFFFFF;padding:20px 24px 16px;display:flex;flex-direction:column;gap:14px;z-index:1;border-bottom:1px solid rgba(17,17,17,.08)">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:700;letter-spacing:-.03em;font-size:20px">예약하기</span>
+          <button onClick="{{ closeBook }}" aria-label="닫기" style="width:44px;height:44px;margin-right:-12px;border:none;background:transparent;font-size:22px;cursor:pointer;color:#111111">×</button>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+          <sc-for list="{{ bookSteps }}" as="st" hint-placeholder-count="3">
+            <div style="display:flex;flex-direction:column;gap:8px"><div style="height:3px;border-radius:2px;background:{{ st.bar }}"></div><span style="font-size:12px;color:{{ st.color }}">{{ st.label }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+
+      <sc-if value="{{ bs1 }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:24px;display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:17px;font-weight:600;margin-bottom:6px">어떤 시술을 원하세요?</span>
+          <sc-for list="{{ techOpts }}" as="t" hint-placeholder-count="6">
+            <button onClick="{{ t.pick }}" style="min-height:64px;padding:14px 18px;border-radius:8px;border:1px solid {{ t.border }};background:{{ t.bg }};display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;text-align:left;color:#111111">
+              <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:600">{{ t.name }}</span><span style="font-size:13px;color:#666666">{{ t.sub }}</span></span>
+              <span style="font-size:14px;white-space:nowrap">{{ t.price }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ bs2 }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:24px;display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:17px;font-weight:600">날짜를 골라주세요</span>
+          <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin:0 -24px;padding-left:24px;padding-right:24px">
+            <sc-for list="{{ dates }}" as="d" hint-placeholder-count="10">
+              <button onClick="{{ d.pick }}" disabled="{{ d.off }}" style="flex:none;width:60px;height:76px;border-radius:10px;border:1px solid {{ d.border }};background:{{ d.bg }};color:{{ d.color }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer">
+                <span style="font-size:12px">{{ d.dow }}</span><span style="font-size:19px;font-weight:600">{{ d.day }}</span><span style="font-size:10px">{{ d.note }}</span>
+              </button>
+            </sc-for>
+          </div>
+          <span style="font-size:17px;font-weight:600;margin-top:8px">시간</span>
+          <sc-if value="{{ hasDate }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px">
+              <sc-for list="{{ times }}" as="tm" hint-placeholder-count="8">
+                <button onClick="{{ tm.pick }}" disabled="{{ tm.off }}" style="height:48px;border-radius:8px;border:1px solid {{ tm.border }};background:{{ tm.bg }};color:{{ tm.color }};font-size:15px;cursor:pointer;text-decoration:{{ tm.strike }}">{{ tm.t }}</button>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ noDate }}" hint-placeholder-val="{{ true }}">
+            <span style="font-size:14px;color:#666666">날짜를 먼저 선택하면 예약 가능한 시간만 보여드려요.</span>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ bs3 }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:24px;display:flex;flex-direction:column;gap:16px">
+          <div style="padding:14px 16px;background:#F5F5F5;border-radius:8px;font-size:14px;line-height:1.6">{{ bookSummary }}</div>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:14px">이름
+            <input value="{{ name }}" onChange="{{ setName }}" placeholder="홍길동" style="height:52px;padding:0 14px;border-radius:8px;border:1px solid rgba(17,17,17,.2);background:#FFF;font-size:16px;color:#111111"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:14px">연락처
+            <input value="{{ phone }}" onChange="{{ setPhone }}" inputMode="tel" placeholder="010-0000-0000" style="height:52px;padding:0 14px;border-radius:8px;border:1px solid rgba(17,17,17,.2);background:#FFF;font-size:16px;color:#111111"></label>
+          <button onClick="{{ fakePhoto }}" style="height:52px;border-radius:8px;border:1px dashed rgba(17,17,17,.3);background:transparent;font-size:14px;color:#444444;cursor:pointer">{{ photoLabel }}</button>
+          <button onClick="{{ toggleAdult }}" style="display:flex;align-items:center;gap:12px;min-height:44px;border:none;background:transparent;padding:0;font-size:14px;cursor:pointer;text-align:left;color:#111111">
+            <span style="flex:none;width:22px;height:22px;border-radius:5px;border:1.5px solid #111111;background:{{ adultBg }};color:#FFFFFF;font-size:13px;display:flex;align-items:center;justify-content:center">{{ adultMark }}</span>만 19세 이상입니다 (미성년자는 보호자 동의 필요)
+          </button>
+          <button onClick="{{ toggleAgree }}" style="display:flex;align-items:center;gap:12px;min-height:44px;border:none;background:transparent;padding:0;font-size:14px;cursor:pointer;text-align:left;color:#111111">
+            <span style="flex:none;width:22px;height:22px;border-radius:5px;border:1.5px solid #111111;background:{{ agreeBg }};color:#FFFFFF;font-size:13px;display:flex;align-items:center;justify-content:center">{{ agreeMark }}</span>개인정보 수집·이용 동의 (필수)
+          </button>
+          <span style="font-size:13px;color:#666666;line-height:1.6">{{ depositNote }}</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ bs4 }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:40px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px">
+          <div style="width:56px;height:56px;border-radius:50%;background:#111111;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:24px">✓</div>
+          <h3 style="margin:0;font-family:'Pretendard Variable',Pretendard,sans-serif;font-weight:700;letter-spacing:-.03em;font-size:26px">예약이 접수되었어요</h3>
+          <p style="margin:0;font-size:15px;line-height:1.7;color:#444444">{{ bookSummary }}<br>카카오 알림톡으로 확정 안내와 시술 전 주의사항(D-1)을 보내드릴게요.</p>
+          <button onClick="{{ closeBook }}" style="margin-top:12px;height:50px;padding:0 28px;border-radius:999px;border:1px solid rgba(17,17,17,.25);background:transparent;font-size:15px;cursor:pointer;color:#111111">확인</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showBookNav }}" hint-placeholder-val="{{ true }}">
+        <div style="position:sticky;bottom:0;margin-top:auto;padding:14px 24px 20px;background:#FFFFFF;border-top:1px solid rgba(17,17,17,.08);display:flex;gap:8px">
+          <sc-if value="{{ bookCanBack }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ bookBack }}" style="height:54px;padding:0 22px;border-radius:999px;border:1px solid rgba(17,17,17,.25);background:transparent;font-size:15px;cursor:pointer;color:#111111">이전</button>
+          </sc-if>
+          <button onClick="{{ bookNext }}" disabled="{{ nextOff }}" style="flex:1;height:54px;border:none;border-radius:999px;background:{{ nextBg }};color:{{ nextColor }};font-size:16px;font-weight:600;cursor:pointer">{{ nextLabel }}</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;top:104px;left:50%;transform:translateX(-50%);z-index:80;max-width:min(92vw,480px);padding:14px 18px;border-radius:10px;background:#111111;color:#FFFFFF;font-size:14px;line-height:1.6;box-shadow:0 10px 30px rgba(17,17,17,.3);animation:tbFade .2s ease">{{ toast }}</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;priceMode&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;전체 공개&quot;, &quot;시작가만&quot;], &quot;default&quot;: &quot;전체 공개&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;운영 결정&quot;}, &quot;deposit&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;예약금 없음&quot;, &quot;예약금 1만원&quot;, &quot;네이버 예약 결제&quot;], &quot;default&quot;: &quot;예약금 없음&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;운영 결정&quot;}}">
+const TECH = [
+  { id: 'embo', name: '자연눈썹', sub: '눈썹 반영구 · 결 표현', price: 130000, ev: null, retouch: '1회 서비스', period: '대표원장 직접 시술', extra: '최종 가격은 디자인 상담 후 확정' },
+  { id: 'combo', name: '콤보눈썹', sub: '눈썹 반영구 · 결 + 쉐이딩', price: 150000, ev: null, retouch: '1회 서비스', period: '대표원장 직접 시술', extra: '최종 가격은 디자인 상담 후 확정' },
+  { id: 'powder', name: '쉐도우눈썹', sub: '눈썹 반영구 · 쉐이딩', price: 150000, ev: null, retouch: '1회 서비스', period: '대표원장 직접 시술', extra: '최종 가격은 디자인 상담 후 확정' },
+  { id: 'eyeline', name: '점막아이라인', sub: '아이라인 반영구', price: 130000, ev: null, retouch: '1회 서비스', period: '대표원장 직접 시술', extra: '최종 가격은 상담 후 확정' },
+  { id: 'lip', name: '틴트입술', sub: '입술 반영구', price: 180000, ev: null, retouch: '1회 서비스', period: '대표원장 직접 시술', extra: '최종 가격은 상담 후 확정' },
+  { id: 'hair', name: '헤어라인', sub: '헤어라인 반영구', price: null, ev: null, retouch: '1회 서비스', period: '대표원장 직접 시술', extra: '면적에 따라 가격 변동 · 상담 후 안내' },
+  { id: 'mole', name: '미인점', sub: '점 반영구', price: 40000, ev: null, retouch: '1회 서비스', period: '대표원장 직접 시술', extra: '최종 가격은 상담 후 확정' },
+  { id: 'remove', name: '잔흔케어', sub: '기존 반영구 잔흔 정리', price: 50000, ev: null, retouch: '—', period: '대표원장 직접 시술', extra: '잔흔 상태에 따라 횟수 상담' },
+];
+const won = n => n == null ? '상담 후 안내' : n.toLocaleString('ko-KR') + '원';
+const man = n => n == null ? '상담 후 안내' : (n / 10000) + '만원';
+const QS = [
+  { key: 'q1', title: '지금 눈썹은 어떤 상태인가요?', opts: [
+    { id: 'sparse', label: '숱이 적거나 흐려요', desc: '매일 그리는 게 번거로워요', img: '숱 적은 눈썹' },
+    { id: 'asym', label: '좌우가 달라요', desc: '높이·길이가 비대칭이에요', img: '비대칭 눈썹' },
+    { id: 'tattoo', label: '기존 문신이 있어요', desc: '변색되거나 모양이 어색해요', img: '변색된 문신' } ] },
+  { key: 'q2', title: '어떤 느낌을 원하세요?', opts: [
+    { id: 'natural', label: '자연스럽게', desc: '한 올씩 결이 보이게', img: '결 눈썹' },
+    { id: 'defined', label: '또렷하게', desc: '메이크업한 듯 선명하게', img: '파우더 눈썹' },
+    { id: 'male', label: '남성 눈썹', desc: '티 나지 않게 정돈만', img: '남성 눈썹' } ] },
+  { key: 'q3', title: '피부 타입은 어떤가요?', opts: [
+    { id: 'oily', label: '지성', desc: 'T존에 유분이 많은 편', img: '지성 피부' },
+    { id: 'dry', label: '건성·중성', desc: '당김이 있거나 보통', img: '건성 피부' } ] },
+];
+const REASON = {
+  embo: '건성·중성 피부는 가는 결이 선명하게 유지돼, 결 표현 중심의 자연눈썹이 가장 자연스럽게 남아요.',
+  combo: '결만 있으면 퍼져 보일 수 있는 피부라, 결 위에 쉐이딩을 더한 콤보눈썹으로 형태를 오래 유지해요.',
+  powder: '유분이 많은 피부에서도 번짐이 적고, 원하는 또렷한 인상을 부드럽게 만들 수 있어요.',
+};
+const HOURS = [{ d: [1, 2, 3, 4, 5], day: '평일', o: 10, c: 20 }, { d: [6], day: '토요일', o: 10, c: 18 }, { d: [0], day: '일요일', o: null }];
+const DOW = ['일', '월', '화', '수', '목', '금', '토'];
+const TIMES = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1280, menuOpen: false, diagOpen: false, diagStep: 0, ans: {}, bookOpen: false, bookStep: 1, tech: null, dateIdx: null, time: null, name: '', phone: '', adult: false, agree: false, photo: false, toast: '', countT: 0, hov: -1, mhov: -1, pIdx: 0, pTab: 0, phov: -1, barsOn: false, slotOn: false, heroScene: 0, sy: 0, docH: 1, act: '', navHov: '', ctaHov: false, nowT: Date.now(), ba: [50, 50, 50], baStage: [2, 1, 2] };
+
+  componentDidMount() {
+    this._rvT = setInterval(() => { const el = document.querySelector('[data-rvcar]'); if (!el || (this._rvHold && Date.now() - this._rvHold < 5000)) return;
+      const c0 = el.children[0], c1 = el.children[1]; if (!c0 || !c1) return; const step = c1.offsetLeft - c0.offsetLeft;
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) el.scrollTo({ left: 0, behavior: 'smooth' }); else el.scrollBy({ left: step, behavior: 'smooth' }); }, 3200);
+    this.onHash = () => { const m = location.hash.match(/^#p=(\w+)/), p = m ? m[1] : ''; if (p !== (this.state.page || '')) { this.setState({ page: p, menuOpen: false }); window.scrollTo(0, 0); if (p) document.querySelectorAll('[data-reveal]').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; }); } };
+    this.onHash(); window.addEventListener('hashchange', this.onHash);
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this.onResize);
+    this.setPromise(0);
+    const sEl = document.getElementById('styles');
+    if (sEl && 'IntersectionObserver' in window) { this.sio = new IntersectionObserver(es => { if (es[0].isIntersecting) { sEl.querySelectorAll('[data-card]').forEach(n => n.animate([{ opacity: 0, transform: 'translateY(40px)' }, { opacity: 1, transform: 'none' }], { duration: 800, delay: 150 + (+n.dataset.card) * 140, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' })); this.sio.disconnect(); } }, { threshold: 0.15 }); this.sio.observe(sEl); }
+    const mEl = document.getElementById('more');
+    if (mEl && 'IntersectionObserver' in window) { this.mio = new IntersectionObserver(es => { if (es[0].isIntersecting) { mEl.querySelectorAll('[data-mcard]').forEach(n => n.animate([{ opacity: 0, transform: 'translateY(50px) scale(.97)' }, { opacity: 1, transform: 'none' }], { duration: 850, delay: 120 + (+n.dataset.mcard) * 120, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' })); this.mio.disconnect(); } }, { threshold: 0.15 }); this.mio.observe(mEl); }
+    const gEl = document.getElementById('gallery');
+    if (gEl && 'IntersectionObserver' in window) { this.gio = new IntersectionObserver(es => { if (es[0].isIntersecting) { this.gio.disconnect();
+      gEl.querySelectorAll('[data-ba]').forEach((n, k) => n.animate([{ opacity: 0, transform: 'translateY(40px)' }, { opacity: 1, transform: 'none' }], { duration: 800, delay: 100 + k * 130, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' }));
+      const t0 = performance.now(), D = 2200, key = [50, 22, 78, 50];
+      const tick = now => { if (this.drag != null) return; const p = Math.min(1, (now - t0 - 600) / D); if (p < 0) { this.sraf = requestAnimationFrame(tick); return; }
+        const seg = Math.min(2, Math.floor(p * 3)), lp = p * 3 - seg, ease = .5 - Math.cos(lp * Math.PI) / 2, v = key[seg] + (key[seg + 1] - key[seg]) * ease;
+        this.setState({ ba: [v, v, v] }); if (p < 1) this.sraf = requestAnimationFrame(tick); };
+      this.sraf = requestAnimationFrame(tick); } }, { threshold: 0.3 }); this.gio.observe(gEl); }
+    const pEl = document.getElementById('prices');
+    if (pEl && 'IntersectionObserver' in window) { this.pio = new IntersectionObserver(es => { if (es[0].isIntersecting) { this.pio.disconnect(); pEl.querySelectorAll('[data-pcard]').forEach((n, k) => n.animate([{ opacity: 0, transform: 'translateY(40px)' }, { opacity: 1, transform: 'none' }], { duration: 800, delay: 120 + k * 120, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' })); } }, { threshold: 0.15 }); this.pio.observe(pEl); }
+    const rEl = document.getElementById('reviews');
+    if (rEl && 'IntersectionObserver' in window) { this.rio = new IntersectionObserver(es => { if (es[0].isIntersecting) { this.rio.disconnect(); this.setState({ barsOn: true }); } }, { threshold: 0.25 }); this.rio.observe(rEl); } else this.setState({ barsOn: true });
+    const SEC = [['styles', 't'], ['more', 't'], ['gallery', 'g'], ['prices', 'p'], ['reviews', 'r'], ['location', 'l']];
+    this.onScroll = () => { const y = window.scrollY; let act = ''; SEC.forEach(([id, k]) => { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top <= 140) act = k; });
+      if (y < 10) act = ''; this.setState({ sy: y, act, docH: Math.max(1, document.documentElement.scrollHeight - window.innerHeight) }); };
+    window.addEventListener('scroll', this.onScroll, { passive: true }); this.onScroll();
+    this.clock = setInterval(() => this.setState({ nowT: Date.now() }), 1000);
+    const eEl = document.getElementById('event');
+    if (eEl && 'IntersectionObserver' in window) { this.eio = new IntersectionObserver(es => { if (es[0].isIntersecting) { this.eio.disconnect(); this.setState({ slotOn: true }); } }, { threshold: 0.3 }); this.eio.observe(eEl); } else this.setState({ slotOn: true });
+    const cEl = document.querySelector('[data-count]');
+    if (cEl && 'IntersectionObserver' in window) { this.cio = new IntersectionObserver(es => { if (es[0].isIntersecting) { this.runCount(); this.cio.disconnect(); } }, { threshold: 0.3 }); this.cio.observe(cEl); } else this.setState({ countT: 1 });
+    if ('IntersectionObserver' in window) {
+      this.io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = 'none'; this.io.unobserve(e.target); } }), { threshold: 0.08 });
+      document.querySelectorAll('[data-reveal]').forEach(el => {
+        if (el.getBoundingClientRect().top > window.innerHeight) {
+          el.style.opacity = 0; el.style.transform = 'translateY(16px)'; el.style.transition = 'opacity .8s ease, transform .8s ease';
+          this.io.observe(el);
+        }
+      });
+    }
+  }
+  componentDidUpdate() { if (this._lastTab === undefined) this._lastTab = 0; if (this._lastTab !== this.state.pTab && (this._lastTab = this.state.pTab, true)) document.querySelectorAll('[data-pcard]').forEach((n, k) => n.animate([{ opacity: 0, transform: 'translateY(24px)' }, { opacity: 1, transform: 'none' }], { duration: 600, delay: k * 80, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' })); }
+  setPromise(i) { clearTimeout(this.pt); this.setState({ pIdx: i }); this.pt = setTimeout(() => this.setPromise((i + 1) % 3), 5000); }
+  runCount() {
+    if (this.counting) return; this.counting = true;
+    const el = document.querySelector('[data-count]');
+    el && el.querySelectorAll('[data-stagger]').forEach(n => { const k = +n.dataset.stagger; n.animate([{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'none' }], { duration: 700, delay: k * 120, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' }); });
+    const t0 = performance.now(), D = 1600;
+    const tick = now => { const p = Math.min(1, (now - t0) / D); this.setState({ countT: 1 - Math.pow(1 - p, 3) }); if (p < 1) this.raf = requestAnimationFrame(tick); };
+    this.raf = requestAnimationFrame(tick);
+  }
+  componentWillUnmount() { clearInterval(this._rvT); window.removeEventListener('scroll', this.onScroll); clearInterval(this.clock); clearTimeout(this.pt); cancelAnimationFrame(this.raf); this.cio && this.cio.disconnect(); window.removeEventListener('resize', this.onResize); this.io && this.io.disconnect(); clearTimeout(this.tt); }
+
+  carGo(k, i) { const el = document.querySelector('[data-car="' + k + '"]'); if (!el) return; const n = el.children.length; i = Math.max(0, Math.min(n - 1, i));
+    const c = el.children[i], left = c.offsetLeft - el.children[0].offsetLeft;
+    this._carLock = Date.now(); el.style.scrollSnapType = 'none'; el.scrollTo({ left, behavior: 'smooth' });
+    clearTimeout(this._carT); this._carT = setTimeout(() => { el.style.scrollSnapType = 'x mandatory'; this._carLock = 0; }, 700);
+    this.setState({ ['car_' + k]: i }); }
+  carVals(k, names) { const cur = this.state['car_' + k] || 0;
+    return { [k + 'Tabs']: names.map((name, i) => { const on = cur === i; return { name, go: () => this.carGo(k, i), bg: on ? '#111111' : '#FFFFFF', color: on ? '#FFFFFF' : '#111111', border: on ? '#111111' : 'rgba(17,17,17,.15)' }; }),
+      [k + 'Prev']: () => this.carGo(k, cur - 1), [k + 'Next']: () => this.carGo(k, cur + 1),
+      [k + 'Scroll']: e => { if (this._carLock && Date.now() - this._carLock < 700) return; const el = e.currentTarget, c0 = el.children[0], c1 = el.children[1]; if (!c0 || !c1) return; const step = c1.offsetLeft - c0.offsetLeft; const i = Math.round(el.scrollLeft / step); if (i !== cur && Math.abs(el.scrollLeft - i * step) < step * .3) this.setState({ ['car_' + k]: Math.min(names.length - 1, i) }); } }; }
+  showToast(msg) { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: '' }), 3400); }
+  openBook() { this.setState({ diagOpen: false, menuOpen: false }); window.open('https://m.place.naver.com/place/2088171690/booking', '_blank', 'noopener'); }
+
+  result() {
+    const { q1, q2, q3 } = this.state.ans;
+    let rec, alt;
+    if (q2 === 'natural' || q2 === 'male') { rec = q3 === 'dry' ? 'embo' : 'combo'; alt = q3 === 'dry' ? 'combo' : 'powder'; }
+    else { rec = q3 === 'oily' ? 'powder' : 'combo'; alt = q3 === 'oily' ? 'combo' : 'powder'; }
+    const cover = q1 === 'tattoo';
+    const R = TECH.find(t => t.id === rec), A = TECH.find(t => t.id === alt);
+    const lbl = (i, v) => (QS[i].opts.find(o => o.id === v) || {}).label;
+    const summary = `${lbl(0, q1)} · ${lbl(1, q2)} · ${lbl(2, q3)}`;
+    return { rec, summary, kicker: cover ? '추천 기법 · 기존 문신 커버 여부 먼저 확인' : '추천 기법', name: R.name, reason: REASON[rec] + (cover ? ' 기존 문신의 색과 깊이에 따라 커버 가능 여부가 달라 사진으로 먼저 확인해 드려요.' : ''),
+      price: R.ev ? `${won(R.ev)} (이벤트가)` : man(R.price), alt: A.name,
+      cta: cover ? '사진 보내고 커버 가능 여부 확인하기' : '이 결과로 카톡 상담하기',
+      msg: `[탠뷰티 눈썹 진단] ${summary} → 추천: ${R.name} / 대안: ${A.name}` };
+  }
+
+  renderVals() {
+    const s = this.state, isMobile = s.w < 1040;
+    const priceMode = this.props.priceMode ?? '전체 공개';
+    const deposit = this.props.deposit ?? '예약금 없음';
+    const now = new Date(), dow = now.getDay(), h = now.getHours() + now.getMinutes() / 60;
+    const today = HOURS.find(x => x.d.includes(dow));
+    const isOpen = today.o != null && h >= today.o && h < today.c;
+    const openLabel = isOpen ? '지금 영업 중' : '영업 준비 중';
+    const openSub = isOpen ? `오늘 ${today.c}:00까지` : (today.o != null && h < today.o ? `오늘 ${today.o}:00 오픈` : '카톡 상담은 24시간 접수');
+
+    const stageNames = ['시술 직후', '7일 후', '리터치 후'];
+    const baMeta = [
+      { tab: '자연눈썹', title: '자연눈썹 · 건성 · 여성', meta: '촬영 2026.08 · 보정 없음' },
+      { tab: '콤보눈썹', title: '콤보눈썹 · 지성 · 남성', meta: '촬영 2026.09 · 보정 없음' },
+      { tab: '쉐도우눈썹', title: '쉐도우눈썹 · 커버 · 여성', meta: '촬영 2026.10 · 보정 없음' },
+    ];
+    const baItems = baMeta.map((m, i) => {
+      const move = e => { const r = e.currentTarget.getBoundingClientRect(); const p = Math.min(100, Math.max(0, (e.clientX - r.left) / r.width * 100)); this.setState(st => { const ba = st.ba.slice(); ba[i] = p; return { ba }; }); };
+      return { ...m, pos: s.ba[i] + '%', stageLabel: stageNames[s.baStage[i]],
+        down: e => { e.currentTarget.setPointerCapture && e.currentTarget.setPointerCapture(e.pointerId); this.drag = i; move(e); },
+        move: e => { if (this.drag === i) move(e); }, up: () => { this.drag = null; },
+        stages: stageNames.map((l, j) => { const on = s.baStage[i] === j; return { label: l, bg: on ? '#FFFFFF' : 'transparent', color: on ? '#111111' : '#888888', shadow: on ? '0 2px 8px rgba(17,17,17,.1)' : 'none', pick: () => this.setState(st => { const b = st.baStage.slice(); b[i] = j; return { baStage: b }; }) }; }) };
+    });
+
+    const baSel = s.baSel || 0, baShown = [baItems[baSel]];
+    const baTabs = baMeta.map((m, i) => { const on = baSel === i; return { name: m.tab, go: () => this.setState({ baSel: i }), bg: on ? '#111111' : '#FFFFFF', color: on ? '#FFFFFF' : '#111111', border: on ? '#111111' : 'rgba(17,17,17,.15)' }; });
+    const priceRows = TECH.map(t => ({ name: t.name, sub: t.sub, price: won(t.price), ev: t.ev ? won(t.ev) : '상담 후 안내', strike: t.ev ? 'line-through' : 'none', retouch: t.retouch, period: t.period, extra: t.extra, start: man(t.ev || t.price) }));
+    const dist = [{ star: 5, n: 102 }, { star: 4, n: 0 }, { star: 3, n: 0 }, { star: 2, n: 0 }, { star: 1, n: 0 }].map(d => ({ ...d, pct: Math.round(d.n / 102 * 100) + '%', w: s.barsOn ? (d.n / 102 * 100).toFixed(1) + '%' : '0%' }));
+    const reviews = [{"tag":"잔흔케어","text":"오래전에 한 반영구가 주황색 잔흔이 남아서 신경 쓰였는데… 신경 쓰이던 부분이 정말 자연스럽고 깔끔하게 정돈되어 한결 차분해져서 너무 마음에 들어요.","who":"오즈*","date":"2026.10"},{"tag":"자연눈썹 · 첫 시술","text":"수시로 소독도 하시고 일회용 제품도 뜯기전에 확인 시켜주셔서 더 믿음이 갔네요. 자연스러운걸 좋아한다고 말씀드리니 정말 당일부터 자연스럽고 만족스러워요.","who":"윤*근","date":"2026.09"},{"tag":"콤보눈썹","text":"결을 살리는 엠보랑 음영을 넣어주는 수지를 같이 들어가서 그런지 확실히 쌩얼일 때도 너무 자연스럽고… 얼굴형이랑 눈썹 골격에 맞춰서 진짜 꼼꼼하게 대칭 체크해주셨어요.","who":"ing*","date":"2026.08"},{"tag":"틴트입술","text":"제 입술에 맞는 컬러를 추천해 주셔서 결과가 정말 자연스럽습니다. 무엇보다 쌩얼에도 혈색이 살아 보여서 너무 만족합니다.","who":"SHW*","date":"2026.07"},{"tag":"남성 눈썹 · 50대","text":"50대 중반 남자입니다… 넘 자연스럽게 연출해주셔서 기분 좋게 리뷰 남겨요. 제 나이때 눈썹 생각하신분께 적극 추천합니다.","who":"잘공*","date":"2026.06"},{"tag":"디자인 상담","text":"시술 전 스케치할때부터 거울을 보며 몇번이고 함께 의논하며 수정할 부분은 없는지 저보다 더 꼼꼼하게 체크해주셨답니다.","who":"진호*","date":"2026.08"},{"tag":"잔흔케어","text":"무리하게 추가 시술을 강요하지 않으시고, 딱 제 상태에 맞춰 필요한 만큼만 솔직하게 진행해 주셔서 더 믿음이 갔습니다.","who":"째뿡*","date":"2026.10"},{"tag":"잔흔케어","text":"특히 푸른 잔흔은 컨실러로도 잘 안가려져서 화장할 때마다 가리는게 번거롭더라구요. 오늘 제거받고 나니까 속이 시원하고 진작 받을걸 싶었어요.","who":"아리*","date":"2026.08"},{"tag":"자연눈썹","text":"자연눈썹으로 진행했는데 당일에도 짱구눈썹이 아니라 너무 자연스러워서 좋아요.","who":"ysy*","date":"2026.10"},{"tag":"리터치","text":"리터치까지 받고 나니까 눈썹 모양도 훨씬 자연스럽고 예쁘게 돼서 너무 만족스러워요!!","who":"ddl*","date":"2026.08"},{"tag":"잔흔케어","text":"다른곳과는 다르게 여러회차를 한꺼번에 바로 결제 하지 않아도 되어서 부담도 업꼬 잘 관리 하다가 날짜 맞춰서 또 방문 하께요.","who":"새히*","date":"2026.08"},{"tag":"남성 눈썹","text":"여자친구가 극찬한곳이라 믿고 왔는데- 너무 만족스럽네요. 자연스럽게 되어 더 좋습니다!","who":"발렌*","date":"2026.11"}];
+    const reviewsA = [...reviews.slice(0, 6), ...reviews.slice(0, 6)], reviewsB = [...reviews.slice(6), ...reviews.slice(6)];
+    const hours = HOURS.map(x => ({ day: x.day, time: x.o == null ? '휴무' : `${x.o}:00 – ${x.c}:00`, weight: x.d.includes(dow) ? 600 : 400 }));
+
+    const qi = Math.min(s.diagStep, 2), Q = QS[qi];
+    const q = { title: Q.title, opts: Q.opts.map(o => ({ ...o, border: s.ans[Q.key] === o.id ? '#111111' : 'rgba(17,17,17,.12)',
+      pick: () => this.setState(st => ({ ans: { ...st.ans, [Q.key]: o.id }, diagStep: st.diagStep + 1 })) })) };
+    const diagDone = s.diagStep >= 3;
+    const res = diagDone ? this.result() : {};
+
+    const days = [];
+    for (let i = 1; i <= 14; i++) { const d = new Date(now); d.setDate(now.getDate() + i); days.push(d); }
+    const dates = days.map((d, i) => { const closed = d.getDay() === 0, full = !closed && i % 5 === 2, off = closed || full, on = s.dateIdx === i;
+      return { dow: DOW[d.getDay()], day: d.getDate(), note: closed ? '휴무' : full ? '마감' : '', off,
+        bg: on ? '#111111' : off ? '#F2F2F2' : '#FFF', color: on ? '#FFFFFF' : off ? '#AAAAAA' : '#111111', border: on ? '#111111' : 'rgba(17,17,17,.12)',
+        pick: () => this.setState({ dateIdx: i, time: null }) }; });
+    const selDay = s.dateIdx != null ? days[s.dateIdx] : null;
+    const times = TIMES.filter(t => !(selDay && selDay.getDay() === 6 && parseInt(t) > 16)).map((t, j) => {
+      const off = s.dateIdx != null && (j + s.dateIdx) % 4 === 1, on = s.time === t;
+      return { t, off, strike: off ? 'line-through' : 'none', bg: on ? '#111111' : off ? '#F2F2F2' : '#FFF', color: on ? '#FFFFFF' : off ? '#AAAAAA' : '#111111', border: on ? '#111111' : 'rgba(17,17,17,.12)', pick: () => this.setState({ time: t }) }; });
+
+    const techOpts = [...TECH.map(t => ({ id: t.id, name: t.name, sub: t.sub, price: priceMode === '시작가만' ? man(t.ev || t.price) : (t.ev ? won(t.ev) : man(t.price)) })),
+      { id: 'unsure', name: '모르겠어요', sub: '상담 후 결정할게요', price: '' }].map(t => ({ ...t, bg: s.tech === t.id ? '#F5F5F5' : '#FFF', border: s.tech === t.id ? '#111111' : 'rgba(17,17,17,.12)', pick: () => this.setState({ tech: t.id, bookStep: 2 }) }));
+    const techName = s.tech === 'unsure' ? '상담 후 결정' : (TECH.find(t => t.id === s.tech) || {}).name;
+    const bookSummary = selDay ? `${techName} · ${selDay.getMonth() + 1}월 ${selDay.getDate()}일(${DOW[selDay.getDay()]}) ${s.time || ''}` : techName || '';
+    const valid = s.bookStep === 1 ? !!s.tech : s.bookStep === 2 ? !!(s.dateIdx != null && s.time) : (s.name.trim() && s.phone.replace(/\D/g, '').length >= 10 && s.adult && s.agree);
+    const stepLabels = ['시술 선택', '날짜·시간', '정보 입력'];
+    const depositNote = deposit === '예약금 없음' ? '예약금 없이 접수됩니다. 일정 변경은 하루 전까지 카톡으로 알려주세요.' : deposit === '예약금 1만원' ? '노쇼 방지를 위해 예약금 1만원을 받고 있으며, 시술 금액에서 차감됩니다. 하루 전까지 취소 시 전액 환불.' : '네이버 예약으로 연결되어 예약금 결제 후 확정됩니다.';
+
+    return {
+      isMobile, isDesktop: !isMobile, menuOpen: s.menuOpen && isMobile,
+      toggleMenu: () => this.setState(st => ({ menuOpen: !st.menuOpen })), closeMenu: () => this.setState({ menuOpen: false }),
+      openLabel, openSub, openDot: isOpen ? '#4E8A5B' : '#AAAAAA',
+      baItems, baShown, baTabs, priceRows, dist, reviews, reviewsA, reviewsB, hours,
+      showFullPrice: priceMode !== '시작가만', showStartPrice: priceMode === '시작가만',
+      ...this.carVals('st', ['자연눈썹', '콤보눈썹', '쉐도우눈썹']), ...this.carVals('mo', ['점막아이라인', '틴트입술', '헤어라인', '미인점']),
+      isRvMob: (s.w || 1200) < 700, isRvDesk: (s.w || 1200) >= 700, rvTouch: () => { this._rvHold = Date.now(); },
+      rvBoxCols: (s.w || 1200) < 700 ? 'minmax(0,1fr)' : 'auto minmax(0,1fr)', rvChipFs: (s.w || 1200) < 700 ? '12px' : '14px',
+      mc: (() => { const m = (s.w || 1200) < 700; return { cardBg: m ? '#FFFFFF' : '#1A1A1A', border: m ? '1px solid rgba(17,17,17,.1)' : 'none', gradOp: m ? 0 : 1, pos: m ? 'static' : 'absolute', pad: m ? '28px 28px 30px' : '28px', gap: m ? '14px' : '10px',
+        flex: m ? '1' : 'none', basis: m ? 'min(82%,400px)' : 'min(70%,320px)', ar: '4/5', nameSize: m ? '28px' : 'clamp(26px,2.2vw,32px)', descSize: m ? '16px' : '15px',
+        pt: m ? '18px' : '0px', bt: m ? '1px solid rgba(17,17,17,.08)' : 'none', priceDir: m ? 'row' : 'column', priceAlign: m ? 'center' : 'flex-start',
+        btnH: m ? '52px' : '44px', btnW: m ? '52px' : 'auto', btnPad: m ? '0px' : '0 18px', btnBg: m ? 'transparent' : '#FFB3C8', btnBorder: m ? '1px solid rgba(17,17,17,.2)' : 'none', btnTxt: m ? '→' : '자세히 보기 →', ink: m ? '#111111' : '#FFFFFF', desc: m ? '#555555' : '#DDDDDD', vat: m ? '#666666' : '#BBBBBB', mt: m ? 'auto' : '10px' }; })(),
+      pickEmbo: () => (location.href = '/treatment#t=embo'), pickCombo: () => (location.href = '/treatment#t=combo'), pickPowder: () => (location.href = '/treatment#t=powder'), pickEyeline: () => (location.href = '/treatment#t=eyeline'), pickLip: () => (location.href = '/treatment#t=lip'), pickHair: () => (location.href = '/treatment#t=hair'), pickMole: () => (location.href = '/treatment#t=mole'),
+      navOpen: !!s.navOpen, navIn: () => this.setState({ navOpen: true }), navOut: () => this.setState({ navOpen: false }),
+      openBookEmpty: () => this.openBook(null),
+      kakao: () => window.open('https://pf.kakao.com/_BxoQan', '_blank', 'noopener'),
+      stop: e => e.stopPropagation(),
+      openDiag: () => this.setState({ diagOpen: true, diagStep: 0, ans: {}, menuOpen: false }),
+      closeDiag: () => this.setState({ diagOpen: false }),
+      diagCount: diagDone ? '결과' : `${s.diagStep + 1} / 3`, diagPct: (Math.min(s.diagStep, 3) / 3 * 100) + '%',
+      diagAsking: !diagDone, diagDone, q, diagCanBack: s.diagStep > 0 && !diagDone,
+      diagBack: () => this.setState(st => ({ diagStep: st.diagStep - 1 })),
+      diagRestart: () => this.setState({ diagStep: 0, ans: {} }),
+      res, kakaoDiag: () => window.open('https://pf.kakao.com/_BxoQan', '_blank', 'noopener'),
+      bookFromDiag: () => this.openBook(res.rec),
+      bookOpen: s.bookOpen, closeBook: () => this.setState({ bookOpen: false, bookStep: s.bookStep === 4 ? 1 : s.bookStep }),
+      bookSteps: stepLabels.map((l, i) => ({ label: l, bar: i < s.bookStep ? '#111111' : '#F0F0F0', color: i + 1 === s.bookStep ? '#111111' : '#666666' })),
+      bs1: s.bookStep === 1, bs2: s.bookStep === 2, bs3: s.bookStep === 3, bs4: s.bookStep === 4,
+      techOpts, dates, times, hasDate: s.dateIdx != null, noDate: s.dateIdx == null, bookSummary,
+      name: s.name, phone: s.phone, setName: e => this.setState({ name: e.target.value }), setPhone: e => this.setState({ phone: e.target.value }),
+      photoLabel: s.photo ? '현재 눈썹 사진 1장 첨부됨 · 변경' : '+ 현재 눈썹 사진 (선택)', fakePhoto: () => this.setState(st => ({ photo: !st.photo })),
+      adultBg: s.adult ? '#111111' : 'transparent', adultMark: s.adult ? '✓' : '', toggleAdult: () => this.setState(st => ({ adult: !st.adult })),
+      agreeBg: s.agree ? '#111111' : 'transparent', agreeMark: s.agree ? '✓' : '', toggleAgree: () => this.setState(st => ({ agree: !st.agree })),
+      depositNote, showBookNav: s.bookStep < 4, bookCanBack: s.bookStep > 1,
+      bookBack: () => this.setState(st => ({ bookStep: st.bookStep - 1 })),
+      bookNext: () => valid && this.setState(st => ({ bookStep: st.bookStep + 1 })),
+      nextOff: !valid, nextBg: valid ? '#FFB3C8' : '#E5E5E5', nextLabel: s.bookStep === 3 ? '예약 신청하기' : '다음',
+      toast: s.toast,
+      heroTime: e => { const t = e.currentTarget.currentTime, sc = t < 4.1 ? 0 : t < 7.4 ? 1 : t < 11.6 ? 2 : 3; if (sc !== this.state.heroScene) this.setState({ heroScene: sc }); },
+      heroCaps: ['디자인 상담부터', '1인 1멸균 니들 사용 위생까지', '리터치 관리까지', '눈썹 하나에 진심인 곳'].map((text, i) => { const on = s.heroScene === i, last = i === 3;
+        return { text, last, num: '0' + (i + 1), op: on ? 1 : 0, y: on ? '0px' : '18px', weight: last ? 800 : 600, size: last ? 'clamp(40px,6vw,88px)' : 'clamp(30px,4.2vw,60px)',
+          barW: on ? '36px' : '14px', barBg: on ? '#FFB3C8' : 'rgba(255,255,255,.5)' }; }),
+      gMt: s.page ? '0px' : 'clamp(72px,9vw,128px)',
+      pv: Object.fromEntries(['home', 'gallery', 'prices', 'reviews', 'location'].map(k => [k, k === 'home' ? (s.page ? 'none' : 'block') : (!s.page || s.page === k ? 'block' : 'none')])),
+      hdr: { ink: (s.sy > 10 || !!s.page) || s.menuOpen ? '#111111' : '#FFFFFF', sub: (s.sy > 10 || !!s.page) || s.menuOpen ? '#666666' : 'rgba(255,255,255,.8)', blur: (s.sy > 10 || !!s.page) ? 'blur(14px)' : 'none', bg: (s.sy > 10 || !!s.page) || s.menuOpen ? 'rgba(255,255,255,.94)' : 'transparent', shadow: (s.sy > 10 || !!s.page) ? '0 6px 24px rgba(17,17,17,.06)' : 'none', h: (s.sy > 10 || !!s.page) ? '72px' : '88px', progress: Math.min(100, s.sy / s.docH * 100) + '%' },
+      nv: Object.fromEntries(['t', 'g', 'p', 'r', 'l'].map(k => { const on = s.page ? ({ g: 'gallery', p: 'prices', r: 'reviews', l: 'location' })[k] === s.page : s.act === k, hv = s.navHov === k; return [k, { color: on || hv ? '#FFB3C8' : ((s.sy > 10 || !!s.page) ? '#111111' : '#FFFFFF'), line: on || hv ? '100%' : '0%',
+        enter: () => this.setState({ navHov: k, ...(k === 't' ? { navOpen: true } : {}) }), leave: () => this.setState({ navHov: '' }) }]; })),
+      ctaIn: () => this.setState({ ctaHov: true }), ctaOut: () => this.setState({ ctaHov: false }),
+      cta: s.ctaHov ? { bg: '#111111', color: '#FFFFFF', dotBg: '#FFB3C8', dotColor: '#111111', x: '4px', shadow: '0 10px 24px rgba(17,17,17,.2)' } : { bg: '#FFB3C8', color: '#111111', dotBg: '#111111', dotColor: '#FFFFFF', x: '0px', shadow: '0 6px 18px rgba(255,179,200,.45)' },
+      cd: (() => { const n = new Date(s.nowT), end = new Date(n.getFullYear(), n.getMonth() + 1, 1); let r = Math.max(0, Math.floor((end - n) / 1000)); const p = v => String(v).padStart(2, '0');
+        return { month: n.getMonth() + 1, d: p(Math.floor(r / 86400)), h: p(Math.floor(r % 86400 / 3600)), m: p(Math.floor(r % 3600 / 60)), s: p(r % 60) }; })(),
+      slotW: s.slotOn ? '70%' : '0%',
+      tabLeft: s.pTab === 0 ? '5px' : '50%', tabBrowColor: s.pTab === 0 ? '#FFFFFF' : '#666666', tabEtcColor: s.pTab === 1 ? '#FFFFFF' : '#666666',
+      tabBrow: () => this.setState({ pTab: 0, phov: -1 }), tabEtc: () => this.setState({ pTab: 1, phov: -1 }),
+      priceCards: TECH.filter(t => (s.pTab === 0) === ['embo', 'combo', 'powder'].includes(t.id)).map((t, i) => { const on = s.phov === i, full = priceMode !== '시작가만', hasEv = !!t.ev;
+        return { name: t.name, sub: t.sub, price: won(t.price), retouch: t.retouch, period: t.period, extra: t.extra,
+          hasDc: full && hasEv, dc: hasEv ? Math.round((1 - t.ev / t.price) * 100) : 0, showStrike: full && hasEv,
+          main: full ? won(t.ev || t.price) : man(t.ev || t.price), mainNote: t.price == null ? '' : 'VAT 별도',
+          bg: on ? '#FFF1F5' : 'transparent', border: on ? '#FFB3C8' : 'rgba(17,17,17,.1)', lift: on ? 'translateY(-8px)' : 'none', shadow: on ? '0 24px 50px rgba(255,179,200,.15)' : 'none',
+          btnBg: on ? '#FFB3C8' : '#111111', btnColor: on ? '#111111' : '#FFFFFF',
+          enter: () => this.setState({ phov: i }), leave: () => this.setState({ phov: -1 }), book: () => this.openBook(t.id),
+          href: '/treatment#t=' + t.id, img: '__TB_BASE__/gen/' + ({ embo: 'brow-natural', combo: 'brow-combo', powder: 'brow-shadow', eyeline: 'eyeline', lip: 'lip', hair: 'hairline', mole: 'beautymark', remove: 'p-studio' })[t.id] + '.jpg',
+          zoom: on ? 1.06 : 1, tag: t.id === 'remove' ? '회차별 결제' : '리터치 1회 포함', tagBg: t.id === 'remove' ? '#EEEEEE' : '#FFB3C8', arrowBg: on ? '#111111' : 'transparent', arrowInk: on ? '#FFFFFF' : '#111111', arrowBorder: on ? '#111111' : 'rgba(17,17,17,.2)' }; }),
+      promises: [
+        { title: '대표원장이 직접 1:1로 디자인합니다', desc: 'IBAC 국제바디아트콘테스트 반영구 심사장 출신 대표원장이 상담부터 디자인, 시술까지 1:1 맞춤으로 진행합니다.', photo: 'PHOTO · 대표원장 1:1 디자인 상담', img: '__TB_BASE__/gen/p-sketch.jpg' },
+        { title: '7년차 메이크업 아티스트의 눈으로 봅니다', desc: '메이크업으로 쌓은 얼굴 비율 감각으로, 화장 없이도 어울리는 결과 형태를 찾아드려요.', photo: 'PHOTO · 디자인 드로잉 과정', img: '__TB_BASE__/gen/p-hands.jpg' },
+        { title: '리터치 1회 서비스', desc: '시술 후 자리 잡은 상태를 보고 한 번 더 다듬어 드립니다. 리터치는 서비스로 제공돼요.', photo: 'PHOTO · 리터치 전후 비교', img: '__TB_BASE__/gen/p-studio.jpg' },
+      ].map((p, i) => { const on = s.pIdx === i; return { ...p, num: '0' + (i + 1), active: on, numColor: on ? '#FFB3C8' : 'rgba(255,255,255,.22)', titleColor: on ? '#FFFFFF' : '#8A8A8A', op: on ? 1 : 0, scale: on ? 1 : 1.08, pick: () => this.setPromise(i), dir: i % 2 ? 'row-reverse' : 'row' }; }),
+      isPromiseMob: (s.w || 1200) < 700, isPromiseDesk: (s.w || 1200) >= 700,
+      pNum: '0' + (s.pIdx + 1),
+      progressBar: React.createElement('span', { key: 'pb' + s.pIdx, style: { position: 'absolute', inset: 0, background: '#FFB3C8', transformOrigin: 'left', animation: 'tbProg 5s linear forwards' } }),
+      ...Object.fromEntries([0, 1, 2, 3].map(i => { const on = s.mhov === i; return ['hm' + i, { enter: () => this.setState({ mhov: i }), leave: () => this.setState({ mhov: -1 }),
+        zoom: on ? 1.1 : 1, numColor: on ? '#FFB3C8' : (s.w || 1200) < 700 ? 'rgba(255,255,255,.85)' : 'rgba(255,255,255,.18)', shift: on && (s.w || 1200) >= 700 ? '-8px' : '0px', btnOp: on || (s.w || 1200) < 700 ? 1 : 0, btnX: on || (s.w || 1200) < 700 ? '0px' : '-12px' }]; })),
+      ...Object.fromEntries([0, 1, 2].map(i => { const on = s.hov === i; return ['hv' + i, { enter: () => this.setState({ hov: i }), leave: () => this.setState({ hov: -1 }),
+        lift: on ? 'translateY(-10px)' : 'none', shadow: on ? '0 28px 60px rgba(255,179,200,.18)' : '0 2px 10px rgba(17,17,17,.04)', zoom: on ? 1.08 : 1,
+        arrowBg: on ? '#FFB3C8' : 'transparent', arrowBorder: on ? '#FFB3C8' : 'rgba(17,17,17,.2)', rot: on ? '-45deg' : '0deg', lineW: on ? '100%' : '0%' }]; })),
+      c0: Math.round(11 * s.countT), c2: (5 * s.countT).toFixed(1), lineW: (s.countT * 100) + '%',
+    };
+  }
+}
+</script>

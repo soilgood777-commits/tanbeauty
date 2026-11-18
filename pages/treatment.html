@@ -1,0 +1,344 @@
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{margin:0;background:#FFFFFF;color:#111111;font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;-webkit-font-smoothing:antialiased;word-break:keep-all;letter-spacing:-.02em}
+*{box-sizing:border-box}
+@media (max-width:600px){:root{--mz:.8}#dc-root{zoom:var(--mz)}}
+a{color:#111111;text-decoration:none}
+a:hover{color:#FFB3C8}
+button{font-family:inherit}
+@keyframes tbFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<div style="min-height:100vh">
+
+<header style="position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(17,17,17,.06)">
+  <div style="padding:0 clamp(20px,4vw,48px);height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+    <a href="/" aria-label="탠뷰티 홈" style="display:flex;align-items:baseline;gap:12px;padding-top:6px">
+      <span style="position:relative;display:inline-flex;align-items:baseline;font-weight:800;font-size:28px;letter-spacing:-.04em;line-height:1;color:#111111"><span style="position:absolute;left:.1em;top:-.2em;width:1.1em;height:.2em;border-top:.075em solid #FFB3C8;border-radius:70% 30% 0 0/100% 100% 0 0"></span>탠뷰티<span style="width:.2em;height:.2em;border-radius:50%;background:#FFB3C8;margin-left:.08em"></span></span>
+      <span style="font-size:12px;font-weight:500;color:#666666;letter-spacing:.22em">TAN BEAUTY</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:clamp(16px,2.4vw,40px)">
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <nav style="display:flex;align-items:center;gap:clamp(22px,2.8vw,44px);font-size:18px;font-weight:500;height:72px">
+          <div onMouseEnter="{{ navIn }}" onMouseLeave="{{ navOut }}" style="position:relative;height:100%;display:flex;align-items:center">
+            <span style="padding:8px 0;color:#E0809E;font-weight:700;cursor:default">시술</span>
+            <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;top:100%;left:50%;margin-left:-110px;width:220px;background:#FFFFFF;border:1px solid rgba(17,17,17,.1);box-shadow:0 16px 40px rgba(17,17,17,.08);padding:10px 0;display:flex;flex-direction:column;animation:tbFade .18s ease">
+                <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="8">
+                  <button onClick="{{ tb.go }}" style="padding:10px 22px;border:none;background:transparent;text-align:left;font-size:16px;font-weight:{{ tb.weight }};color:{{ tb.menuColor }};cursor:pointer" style-hover="color:#E0809E">{{ tb.name }}</button>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+          <a href="/info#p=gallery" style="padding:8px 0">전후사진</a>
+          <a href="/info#p=prices" style="padding:8px 0">가격</a>
+          <a href="/info#p=reviews" style="padding:8px 0">후기</a>
+          <a href="/info#p=location" style="padding:8px 0">오시는 길</a>
+        </nav>
+      </sc-if>
+      <button onClick="{{ book }}" style="height:44px;padding:0 20px;border-radius:999px;border:none;background:#111111;color:#FFFFFF;font-size:15px;font-weight:700;cursor:pointer" style-hover="background:#FFB3C8;color:#111111">예약하기</button>
+    </div>
+  </div>
+  <nav aria-label="시술 목록" style="display:flex;gap:6px;padding:0 clamp(20px,4vw,48px) 12px;overflow-x:auto;scrollbar-width:none">
+    <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="8">
+      <button onClick="{{ tb.go }}" style="flex:none;height:36px;padding:0 14px;border-radius:999px;border:1px solid {{ tb.border }};background:{{ tb.bg }};color:{{ tb.color }};font-size:14px;font-weight:600;cursor:pointer;transition:all .25s">{{ tb.name }}</button>
+    </sc-for>
+  </nav>
+</header>
+
+<section style="padding:clamp(40px,6vw,88px) clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,5vw,72px);align-items:center">
+  <div style="display:flex;flex-direction:column;gap:22px;animation:tbFade .5s ease">
+    <span style="display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:700;letter-spacing:.08em;color:#E0809E"><span style="width:28px;height:2px;background:#FFB3C8"></span>{{ d.en }}</span>
+    <h1 style="margin:0;font-weight:800;letter-spacing:-.045em;font-size:clamp(44px,6vw,84px);line-height:1.05">{{ d.name }}</h1>
+    <p style="margin:0;font-size:clamp(18px,1.6vw,22px);line-height:1.6;color:#333333;max-width:24em;text-wrap:pretty">{{ d.lead }}</p>
+    <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:18px 0;border-top:1px solid rgba(17,17,17,.1);border-bottom:1px solid rgba(17,17,17,.1)">
+      <span style="font-weight:800;font-size:clamp(30px,3vw,40px);letter-spacing:-.03em">{{ d.priceText }}</span>
+      <sc-if value="{{ d.hasPrice }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:#666666">VAT 별도</span></sc-if>
+      <sc-if value="{{ d.hasRetouch }}" hint-placeholder-val="{{ true }}"><span style="font-size:13px;font-weight:700;background:#FFB3C8;padding:4px 10px;border-radius:999px">리터치 1회 포함</span></sc-if>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button onClick="{{ book }}" style="height:56px;padding:0 28px;border-radius:999px;border:none;background:#111111;color:#FFFFFF;font-size:17px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px" style-hover="background:#FFB3C8;color:#111111">네이버로 예약하기 <span>→</span></button>
+      <button onClick="{{ kakao }}" style="height:56px;padding:0 24px;border-radius:999px;border:1.5px solid #111111;background:transparent;color:#111111;font-size:16px;font-weight:600;cursor:pointer">카톡으로 먼저 상담</button>
+    </div>
+  </div>
+  <div style="position:relative;aspect-ratio:4/5;max-height:680px;width:100%;border-radius:28px;overflow:hidden;background:#F4ECEE">
+    <div data-hero-img="1" style="position:absolute;inset:0;background:#F4ECEE url({{ d.img }}) center/cover no-repeat;transform:translateY({{ heroShift }}) scale(1.08);will-change:transform"></div>
+    <div style="position:absolute;left:16px;top:16px;display:flex;gap:6px;flex-wrap:wrap">
+      <sc-for list="{{ d.chips }}" as="ch" hint-placeholder-count="2">
+        <span style="font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.9);backdrop-filter:blur(6px)">{{ ch }}</span>
+      </sc-for>
+    </div>
+    <span style="position:absolute;right:16px;bottom:14px;font-size:10px;font-weight:500;color:#666666;background:rgba(255,255,255,.8);padding:3px 7px;border-radius:3px">연출 이미지</span>
+  </div>
+</section>
+
+<section style="background:#111111;color:#FFFFFF">
+  <div style="padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(50%,200px),1fr))">
+    <sc-for list="{{ d.facts }}" as="f" hint-placeholder-count="4">
+      <div style="padding:clamp(28px,3.4vw,44px) clamp(12px,1.6vw,24px);display:flex;flex-direction:column;gap:10px;border-left:1px solid rgba(255,255,255,.1)">
+        <span style="font-size:14px;color:#BBBBBB">{{ f.k }}</span>
+        <span style="font-weight:800;font-size:clamp(22px,2.2vw,30px);letter-spacing:-.03em;color:#FFB3C8">{{ f.v }}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section data-rv="1" style="padding:clamp(64px,8vw,112px) clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(32px,5vw,72px)">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <span style="font-size:14px;font-weight:700;color:#E0809E">01 · 이런 분께</span>
+    <h2 style="margin:0;font-weight:800;letter-spacing:-.04em;font-size:clamp(30px,3.6vw,48px);line-height:1.2">{{ d.name }}{{ d.ga }}<br>잘 맞는 분</h2>
+  </div>
+  <div style="display:flex;flex-direction:column">
+    <sc-for list="{{ d.forList }}" as="x" hint-placeholder-count="3">
+      <div data-rv-item="1" style="display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(17,17,17,.1)">
+        <span style="font-weight:800;font-size:20px;color:#FFB3C8">{{ x.n }}</span>
+        <span style="font-size:clamp(18px,1.6vw,21px);line-height:1.55;font-weight:500">{{ x.t }}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<sc-if value="{{ isBrow }}" hint-placeholder-val="{{ true }}">
+<section data-rv="1" style="padding:0 clamp(20px,4vw,48px) clamp(64px,8vw,112px)">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <span style="font-size:14px;font-weight:700;color:#E0809E">02 · 기법 비교</span>
+      <h2 style="margin:0;font-weight:800;letter-spacing:-.04em;font-size:clamp(30px,3.6vw,48px);line-height:1.2">세 가지 눈썹, 한눈에</h2>
+    </div>
+    <span style="font-size:15px;color:#666666">카드를 누르면 해당 기법으로 바뀌어요</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px">
+    <sc-for list="{{ compare }}" as="cp" hint-placeholder-count="3">
+      <button onClick="{{ cp.go }}" style="text-align:left;padding:0;border-radius:24px;border:2px solid {{ cp.border }};background:{{ cp.bg }};overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transform:{{ cp.lift }};box-shadow:{{ cp.shadow }};transition:all .35s cubic-bezier(.2,.7,.2,1);color:#111111" style-hover="transform:translateY(-4px)">
+        <div style="aspect-ratio:16/9;background:#F4ECEE url({{ cp.img }}) center/cover no-repeat"></div>
+        <div style="padding:22px 24px 24px;display:flex;flex-direction:column;gap:16px;width:100%">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span style="font-weight:800;font-size:22px;letter-spacing:-.03em">{{ cp.name }}</span><span style="font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:{{ cp.tagBg }};color:{{ cp.tagColor }}">{{ cp.tag }}</span></div>
+          <sc-for list="{{ cp.meters }}" as="m" hint-placeholder-count="2">
+            <div style="display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:center;font-size:14px">
+              <span style="color:#666666">{{ m.k }}</span>
+              <span style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px"><span style="height:6px;border-radius:3px;background:{{ m.c1 }}"></span><span style="height:6px;border-radius:3px;background:{{ m.c2 }}"></span><span style="height:6px;border-radius:3px;background:{{ m.c3 }}"></span></span>
+            </div>
+          </sc-for>
+          <div style="display:grid;grid-template-columns:64px 1fr;gap:12px;font-size:14px"><span style="color:#666666">추천 피부</span><span style="font-weight:600">{{ cp.skin }}</span></div>
+          <div style="padding-top:14px;border-top:1px solid rgba(17,17,17,.1);display:flex;align-items:baseline;gap:6px"><span style="font-weight:800;font-size:20px">{{ cp.price }}</span><span style="font-size:12px;color:#666666">VAT 별도</span></div>
+        </div>
+      </button>
+    </sc-for>
+  </div>
+</section>
+</sc-if>
+
+<section data-steps="1" style="background:#FFF1F5;padding:clamp(64px,8vw,112px) clamp(20px,4vw,48px)">
+  <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:40px">
+    <span style="font-size:14px;font-weight:700;color:#E0809E">{{ nProc }} · 시술 과정</span>
+    <h2 style="margin:0;font-weight:800;letter-spacing:-.04em;font-size:clamp(30px,3.6vw,48px);line-height:1.2">대표원장이 처음부터 끝까지</h2>
+  </div>
+  <div style="position:relative;height:3px;background:rgba(17,17,17,.08);border-radius:2px;margin-bottom:20px;overflow:hidden"><div style="position:absolute;inset:0 auto 0 0;width:{{ stepFill }};background:#111111;border-radius:2px;transition:width .2s linear"></div></div>
+  <div style="display:grid;grid-template-columns:{{ cols4 }};gap:16px">
+    <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+      <div style="background:#FFFFFF;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:12px;opacity:{{ st.op }};transform:translateY({{ st.y }});transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1)">
+        <span style="width:40px;height:40px;border-radius:50%;background:{{ st.dot }};color:{{ st.dotInk }};display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;transition:background .4s,color .4s">{{ st.n }}</span>
+        <span style="font-weight:800;font-size:20px;letter-spacing:-.03em">{{ st.t }}</span>
+        <span style="font-size:15px;line-height:1.65;color:#555555">{{ st.d }}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<sc-if value="{{ hasReviews }}" hint-placeholder-val="{{ true }}">
+<section style="padding:clamp(64px,8vw,112px) clamp(20px,4vw,48px)">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:36px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <span style="font-size:14px;font-weight:700;color:#E0809E">{{ nRev }} · 실제 후기</span>
+      <h2 style="margin:0;font-weight:800;letter-spacing:-.04em;font-size:clamp(30px,3.6vw,48px);line-height:1.2">{{ d.name }}, 받아본 분들의 말</h2>
+    </div>
+    <a href="https://map.naver.com/p/search/%ED%83%A0%EB%B7%B0%ED%8B%B0/place/2088171690" target="_blank" rel="noopener" style="font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:4px">네이버 리뷰 207건 전체 보기 →</a>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+    <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="2">
+      <div style="padding:28px;border-radius:20px;border:1px solid rgba(17,17,17,.1);display:flex;flex-direction:column;gap:14px">
+        <span style="color:#FFB3C8;font-size:16px;letter-spacing:2px">★★★★★</span>
+        <p style="margin:0;font-size:17px;line-height:1.7;color:#222222;text-wrap:pretty">“{{ r.text }}”</p>
+        <span style="margin-top:auto;font-size:13px;color:#666666">{{ r.who }} · {{ r.date }} · 네이버 방문자 리뷰 발췌</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+</sc-if>
+
+<section style="background:#F7F7F7;padding:clamp(64px,8vw,112px) clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(32px,5vw,72px)">
+  <div style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <span style="font-size:14px;font-weight:700;color:#E0809E">{{ careNum }} · 시술 후 케어</span>
+      <h2 style="margin:0;font-weight:800;letter-spacing:-.04em;font-size:clamp(30px,3.6vw,48px);line-height:1.2">결과는 관리까지<br>함께 만들어요</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ d.care }}" as="c" hint-placeholder-count="4">
+        <div style="display:flex;gap:14px;align-items:flex-start;font-size:17px;line-height:1.6"><span style="flex:none;margin-top:9px;width:8px;height:8px;border-radius:50%;background:#FFB3C8"></span><span>{{ c }}</span></div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <span style="font-size:14px;font-weight:700;color:#E0809E">자주 묻는 질문</span>
+    <div style="display:flex;flex-direction:column;border-top:1px solid rgba(17,17,17,.14)">
+      <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="3">
+        <div style="border-bottom:1px solid rgba(17,17,17,.14)">
+          <button onClick="{{ q.toggle }}" style="width:100%;padding:22px 0;border:none;background:transparent;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;font-size:18px;font-weight:700;cursor:pointer;color:#111111">{{ q.q }}<span style="flex:none;font-size:22px;font-weight:400;transform:rotate({{ q.rot }});transition:transform .3s">+</span></button>
+          <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}">
+            <p style="margin:0 0 22px;font-size:16px;line-height:1.7;color:#555555;animation:tbFade .25s ease">{{ q.a }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px">
+  <h2 style="margin:0;font-weight:800;letter-spacing:-.04em;font-size:clamp(30px,4vw,56px);line-height:1.2">{{ d.name }}, 상담부터 받아보세요</h2>
+  <p style="margin:0;font-size:17px;color:#555555">디자인이 마음에 들지 않으면 시술하지 않아도 괜찮아요.</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+    <button onClick="{{ book }}" style="height:56px;padding:0 28px;border-radius:999px;border:none;background:#111111;color:#FFFFFF;font-size:17px;font-weight:700;cursor:pointer" style-hover="background:#FFB3C8;color:#111111">네이버로 예약하기 →</button>
+    <a href="/" style="height:56px;padding:0 24px;border-radius:999px;border:1.5px solid #111111;display:flex;align-items:center;font-size:16px;font-weight:600">홈으로</a>
+  </div>
+</section>
+
+<footer style="background:#F5F5F5;border-top:1px solid rgba(17,17,17,.08);padding:32px clamp(20px,4vw,48px);font-size:13px;line-height:1.8;color:#444444;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+  <span>탠뷰티 · 인천 남동구 구월로 89 제6동 102호 · 평일 10:00–20:00 · 토 10:00–18:00 · 일 휴무</span>
+  <span>시술 시간·유지 기간은 피부 상태에 따라 개인차가 있어요.</span>
+</footer>
+
+<div style="position:fixed;left:50%;bottom:20px;z-index:45;width:min(calc(100% - 32px),640px);transform:translate(-50%,{{ barY }});opacity:{{ barOp }};pointer-events:{{ barPe }};transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .3s;background:#111111;color:#FFFFFF;border-radius:999px;padding:8px 8px 8px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 16px 40px rgba(17,17,17,.25)">
+  <span style="display:flex;align-items:baseline;gap:10px;min-width:0;overflow:hidden"><span style="font-weight:800;font-size:17px;white-space:nowrap">{{ d.name }}</span><span style="font-size:14px;color:#FFB3C8;white-space:nowrap">{{ d.priceText }}</span></span>
+  <button onClick="{{ book }}" style="flex:none;height:44px;padding:0 20px;border-radius:999px;border:none;background:#FFB3C8;color:#111111;font-size:15px;font-weight:700;cursor:pointer">예약하기 →</button>
+</div>
+
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:60;background:#111111;color:#FFFFFF;padding:14px 22px;border-radius:999px;font-size:15px;animation:tbFade .25s ease">{{ toast }}</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const NAVER = 'https://m.place.naver.com/place/2088171690/booking';
+const G = '__TB_BASE__/gen/';
+const browSteps = [
+  { t: '1:1 디자인 상담', d: '얼굴형·골격·눈썹 결을 보고 함께 모양을 그려요. 거울을 보며 원하실 때까지 수정합니다.' },
+  { t: '마취', d: '마취 크림으로 통증을 줄여요. 개봉 전 일회용 멸균 니들을 직접 확인시켜 드려요.' },
+  { t: '시술', d: '중간중간 거울로 좌우 밸런스를 함께 확인하며 진행해요.' },
+  { t: '리터치', d: '자리 잡은 뒤 한 번 더 다듬어요. 리터치 1회는 가격에 포함돼 있어요.' } ];
+const brow = { time: '약 2시간', anes: '마취 크림', retouch: '4~6주 후', keep: '1~2년 (개인차)' };
+const browCare = ['시술 당일은 시술 부위에 물이 닿지 않게 해주세요.', '안내해 드린 재생크림을 하루 2~3회 얇게 발라주세요.', '각질은 억지로 떼지 말고 자연스럽게 떨어지게 두세요.', '1주일간 사우나·수영·격한 운동은 피해주세요.'];
+const D = {
+  embo: { name: '자연눈썹', en: 'NATURAL BROW', img: G + 'brow-natural.jpg', price: 130000, lead: '한 올씩 결을 그리는 엠보 기법. 메이크업 없이도 내 눈썹처럼 자연스럽게 남아요.', f: brow,
+    forList: ['반영구가 처음이라 티 나지 않게 하고 싶은 분', '눈썹 숱이 적거나 빈 곳만 채우고 싶은 분', '건성·중성 피부로 결이 선명하게 유지되는 분'], care: browCare, rv: ['윤*근', 'ysy*'] },
+  combo: { name: '콤보눈썹', en: 'COMBO BROW', img: G + 'brow-combo.jpg', price: 150000, lead: '엠보 결 위에 쉐이딩을 더해, 쌩얼에는 자연스럽고 화장하면 또렷하게.', f: brow,
+    forList: ['자연스러움과 또렷함을 둘 다 원하는 분', '매일 눈썹 틀 잡기가 어려운 분', '결만 넣으면 퍼져 보일 수 있는 복합성 피부'], care: browCare, rv: ['ing*'] },
+  powder: { name: '쉐도우눈썹', en: 'SHADOW BROW', img: G + 'brow-shadow.jpg', price: 150000, lead: '점묘 쉐이딩으로 부드럽게 채워, 유분이 많은 피부에서도 번짐이 적어요.', f: brow,
+    forList: ['메이크업한 듯 또렷한 눈썹을 원하는 분', '지성 피부라 결 눈썹이 금방 퍼지는 분', '눈썹 모양을 확실히 잡고 싶은 분'], care: browCare, rv: ['진호*'] },
+  eyeline: { name: '점막아이라인', en: 'EYELINE', img: G + 'eyeline.jpg', price: 130000, lead: '점막을 채워 눈매를 또렷하게. 번짐 없이 자연스러운 라인.', f: { time: '약 1시간', anes: '마취 크림', retouch: '4주 후', keep: '1~2년 (개인차)' },
+    steps: [{ t: '상담', d: '원하는 두께와 꼬리 길이, 렌즈 착용 여부를 함께 확인해요.' }, { t: '마취', d: '눈 주변용 마취로 불편함을 줄여요.' }, { t: '시술', d: '점막 안쪽을 촘촘히 채워 화장한 듯 또렷한 눈매로.' }, { t: '리터치', d: '빈 곳 없이 자리 잡도록 한 번 더 채워요.' }],
+    forList: ['아이라인이 매일 번지거나 지워지는 분', '쌩얼에도 또렷한 눈매를 원하는 분', '렌즈·안경으로 화장이 번거로운 분'],
+    care: ['2~3일간 눈을 비비지 말고 아이 메이크업은 피해주세요.', '렌즈는 하루 정도 쉬어주세요.', '1주일간 사우나·수영은 피해주세요.'], rv: [] },
+  lip: { name: '틴트입술', en: 'LIP BLUSH', img: G + 'lip.jpg', price: 180000, lead: '입술 윤곽과 혈색을 맑게. 립밤만 발라도 생기 있어 보여요.', f: { time: '약 2시간', anes: '마취 크림', retouch: '4~6주 후', keep: '1~2년 (개인차)' },
+    steps: [{ t: '컬러 상담', d: '피부톤과 원래 입술색에 맞는 컬러를 함께 골라요.' }, { t: '마취', d: '충분히 마취한 뒤 시작해요.' }, { t: '시술', d: '윤곽을 정돈하고 혈색을 고르게 채워요.' }, { t: '리터치', d: '색이 자리 잡은 뒤 빠진 부분을 보완해요.' }],
+    forList: ['입술 색이 칙칙하거나 창백한 분', '입술 윤곽이 흐릿한 분', '쌩얼에도 혈색이 있어 보이고 싶은 분'],
+    care: ['붓기는 보통 2~3일이면 가라앉아요.', '립밤을 수시로 발라 촉촉하게 유지해주세요.', '맵고 뜨거운 음식은 며칠간 피해주세요.', '입술 헤르페스가 있었다면 상담 때 꼭 알려주세요.'], rv: ['SHW*'] },
+  hair: { name: '헤어라인', en: 'HAIRLINE', img: G + 'hairline.jpg', price: null, lead: '넓은 이마와 정수리 빈 곳을 모발 결처럼 채워요.', f: { time: '2~3시간', anes: '마취 크림', retouch: '4~6주 후', keep: '1~2년 (개인차)' },
+    steps: [{ t: '면적 상담', d: '채울 범위와 모발 방향을 확인하고 가격을 안내해요.' }, { t: '디자인', d: '얼굴 비율에 맞는 자연스러운 라인을 그려요.' }, { t: '시술', d: '모발 결을 따라 한 올씩 채워요.' }, { t: '리터치', d: '빈 곳을 한 번 더 보완해요.' }],
+    forList: ['이마가 넓어 고민인 분', '헤어라인이 비어 보이는 분', '정수리 숱이 적어 보이는 분'],
+    care: ['당일은 머리를 감지 말아주세요.', '1주일간 염색·펌·사우나는 피해주세요.', '시술 부위를 손으로 긁지 말아주세요.'], rv: [] },
+  mole: { name: '미인점', en: 'BEAUTY MARK', img: G + 'beautymark.jpg', price: 40000, lead: '원하는 위치에 작고 자연스러운 점 하나.', f: { time: '약 30분', anes: '마취 크림', retouch: '4주 후', keep: '1~2년 (개인차)' },
+    steps: [{ t: '위치 상담', d: '거울을 보며 크기와 위치를 함께 정해요.' }, { t: '마취', d: '작은 부위라 짧게 마취해요.' }, { t: '시술', d: '자연스러운 점 모양으로 채워요.' }, { t: '리터치', d: '색이 옅어지면 한 번 더 채워요.' }],
+    forList: ['인상에 포인트를 주고 싶은 분', '점을 매일 그리는 분', '다른 시술과 함께 가볍게 받고 싶은 분'],
+    care: ['당일은 물이 닿지 않게 해주세요.', '각질은 자연스럽게 떨어지게 두세요.'], rv: ['KimRo*'] },
+  remove: { name: '잔흔케어', en: 'REMOVAL CARE', img: G + 'p-studio.jpg', price: 50000, retouchNone: true, lead: '붉게·푸르게·노랗게 남은 예전 반영구 흔적을 정리해요.', f: { time: '약 1시간', anes: '마취 크림', retouch: '4~6주', keep: '보통 2~3회 (상태별)' },
+    steps: [{ t: '상태 상담', d: '잔흔의 색과 깊이를 보고 예상 회차를 솔직하게 안내해요.' }, { t: '마취', d: '충분히 마취한 뒤 진행해요.' }, { t: '잔흔 케어', d: '피부 상태를 보며 강도를 조절해요.' }, { t: '다음 회차', d: '여러 회차를 한꺼번에 결제하지 않아도 돼요.' }],
+    forList: ['예전 눈썹문신이 붉게·푸르게 변한 분', '잔흔 때문에 매일 컨실러로 가리는 분', '새로 눈썹을 하기 전 정리가 필요한 분'],
+    care: ['안내해 드린 재생크림과 선크림을 꼭 발라주세요.', '딱지나 각질은 억지로 떼지 마세요.', '1주일간 사우나·수영은 피해주세요.'], rv: ['째뿡*', '아리*', '새히*', '오즈*'] },
+};
+const ORDER = ['embo', 'combo', 'powder', 'eyeline', 'lip', 'hair', 'mole', 'remove'];
+const REV = [
+  { who: '윤*근', date: '2026.09', text: '수시로 소독도 하시고 일회용 제품도 뜯기전에 확인 시켜주셔서 더 믿음이 갔네요. 자연스러운걸 좋아한다고 말씀드리니 정말 당일부터 자연스럽고 만족스러워요.' },
+  { who: 'ysy*', date: '2026.10', text: '자연눈썹으로 진행했는데 당일에도 짱구눈썹이 아니라 너무 자연스러워서 좋아요.' },
+  { who: 'ing*', date: '2026.08', text: '결을 살리는 엠보랑 음영을 넣어주는 수지를 같이 들어가서 그런지 확실히 쌩얼일 때도 너무 자연스럽고, 화장했을 때도 따로 안 건드려도 될 만큼 연출이 예쁘게 잘 나왔습니다.' },
+  { who: '진호*', date: '2026.08', text: '시술 전 스케치할때부터 거울을 보며 몇번이고 함께 의논하며 수정할 부분은 없는지 저보다 더 꼼꼼하게 체크해주셨답니다.' },
+  { who: 'SHW*', date: '2026.07', text: '제 입술에 맞는 컬러를 추천해 주셔서 결과가 정말 자연스럽습니다. 무엇보다 쌩얼에도 혈색이 살아 보여서 너무 만족합니다.' },
+  { who: 'KimRo*', date: '2026.10', text: '간 김에 미인점도 엣헴 ..찍었습니다 왕왕 만족해요.' },
+  { who: '째뿡*', date: '2026.10', text: '무리하게 추가 시술을 강요하지 않으시고, 딱 제 상태에 맞춰 필요한 만큼만 솔직하게 진행해 주셔서 더 믿음이 갔습니다.' },
+  { who: '아리*', date: '2026.08', text: '특히 푸른 잔흔은 컨실러로도 잘 안가려져서 화장할 때마다 가리는게 번거롭더라구요. 오늘 제거받고 나니까 속이 시원하고 진작 받을걸 싶었어요.' },
+  { who: '새히*', date: '2026.08', text: '다른곳과는 다르게 여러회차를 한꺼번에 바로 결제 하지 않아도 되어서 부담도 업꼬 잘 관리 하다가 날짜 맞춰서 또 방문 하께요.' },
+  { who: '오즈*', date: '2026.10', text: '오래전에 한 반영구가 주황색 잔흔이 남아서 신경 쓰였는데… 신경 쓰이던 부분이 정말 자연스럽고 깔끔하게 정돈되어 한결 차분해져서 너무 마음에 들어요.' },
+];
+const FAQ = [
+  { q: '많이 아픈가요?', a: '마취 크림을 충분히 사용해요. 통증은 사람마다 다르지만, 불편하시면 중간에 쉬어가며 진행해요.' },
+  { q: '바로 일상생활이 가능한가요?', a: '대부분 당일부터 출근·외출이 가능해요. 처음 며칠은 조금 진해 보이다가 자연스럽게 자리 잡아요.' },
+  { q: '디자인이 마음에 안 들면요?', a: '시술 전 디자인 단계에서 원하실 때까지 수정해요. 마음에 들지 않으면 시술하지 않으셔도 괜찮아요.' },
+];
+
+class Component extends DCLogic {
+  state = { t: 'embo', faq: -1, toast: '' };
+  componentDidMount() {
+    const q = new URLSearchParams(location.search).get('t') || (location.hash.match(/t=(\w+)/) || [])[1];
+    if (q && D[q]) this.setState({ t: q });
+    this.onR = () => this.setState({ w: window.innerWidth }); this.onR(); window.addEventListener('resize', this.onR);
+    this.onS = () => {
+      const sy = window.scrollY, el = document.querySelector('[data-steps]');
+      let sp = 0; if (el) { const r = el.getBoundingClientRect(), vh = window.innerHeight; sp = Math.max(0, Math.min(1, (vh * .85 - r.top) / (r.height * .7))); }
+      if (Math.abs(sy - (this.state.sy || 0)) > 4 || Math.abs(sp - (this.state.sp || 0)) > .01) this.setState({ sy, sp });
+    };
+    window.addEventListener('scroll', this.onS, { passive: true }); this.onS();
+    this.setupReveal();
+  }
+  componentDidUpdate() { if (this._lastT !== undefined && this._lastT !== this.state.t) { setTimeout(() => { this.setupReveal(); this.onS(); }, 30); const hi = document.querySelector('[data-hero-img]'); if (hi && hi.animate) hi.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 700, easing: 'ease' }); } this._lastT = this.state.t; }
+
+  setupReveal() {
+    if (!('IntersectionObserver' in window)) return;
+    if (this.io) this.io.disconnect();
+    this.io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; this.io.unobserve(e.target);
+      e.target.animate([{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'none' }], { duration: 800, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' });
+      e.target.querySelectorAll('[data-rv-item]').forEach((n, i) => n.animate([{ opacity: 0, transform: 'translateX(-16px)' }, { opacity: 1, transform: 'none' }], { duration: 600, delay: 200 + i * 120, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' }));
+    }), { threshold: .15 });
+    document.querySelectorAll('[data-rv]').forEach(n => this.io.observe(n));
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); window.removeEventListener('scroll', this.onS); if (this.io) this.io.disconnect(); }
+  go(t) {
+    this.setState({ t, faq: -1 });
+    try { history.replaceState(null, '', '#t=' + t); } catch (e) {}
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  renderVals() {
+    const s = this.state, x = D[s.t];
+    const steps = (x.steps || browSteps).map((st, i) => ({ ...st, n: '0' + (i + 1) }));
+    const reviews = REV.filter(r => x.rv.includes(r.who));
+    const isBrow = ['embo', 'combo', 'powder'].includes(s.t), sp = s.sp || 0, sy = s.sy || 0, base = isBrow ? 3 : 2;
+    const pad = n => '0' + n;
+    const CMP = { embo: { tag: '결 표현', skin: '건성·중성', m: [3, 1] }, combo: { tag: '결 + 쉐이딩', skin: '복합성', m: [2, 2] }, powder: { tag: '쉐이딩', skin: '지성', m: [1, 3] } };
+    const meter = v => ({ c1: v >= 1 ? '#111111' : '#EEEEEE', c2: v >= 2 ? '#111111' : '#EEEEEE', c3: v >= 3 ? '#111111' : '#EEEEEE' });
+    return {
+      cols4: (s.w || 1200) >= 900 ? 'repeat(4,minmax(0,1fr))' : (s.w || 1200) >= 480 ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)',
+      isBrow, nProc: pad(base), nRev: pad(base + 1),
+      heroShift: Math.min(40, sy * .08) + 'px',
+      stepFill: Math.round(sp * 100) + '%',
+      steps: steps.map((st, i) => { const on = sp > i / steps.length; return { ...st, op: on ? 1 : .35, y: on ? '0px' : '12px', dot: on ? '#111111' : '#FFFFFF', dotInk: on ? '#FFFFFF' : '#111111' }; }),
+      compare: ['embo', 'combo', 'powder'].map(k => { const c = CMP[k], on = k === s.t; return { name: D[k].name, img: D[k].img, tag: c.tag, skin: c.skin, price: D[k].price.toLocaleString('ko-KR') + '원', go: () => this.go(k),
+        meters: [{ k: '자연스러움', ...meter(c.m[0]) }, { k: '또렷함', ...meter(c.m[1]) }],
+        border: on ? '#111111' : 'rgba(17,17,17,.1)', bg: '#FFFFFF', lift: on ? 'translateY(-6px)' : 'none', shadow: on ? '0 20px 44px rgba(17,17,17,.12)' : 'none', tagBg: on ? '#111111' : '#FFE2EB', tagColor: on ? '#FFFFFF' : '#111111' }; }),
+      barY: sy > 640 ? '0px' : '140%', barOp: sy > 640 ? 1 : 0, barPe: sy > 640 ? 'auto' : 'none',
+      d: { name: x.name, ga: ((x.name.charCodeAt(x.name.length - 1) - 0xAC00) % 28) ? '이' : '가', en: x.en, img: x.img, lead: x.lead,
+        priceText: x.price == null ? '상담 후 안내' : x.price.toLocaleString('ko-KR') + '원', hasPrice: x.price != null, hasRetouch: !x.retouchNone,
+        facts: [{ k: '소요 시간', v: x.f.time }, { k: '마취', v: x.f.anes }, { k: x.retouchNone ? '회차 간격' : '리터치', v: x.f.retouch }, { k: x.retouchNone ? '예상 회차' : '유지 기간', v: x.f.keep }],
+        forList: x.forList.map((t, i) => ({ t, n: '0' + (i + 1) })), care: x.care, chips: [x.f.time, x.retouchNone ? '회차별 결제' : '리터치 1회 포함'] },
+      reviews, hasReviews: reviews.length > 0, careNum: pad(base + (reviews.length ? 2 : 1)),
+      isDesktop: (s.w || 1200) >= 900, navOpen: !!s.navOpen, navIn: () => this.setState({ navOpen: true }), navOut: () => this.setState({ navOpen: false }),
+      tabs: ORDER.map(k => { const on = k === s.t; return { name: D[k].name, go: () => { this.setState({ navOpen: false }); this.go(k); }, weight: on ? 700 : 400, menuColor: on ? '#E0809E' : '#111111', bg: on ? '#111111' : '#FFFFFF', color: on ? '#FFFFFF' : '#111111', border: on ? '#111111' : 'rgba(17,17,17,.14)' }; }),
+      faqs: FAQ.map((f, i) => ({ ...f, open: s.faq === i, rot: s.faq === i ? '45deg' : '0deg', toggle: () => this.setState({ faq: s.faq === i ? -1 : i }) })),
+      book: () => window.open(NAVER, '_blank', 'noopener'),
+      kakao: () => window.open('https://pf.kakao.com/_BxoQan', '_blank', 'noopener'),
+      toast: s.toast, hasToast: !!s.toast,
+    };
+  }
+}
+</script>
